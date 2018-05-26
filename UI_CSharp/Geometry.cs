@@ -56,7 +56,7 @@ namespace midas_challenge
 
             }
 
-            if (IsClosed(curr_room, coord))
+            if (curr_room.walls.Count > 2 && IsClosed(curr_room, coord))
             {
                 if (isSimple(curr_room))
                 {
