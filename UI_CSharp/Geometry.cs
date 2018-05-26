@@ -18,11 +18,16 @@ namespace midas_challenge
         public Line Line { get => line; set => line = value; }
     }
 
-    public struct Room
+    public class Room
     {
         public List<Wall> walls;
         public List<Line> doors;
-        public List<Line> windonws;
+        public List<Line> windows;
+        public Room(){
+            walls = new List<Wall>();
+            doors = new List<Line>();
+            windows = new List<Line>();
+        }
     }
 
     public struct Furniture
