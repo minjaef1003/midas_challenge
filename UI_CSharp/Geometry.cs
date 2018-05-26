@@ -78,6 +78,12 @@ namespace midas_challenge
                 walls.Add(wall);
             }
         }
+
+        public void makeClose()
+        {
+            Wall wall = new Wall(startPoint, walls[0].StartPoint);
+            walls.Add(wall);
+        }
     }
 
     public struct Furniture
@@ -117,6 +123,7 @@ namespace midas_challenge
                 {
 
                 }
+                curr_room.makeClose();
                 rooms.Add(curr_room);
                 curr_room = new Room();
                 return 1;
