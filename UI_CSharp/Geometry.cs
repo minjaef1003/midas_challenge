@@ -26,15 +26,12 @@ namespace midas_challenge
     {
         public static int pushVertex(Room room, Coordinate coord, bool snapmode)
         {
-
             if (isClose(room, coord))
             {
 
             }
             return 0;
         }
-
-        public 
     }
 
     public class Furniture
