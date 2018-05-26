@@ -138,7 +138,7 @@ namespace midas_challenge
             }
             if (isRect)
             {
-                e.Graphics.DrawRectangle(pen, rect);
+                e.Graphics.DrawRectangle(pen, rect);                
             }
             else if (isPolygon && isLine)
             {
@@ -174,6 +174,7 @@ namespace midas_challenge
                     e.Graphics.DrawPolygon(pen1, p);
                 }
             }
+            
         }
 
         private void panel_canvas_MouseDown(object sender, MouseEventArgs e)
@@ -365,14 +366,30 @@ namespace midas_challenge
 
         private void button_create_door_Click(object sender, EventArgs e)
         {
-            if (isDoor) isDoor = false;
-            else isDoor = true;
+            if (isDoor)
+            {
+                button_create_door.BackColor = Color.AliceBlue;
+                isDoor = false;
+            }
+            else
+            {
+                button_create_door.BackColor = Color.LightGray;
+                isDoor = true;
+            }
         }
 
         private void button_create_window_Click(object sender, EventArgs e)
         {
-            if (isWindow) isWindow = false;
-            else isWindow = true;
+            if (isWindow)
+            {
+                button_create_window.BackColor = Color.AliceBlue;
+                isWindow = false;
+            }
+            else
+            {
+                button_create_window.BackColor = Color.LightGray;
+                isWindow = true;
+            }
         }
         private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -436,6 +453,7 @@ namespace midas_challenge
         {
             if (isCreateMenu == 3)
             {
+                button_editmode.BackColor = Color.AliceBlue;
                 Cursor.Current = Cursors.Default;
                 selected_room = null;
                 isCreateMenu = 0;
@@ -443,13 +461,12 @@ namespace midas_challenge
             }
             else
             {
+                button_editmode.BackColor = Color.LightGray;
                 isCreateMenu = 3;
                 label_status.Text = "Edit Mode";
                 isRect = false;
                 Cursor.Current = Cursors.Hand;
-                panel_createroom_menu.Width = 0;
-
-                
+                panel_createroom_menu.Width = 0;               
             }
         }
 
