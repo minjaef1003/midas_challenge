@@ -305,7 +305,7 @@ namespace midas_challenge
             if (curr_room.walls.Count > 2 && IsClosed(curr_room, coord))
             {
                 curr_room.makeClose();
-                if (!IsSimplePolygon(curr_room) && Intersect(rooms, curr_room))
+                if (!IsSimplePolygon(curr_room) || Intersect(rooms, curr_room))
                 {
                     Debug.Print("This is Not Simple");
                     curr_room = new Room();
