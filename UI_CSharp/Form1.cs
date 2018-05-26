@@ -50,20 +50,27 @@ namespace midas_challenge
         }
         private void button_new_document_Click(object sender, EventArgs e)
         {
-            panel_canvas = new DoubleBufferPannel();
-            panel_canvas.ResumeLayout(false);
-            panel_canvas.SuspendLayout();
-            panel_canvas.BorderStyle = BorderStyle.FixedSingle;
-            panel_canvas.Dock = DockStyle.Fill;
-            panel_canvas.Name = "panel_canvas";
-            panel_canvas.Size = new Size(876, 555);
-            panel_canvas.BackColor = Color.FromArgb(255, 255, 255, 253);
-            panel_canvas.Paint += new PaintEventHandler(this.panel_canvas_Paint);
-            panel_canvas.MouseDown += new MouseEventHandler(this.panel_canvas_MouseDown);
-            panel_canvas.MouseMove += new MouseEventHandler(this.panel_canvas_MouseMove);
-            panel_canvas.MouseUp += new MouseEventHandler(this.panel_canvas_MouseUp);
-            panel_workspace.Controls.Add(panel_canvas);
-            panel_workspace.Refresh();
+            if (panel_canvas == null)
+            {
+                panel_canvas = new DoubleBufferPannel();
+                panel_canvas.ResumeLayout(false);
+                panel_canvas.SuspendLayout();
+                panel_canvas.BorderStyle = BorderStyle.FixedSingle;
+                panel_canvas.Dock = DockStyle.Fill;
+                panel_canvas.Name = "panel_canvas";
+                panel_canvas.Size = new Size(876, 555);
+                panel_canvas.BackColor = Color.FromArgb(255, 255, 255, 253);
+                panel_canvas.Paint += new PaintEventHandler(this.panel_canvas_Paint);
+                panel_canvas.MouseDown += new MouseEventHandler(this.panel_canvas_MouseDown);
+                panel_canvas.MouseMove += new MouseEventHandler(this.panel_canvas_MouseMove);
+                panel_canvas.MouseUp += new MouseEventHandler(this.panel_canvas_MouseUp);
+                panel_workspace.Controls.Add(panel_canvas);
+                panel_workspace.Refresh();
+            }
+            else
+            {
+                var result = MessageBox.Show("이미 생성된 문서가 존재합니다.", "문서 생성 실패", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         private void panel_canvas_Paint(object sender, PaintEventArgs e)
         {
@@ -316,21 +323,28 @@ namespace midas_challenge
         }
         private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string openFileName = "";
-            DialogResult result = openFileDialog1.ShowDialog();
-            if (result == DialogResult.OK)
+            if (panel_canvas != null)
             {
-                openFileName = openFileDialog1.FileName;
+               MessageBox.Show("이미 생선된 문서가 존재합니다.", "불러오기 실패", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else if (result == DialogResult.Cancel) return;
+            else
+            {
+                string openFileName = "";
+                DialogResult result = openFileDialog1.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    openFileName = openFileDialog1.FileName;
+                }
+                else if (result == DialogResult.Cancel) return;
 
-            button_new_document_Click(sender, e);
+                button_new_document_Click(sender, e);
 
-            Tuple<List<Room>, List<Furniture>> readDate;
-            readDate = Read(openFileName);
-            RoomMaker.rooms = readDate.Item1;
-            RoomMaker.furnitures = readDate.Item2;
-            Form_Main.count = RoomMaker.rooms.Count;
+                Tuple<List<Room>, List<Furniture>> readDate;
+                readDate = Read(openFileName);
+                RoomMaker.rooms = readDate.Item1;
+                RoomMaker.furnitures = readDate.Item2;
+                Form_Main.count = RoomMaker.rooms.Count;
+            }
         }
 
         private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
