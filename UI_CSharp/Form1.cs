@@ -16,7 +16,7 @@ namespace midas_challenge
     public partial class Form_Main : Form
     {
         public static int count = 0;
-        public static Tuple<int, int> history;
+        public static List<int> history;
         private List<Rectangle> rectList;
         private DoubleBufferPannel panel_canvas;
         private int menu_width, width, height;
@@ -32,6 +32,12 @@ namespace midas_challenge
         Image imgDoor, imgWindow;
         Point[] pointList;
         int cnt = 0;
+
+        // Edit mode
+        Room selected_room = null;
+        bool isMove = false;
+        Point moveStartPoint, moveEndPoint;
+
         public Form_Main()
         {
             InitializeComponent();
@@ -41,7 +47,7 @@ namespace midas_challenge
             panel_createroom_menu.Width = 0;
             panel_furniture_menu.Width = 0;
             rectList = new List<Rectangle>();
-            history = new Tuple<int, int>(0, 0);
+            history = new List<int>();
             RoomMaker.curr_room = new Room();
             RoomMaker.rooms = new List<Room>();
             RoomMaker.furnitures = new List<Furniture>();
@@ -152,6 +158,22 @@ namespace midas_challenge
             {
                 e.Graphics.DrawImage(imgWindow, loc.X, loc.Y);
             }
+
+            if (isCreateMenu == 3)
+            {
+                Pen pen1 = new Pen(Color.Blue, 9);
+                if (selected_room == null) return;
+                for (int j = 0; j < selected_room.walls.Count; j++)
+                {
+                    Point[] p =
+                    {
+                        selected_room.walls[j].StartPoint,
+                        selected_room.walls[j].EndPoint
+                    };
+
+                    e.Graphics.DrawPolygon(pen1, p);
+                }
+            }
         }
 
         private void panel_canvas_MouseDown(object sender, MouseEventArgs e)
@@ -210,14 +232,26 @@ namespace midas_challenge
             if (e.Button == MouseButtons.Right)
                 contextMenuStrip1.Show(new Point(MousePosition.X, MousePosition.Y));
 
-            //if (isCreateMenu == 3)
-            //{
-            //    Room selected_room = RoomMaker.CheckInnerPoint(new Point(MousePosition.X, MousePosition.Y));
-            //    Rectangle selected_rect = new Rectangle(selected_room.getRectangle()[0], selected_room.getRectangle()[1], )
-            //    e.Graphics.DrawRectangle(pen, rect);
-            //}
 
             isDraw = true;
+            if (isCreateMenu == 3)
+            {
+                if (isMove)
+                {
+                    moveStartPoint = new Point(e.X, e.Y);
+                }
+                else
+                {
+                    selected_room = RoomMaker.CheckInnerPoint(new Point(e.X, e.Y));
+                    if (selected_room == null) Debug.WriteLine("Room not selected");
+                    else label_status.Text = "Edit Mode : Room을 선택함";
+                    contextMenuStrip3.Show(new Point(MousePosition.X, MousePosition.Y));
+
+                    panel_canvas.Refresh();
+                }
+            }
+
+
         }
         private void panel_canvas_MouseMove(object sender, MouseEventArgs e)
         {
@@ -234,6 +268,10 @@ namespace midas_challenge
                 {
                     //ep = e.Location;                    
                 }
+            }
+            if (isMove)
+            {
+
             }
             panel_canvas.Refresh();
         }
@@ -253,6 +291,15 @@ namespace midas_challenge
                 rect = new Rectangle(0, 0, 0, 0);
             }
             isDraw = false;
+
+            if (isCreateMenu == 3 && isMove)
+            {
+                moveEndPoint = new Point(e.X, e.Y);
+                selected_room.MoveRoom(moveStartPoint, moveEndPoint);
+                RoomMaker.SnapRectangleRoom(selected_room);
+                isMove = false;
+                selected_room = null;
+            }
         }
         private void button_create_room_Click(object sender, EventArgs e)
         {
@@ -370,19 +417,41 @@ namespace midas_challenge
             if (isCreateMenu == 3)
             {
                 Cursor.Current = Cursors.Default;
-
+                selected_room = null;
+                isCreateMenu = 0;
+                panel_createroom_menu.Width = 0;
             }
             else
             {
                 isCreateMenu = 3;
-
+                label_status.Text = "Edit Mode";
                 isRect = false;
                 Cursor.Current = Cursors.Hand;
+                panel_createroom_menu.Width = 0;
 
 
             }
 
 
+        }
+
+        private void EditModeRemoveRoomToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (selected_room != null)
+            {
+                label_status.Text = "Edit Mode : Delete Mode";
+                RoomMaker.deleteRoom(selected_room);
+                selected_room = null;
+            }
+        }
+
+        private void EditModeMovingRoomToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (selected_room != null)
+            {
+                isMove = true;
+                label_status.Text = "Edit Mode : Move Mode";
+            }
         }
 
         private void button_createroom_rect_Click(object sender, EventArgs e)
@@ -439,20 +508,20 @@ namespace midas_challenge
 
         private void button_undo_Click(object sender, EventArgs e)
         {
-            if (Form_Main.count > 0)
+            if (history.Count > 0)
             {
-                Form_Main.count--;
-                panel_canvas.Refresh();
+                
             }
         }
 
         private void button_redo_Click(object sender, EventArgs e)
         {
-            if (Form_Main.count < RoomMaker.rooms.Count)
+            if ( Form_Main.count <  history.Count )
             {
-                Form_Main.count++;
+                
                 panel_canvas.Refresh();
             }
         }
     }
+
 }

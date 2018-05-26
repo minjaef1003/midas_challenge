@@ -301,17 +301,42 @@ namespace midas_challenge
                 return false;
             }
         }
-        /*
+
         public List<int> getRectangle()
         {
             int minx = 10000;
             int miny = 10000;
             int maxx = -10000;
             int maxy = -10000;
-            
-            return List<int>(){ minx, miny, maxx, maxy};
+
+            for (int  i = 0; i < walls.Count; i++)
+            {
+                Point sp = walls[i].StartPoint;
+                if (minx > sp.X)
+                {
+                    minx = sp.X;
+                }
+                if (maxx < sp.X)
+                {
+                    maxx = sp.X;
+                }
+                if (miny > sp.Y)
+                {
+                    miny = sp.Y;
+                }
+                if (maxy < sp.Y)
+                {
+                    maxy = sp.Y;
+                }
+            }
+
+            List<int> result = new List<int>
+            {
+                minx, miny, maxx-minx, maxy-miny
+            };
+            return result;
         }
-        */
+
 
         public void MoveRoom(Point start, Point end)
         {
@@ -322,7 +347,6 @@ namespace midas_challenge
             {
                 wall.StartPoint = new Point(wall.StartPoint.X + dx, wall.StartPoint.Y + dy);
                 wall.EndPoint = new Point(wall.EndPoint.X + dx, wall.EndPoint.Y + dy);
-
             }
         }
     }
@@ -499,6 +523,13 @@ namespace midas_challenge
             return globalMin;
         }
 
+        internal static void deleteRoom(Room selected_room)
+        {
+            rooms.Remove(selected_room);
+            Form_Main.count = rooms.Count;
+            return;
+        }
+
         private static Point SnapCoord(Point point)
         {
             double mindist = 1000.0;
@@ -523,7 +554,7 @@ namespace midas_challenge
             return point;
         }
         
-        private static void SnapRectangleRoom(Room room)
+        public static void SnapRectangleRoom(Room room)
         {
             int n = room.walls.Count;
 

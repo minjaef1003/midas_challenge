@@ -69,6 +69,11 @@
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.contextMenuStrip3 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.정점편집ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.방삭제ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.방이동ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.속성ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel_outline.SuspendLayout();
             this.panel_workspace.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -78,6 +83,7 @@
             this.toolStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
+            this.contextMenuStrip3.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel_outline
@@ -527,6 +533,42 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // contextMenuStrip3
+            // 
+            this.contextMenuStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.정점편집ToolStripMenuItem,
+            this.방삭제ToolStripMenuItem,
+            this.방이동ToolStripMenuItem,
+            this.속성ToolStripMenuItem});
+            this.contextMenuStrip3.Name = "contextMenuStrip3";
+            this.contextMenuStrip3.Size = new System.Drawing.Size(181, 114);
+            // 
+            // 정점편집ToolStripMenuItem
+            // 
+            this.정점편집ToolStripMenuItem.Name = "정점편집ToolStripMenuItem";
+            this.정점편집ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.정점편집ToolStripMenuItem.Text = "정점 편집";
+            // 
+            // 방삭제ToolStripMenuItem
+            // 
+            this.방삭제ToolStripMenuItem.Name = "방삭제ToolStripMenuItem";
+            this.방삭제ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.방삭제ToolStripMenuItem.Text = "방 삭제";
+            this.방삭제ToolStripMenuItem.Click += new System.EventHandler(this.EditModeRemoveRoomToolStripMenuItem_Click);
+            // 
+            // 방이동ToolStripMenuItem
+            // 
+            this.방이동ToolStripMenuItem.Name = "방이동ToolStripMenuItem";
+            this.방이동ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.방이동ToolStripMenuItem.Text = "방 이동";
+            this.방이동ToolStripMenuItem.Click += new System.EventHandler(this.EditModeMovingRoomToolStripMenuItem_Click);
+            // 
+            // 속성ToolStripMenuItem
+            // 
+            this.속성ToolStripMenuItem.Name = "속성ToolStripMenuItem";
+            this.속성ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.속성ToolStripMenuItem.Text = "속성";
+            // 
             // Form_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -556,6 +598,7 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
+            this.contextMenuStrip3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -602,6 +645,11 @@
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button button_editmode;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip3;
+        private System.Windows.Forms.ToolStripMenuItem 정점편집ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 방삭제ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 방이동ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 속성ToolStripMenuItem;
     }
 }
 
