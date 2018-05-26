@@ -389,6 +389,7 @@ namespace midas_challenge
                 rooms.Add(curr_room);
             }
             curr_room = new Room();
+            Form_Main.count = rooms.Count;
             return 1;
         }
 

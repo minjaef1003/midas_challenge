@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
@@ -64,7 +65,7 @@ namespace midas_challenge
             panel_workspace.Refresh();
         }
         private void panel_canvas_Paint(object sender, PaintEventArgs e)
-        {            
+        {
             e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
 
             Pen pen = new Pen(Color.Black, 3);
