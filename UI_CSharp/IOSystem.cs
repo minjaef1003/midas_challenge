@@ -15,7 +15,7 @@ namespace midas_challenge
     {
 
         public static Dictionary<string, Image> imgDic = new Dictionary<string, Image>();
-        public static void AddImg(string str, Image img) 
+        public static void AddImg(string str, Image img)
         {
             imgDic.Add(str, img);
         }
@@ -27,28 +27,31 @@ namespace midas_challenge
             AddImg("Washing_Machine", Properties.Resources.icons8_Washing_Machine_100px_1);
             AddImg("Lamp", Properties.Resources.icons8_Lamp_100px);
             AddImg("Closet", Properties.Resources.icons8_Closet_100px);
+            AddImg("None", Properties.Resources.icons8_None_800px);
         }
 
         public static Tuple<List<Room>, List<Furniture>> Read(string fileName)
         {
-            List<Room> rooms;
-            List<Furniture> furnitures;
+            List<Room> rooms = new List<Room>();
+            List<Furniture> furnitures = new List<Furniture>();
 
             int roomCount = 0, furnitureCount = 0;
             string line;
+            string[] str;
             StreamReader sr = new StreamReader(fileName);
 
-            if ((line = sr.ReadLine()) != null) {
-                roomCount = Int32.Parse(line);
+            if ((line = sr.ReadLine()) != null)
+            {
+                str = line.Split(' ');
+                roomCount = Int32.Parse(str[2]);
             }
-
-            rooms = new List<Room>(roomCount);
 
             for (int i = 0; i < roomCount; i++)
             {
+                rooms.Add(new Room());
                 while (((line = sr.ReadLine()) != null))
                 {
-                    string[] str = line.Split(' ', ',');
+                    str = line.Split(' ', ',', '{', 'X', '=', 'Y', '}');
                     if (str[0].Equals("Wall"))
                     {
                         rooms[i].walls.Add(new Wall(new Point(Int32.Parse(str[1]), Int32.Parse(str[2])), new Point(Int32.Parse(str[3]), Int32.Parse(str[4]))));
@@ -69,16 +72,17 @@ namespace midas_challenge
             }
             if ((line = sr.ReadLine()) != null)
             {
-                furnitureCount = Int32.Parse(line);
+                str = line.Split(' ');
+                furnitureCount = Int32.Parse(str[2]);
             }
 
-            furnitures = new List<Furniture>(furnitureCount);
 
             for (int i = 0; i < furnitureCount; i++)
             {
+                furnitures.Add(new Furniture());
                 if (((line = sr.ReadLine()) != null))
                 {
-                    string[] str = line.Split(' ', ',');
+                    str = line.Split(' ', ',');
 
                     furnitures[i] = new Furniture(imgDic[str[2]], str[1], new Rectangle(Int32.Parse(str[3]), Int32.Parse(str[4]), Int32.Parse(str[5]), Int32.Parse(str[6])), str[2]);
                 }
@@ -87,7 +91,7 @@ namespace midas_challenge
             return new Tuple<List<Room>, List<Furniture>>(rooms, furnitures);
         }
 
-        
+
         public static void Write(List<Room> rooms, List<Furniture> furnitures)
         {
             StreamWriter sw = new StreamWriter("test.txt");
@@ -100,17 +104,17 @@ namespace midas_challenge
                 str = "Room " + i.ToString();
                 foreach (Wall wall in room.walls)
                 {
-                    str = "Wall " + wall.StartPoint.ToString() + " " + wall.EndPoint.ToString();
+                    str = "Wall " + wall.StartPoint.X + " " + wall.StartPoint.Y + " " + wall.EndPoint.X + " " + wall.EndPoint.Y;
                     sw.WriteLine(str);
                 }
                 foreach (Line door in room.doors)
                 {
-                    str = "Door " + door.StartPoint.ToString() + " " + door.EndPoint.ToString();
+                    str = "Door " + door.StartPoint.X + " " + door.StartPoint.Y + " " + door.EndPoint.X + " " + door.EndPoint.Y;
                     sw.WriteLine(str);
                 }
                 foreach (Line window in room.windows)
                 {
-                    str = "Window " + window.StartPoint.ToString() + " " + window.EndPoint.ToString();
+                    str = "Window " + window.StartPoint.X + " " + window.StartPoint.Y + " " + window.EndPoint.X + " " + window.EndPoint.Y;
                     sw.WriteLine(str);
                 }
                 sw.WriteLine("Room " + i.ToString() + " finish");
