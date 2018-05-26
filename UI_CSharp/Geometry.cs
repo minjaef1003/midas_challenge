@@ -26,6 +26,7 @@ namespace midas_challenge
     {
         public static int pushVertex(Room room, ref Coordinate coord, bool snapmode)
         {
+
             if (isClose(room, coord))
             {
 
