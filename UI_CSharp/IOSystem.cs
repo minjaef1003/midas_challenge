@@ -118,7 +118,7 @@ namespace midas_challenge
             sw.WriteLine("Furniture count: " + furnitures.Count());
             foreach (Furniture furniture in furnitures)
             {
-                str = "Funiture " + furniture.name.ToString() + " " + furniture.type + " " + furniture.imgSize.X + " " + furniture.imgSize.Y + " " + furniture.imgSize.Width + " " + furniture.imgSize.Height;
+                str = "Funiture " + furniture.name.Text + " " + furniture.type + " " + furniture.imgSize.X + " " + furniture.imgSize.Y + " " + furniture.imgSize.Width + " " + furniture.imgSize.Height;
                 sw.WriteLine(str);
             }
 
