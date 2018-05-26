@@ -112,12 +112,13 @@ namespace midas_challenge
     {
         public Door()
         {
-
+            parent_room_id = new List<int>();
         }
         public Door(Point sp, Point ep)
         {
             startPoint = sp;
             endPoint = ep;
+            parent_room_id = new List<int>();
         }
         public List<int> parent_room_id;
         public double length;
