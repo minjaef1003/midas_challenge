@@ -453,6 +453,16 @@ namespace midas_challenge
             return new_door;
         }
 
+        public static bool checkValid()
+        {
+            foreach (Room room in rooms)
+            {
+                if (room.doors.Count <= 0)
+                    return false;
+            }
+            return true;
+        }
+
         private static Tuple<int, int> FindWallfromDoorCenter(Point center, out double globalMinDist, out Point closest)
         {
             globalMinDist = 10000.0;
