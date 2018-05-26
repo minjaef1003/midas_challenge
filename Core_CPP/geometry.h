@@ -18,14 +18,14 @@ class Furniture;
 class Vertex
 {
 private:
-	double x;
-	double y;
+	int x;
+	int y;
 public:
 	Vertex();
-	Vertex(double, double);
+	Vertex(int _x, int _y);
 	void setVertex(Vertex*);
-	void moveX(double);
-	void moveY(double);
+	void moveX(int);
+	void moveY(int);
 
 };
 
@@ -47,12 +47,12 @@ class Openings
 {
 private:
 	Line * line;
-	double length;
+	int length;
 public:
 	Openings();
-	Openings(Line*, double);
+	Openings(Line*, int);
 	void moveOpening(Line*);
-	void setLength(double);
+	void setLength(int);
 };
 
 //Window
@@ -62,7 +62,6 @@ private:
 
 public:
 	Window();
-	~Window();
 };
 
 //Door
@@ -72,7 +71,6 @@ private:
 
 public:
 	Door();
-	~Door();
 };
 
 //Wall
@@ -84,7 +82,6 @@ private:
 	vector<Openings*> doors;
 public:
 	Wall();
-	~Wall();
 	void addDoor(Door*);
 	void addWindow(Window*);
 };
@@ -96,7 +93,8 @@ private:
 	vector<Line*> vecLine;
 public:
 	Polygon();
-	~Polygon();
+	void addLine(Line*);
+	void addVecLine(vector<Line*>);
 };
 
 //Room
@@ -106,7 +104,7 @@ private:
 	
 public:
 	Room();
-	~Room();
+	Room(vector<Line*>*);
 	bool checkClosure();
 };
 
@@ -117,6 +115,5 @@ private:
 
 public:
 	Furniture();
-	~Furniture();
 };
 
