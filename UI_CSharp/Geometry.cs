@@ -22,39 +22,6 @@ namespace midas_challenge
         public List<KeyValuePair<Coordinate, Coordinate>> windonws;
     }
 
-    public class RoomManager
-    {
-        public static int PushVertex(Room room, ref Coordinate coord, bool snapmode)
-        {
-
-            if (IsClose(room, coord))
-            {
-
-
-            }
-
-            if (snapmode) DoSnap(ref coord, );
-
-            return 0;
-        }
-
-        private static void DoSnap(ref Coordinate coord)
-        {
-            throw new NotImplementedException();
-        }
-
-        public static bool IsClose(Room room, Coordinate coord)
-        {
-            return false;
-        }
-
-        public static bool CheckOverlap(Furniture ft, List<Room> rooms)
-        {
-            //TODO
-            return false;
-        }
-    }
-
     public struct Furniture
     {
         public Coordinate lowerLeft;
@@ -62,6 +29,14 @@ namespace midas_challenge
         public Image img;
         public Label name;
         public Rectangle rectangle;
+        public Furniture(Coordinate ll, Coordinate ur, Image _img, Label _name, Rectangle rect)
+        {
+            lowerLeft = ll;
+            upperRight = ur;
+            img = _img;
+            name = _name;
+            rectangle = rect;
+        }
     }
 
     public class RoomMaker
@@ -72,19 +47,42 @@ namespace midas_challenge
 
         static public int PushVertex(Coordinate cd, bool snapmode = false)
         {
+            if (IsClose(room, coord))
+            {
+
+
+            }
+
+            if (snapmode) DoSnap(ref coord);
+
             return 0;
         }
 
         static public int PushFurniture(Furniture ft)
         {
-            /*
-            if (RoomManager.CheckOverlap(ft, rooms))
+            if (CheckOverlap(ft))
             {
                 return 1;
             }
-            */
+            
             furnitures.Add(ft);
             return 0;
+        }
+
+        private static void DoSnap(ref Coordinate coord)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static bool IsClose(Room room, Coordinate coord)
+        {
+            return false;
+        }
+
+        private static bool CheckOverlap(Furniture ft)
+        {
+            //TODO
+            return false;
         }
 
         public void WriteFile()
