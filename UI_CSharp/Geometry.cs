@@ -134,13 +134,15 @@ namespace midas_challenge
         public List<Door> doors;
         public List<Door> windows;
         public string type = "Not_defined";
-        public int id;
+        private int id;
+
+        public int Id { get => id; set => id = value; }
+
         public Room(){
             walls = new List<Wall>();
             doors = new List<Door>();
             windows = new List<Door>();
             IsStart = false;
-            id = RoomMaker.room_id++;
         }
 
         public List<Point> getAllCoordinate() {
@@ -172,6 +174,15 @@ namespace midas_challenge
         {
             Wall wall = new Wall(startPoint, walls[0].StartPoint);
             walls.Add(wall);
+        }
+
+        public void translateStartPoint(int w, int x, int y)
+        {
+            walls[w].StartPoint = new Point(x, y);
+            if (w == 0)
+                walls[walls.Count - 1].EndPoint = new Point(x, y);
+            else
+                walls[w - 1].EndPoint = new Point(x, y);
         }
     }
 
@@ -220,7 +231,11 @@ namespace midas_challenge
                 return 1;
             }
 
-            if (snapmode) DoSnap(ref coord);
+            if (snapmode)
+            {
+                SnapRectangleRoom(curr_room);
+                DoSnap(ref coord);
+            }
             if (Intersect(rooms, curr_room))
             {
 
@@ -232,14 +247,14 @@ namespace midas_challenge
             return 0;
         }
 
-        static public int PushRectangle(List<Point> coords, bool snapmode = false)
+        static public int PushRectangle(List<Point> coords, bool snapmode = true)
         {
             curr_room.pushVertex(coords[0]);
             curr_room.pushVertex(coords[1]);
             curr_room.pushVertex(coords[2]);
             curr_room.pushVertex(coords[3]);
             curr_room.makeClose();
-            if (snapmode) DoSnapCurrentRoom();
+            if (snapmode) SnapRectangleRoom(curr_room);
 
             rooms.Add(curr_room);
             curr_room = new Room();
@@ -255,14 +270,16 @@ namespace midas_challenge
 
             if (dist > SNAPPING_TRHES)
             {
-               // return null;
+                return null;
             }
 
             Door new_door = new Door();
             new_door.isDoor = IsDoor;
-            new_door.parent_room_id.Add(rooms[appropriate_wall.Item1].id);
+            new_door.parent_room_id.Add(rooms[appropriate_wall.Item1].Id);
             Wall wall = rooms[appropriate_wall.Item1].walls[appropriate_wall.Item2];
 
+            Debug.WriteLine(wall.StartPoint.ToString() + "," + wall.EndPoint.ToString());
+            Debug.WriteLine(closest.ToString());
             if (Computation.EuclideanDist(wall.StartPoint, wall.EndPoint) < DOOR_LENGTH_DEFAULT)
             {
                 new_door.StartPoint = wall.StartPoint;
@@ -311,14 +328,14 @@ namespace midas_challenge
             closest = new Point();
             for (int i = 0; i < rooms.Count; i++)
             {
-                //Tuple<Room, int> localMin = new Tuple<Room, int>(rooms[i], 0);
-                // double localMinDist = 10000.0;
                 for (int j = 0; j < rooms[i].walls.Count; j++)
                 {
                     Wall wall = rooms[i].walls[j];
-                    double dist = Computation.EuclideanDist(wall, center, out closest);
+                    Point temp_closest;
+                    double dist = Computation.EuclideanDist(wall, center, out temp_closest);
                     if (dist < globalMinDist)
                     {
+                        closest = temp_closest;
                         globalMin = new Tuple<int, int>(i,j);
                         globalMinDist = dist;
                     }
@@ -329,9 +346,34 @@ namespace midas_challenge
             return globalMin;
         }
         
-        private static void DoSnapCurrentRoom()
+        private static void SnapRectangleRoom(Room room)
         {
-            Debug.Print("Intersect TODO");
+            if (room.walls.Count != 4) return;
+
+            if (rooms.Count == 0) return;
+            
+            for (int w = 0; w < 4; w += 1)
+            {
+                double mindist = 1000.0;
+                Point minPoint = new Point(0,0);
+                for (int i = 0; i < rooms.Count; i++)
+                {
+                    for (int j = 0; j < rooms[i].walls.Count; j++)
+                    {
+                        Point rwl = rooms[i].walls[j].StartPoint;
+                        double dist = Computation.EuclideanDist(rwl, room.walls[w].StartPoint);
+                        if (mindist > dist)
+                        {
+                            mindist = dist;
+                            minPoint = rwl;
+                        }
+                    }
+                }
+                if (mindist < SNAPPING_TRHES)
+                {
+                    room.translateStartPoint(w, minPoint.X, minPoint.Y);
+                }
+            }
             return;
         }
 

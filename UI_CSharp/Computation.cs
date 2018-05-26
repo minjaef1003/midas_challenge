@@ -100,6 +100,16 @@ namespace midas_challenge
             // Calculate the t that minimizes the distance.
             double t = ((pt.X - p1.X) * dx + (pt.Y - p1.Y) * dy) / (dx * dx + dy * dy);
 
+            int ymax = Math.Max(p2.Y, p1.Y);
+            int ymin = Math.Min(p2.Y, p1.Y);
+            if (dx == 0.0)
+            {
+                if (ymax >= pt.Y && ymin <= pt.Y)
+                {
+                    closest = new Point(p1.X, pt.Y);
+                    return dy;
+                }
+            }
             // See if this represents one of the segment's
             // end points or a point in the middle.
             if (t < 0)
@@ -129,6 +139,12 @@ namespace midas_challenge
         public static bool IsPointInLine(Point pt, Line wall)
         {
             return (pt.X <= wall.EndPoint.X && pt.X >= wall.StartPoint.X) && (pt.Y <= wall.EndPoint.Y && pt.Y >= wall.StartPoint.Y);
+        }
+
+        public static double EuclideanDist(Wall rwl, Wall wall)
+        {
+            Point temp;
+            return Math.Min(EuclideanDist(wall, rwl.StartPoint, out temp), EuclideanDist(wall, rwl.EndPoint, out temp));
         }
     }
 }
