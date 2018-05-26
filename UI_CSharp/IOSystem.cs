@@ -8,10 +8,31 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace midas_challenge
 {
     partial class Form_Main
     {
+
+        public static Dictionary<string, Image> imgDic = new Dictionary<string, Image>();
+        public static void AddImg(string str, Image img) 
+        {
+            imgDic.Add(str, img);
+        }
+        public static void InitImgDic()
+        {
+            AddImg("Table", Properties.Resources.icons8_Table_100px);
+            AddImg("Toilet_Bowl", Properties.Resources.icons8_Toilet_Bowl_96px);
+            AddImg("Bureau", Properties.Resources.icons8_Bureau_100px);
+            AddImg("Washing_Machine", Properties.Resources.icons8_Washing_Machine_100px_1);
+            AddImg("Lamp", Properties.Resources.icons8_Lamp_100px);
+            AddImg("Closet", Properties.Resources.icons8_Closet_100px);
+        }
+        public static Image GetImage(string type)
+        {
+            return imgDic[type];
+        }
+
         public static Tuple<List<Room>, List<Furniture>> Read()
         {
             List<Room> rooms;
@@ -70,13 +91,7 @@ namespace midas_challenge
             return new Tuple<List<Room>, List<Furniture>>(rooms, furnitures);
         }
 
-        public static Image GetImage(string type)
-        {
-            Image img;
-
-
-            return img;
-        }
+        
         public static void Write(List<Room> rooms, List<Furniture> furnitures)
         {
             StreamWriter sw = new StreamWriter("test.txt");
