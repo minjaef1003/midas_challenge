@@ -344,36 +344,34 @@ namespace midas_challenge
 
         static public int room_id = 0;
 
-        static public int PushVertex(Point coord, bool snapmode = false)
+        static public int PushVertex(ref Point coord, bool snapmode = true)
         {
             if (curr_room.walls.Count > 2 && IsClosed(curr_room, coord))
             {
                 curr_room.makeClose();
-                if (!IsSimplePolygon(curr_room))
+                if (!IsSimplePolygon(curr_room) && Intersect(rooms, curr_room))
                 {
                     Debug.Print("This is Not Simple");
                     curr_room = new Room();
                     return -1;
                 }
-                SnapRectangleRoom(curr_room);
+                // if (snapmode) SnapRectangleRoom(curr_room);
+                
                 rooms.Add(curr_room);
                 curr_room = new Room();
                 Form_Main.count = rooms.Count;
                 return 1;
             }
 
+            Debug.WriteLine(coord.ToString());
             if (snapmode)
             {
-                SnapRectangleRoom(curr_room);
-                DoSnap(ref coord);
+                Point new_coord = SnapCoord(coord);
+                curr_room.pushVertex(new_coord);
+                coord = new_coord;
             }
-            if (Intersect(rooms, curr_room))
-            {
-
-            }
-
-            curr_room.pushVertex(coord);
-
+            else
+                curr_room.pushVertex(coord);
 
             return 0;
         }
@@ -386,12 +384,12 @@ namespace midas_challenge
             curr_room.pushVertex(coords[3]);
             curr_room.makeClose();
             if (snapmode) SnapRectangleRoom(curr_room);
-
             if (!Intersect(rooms, curr_room))
             {
                 rooms.Add(curr_room);
             }
             curr_room = new Room();
+            Form_Main.count = rooms.Count;
             return 1;
         }
 
@@ -480,12 +478,37 @@ namespace midas_challenge
             return globalMin;
         }
 
+        private static Point SnapCoord(Point point)
+        {
+            double mindist = 1000.0;
+            Point minPoint = new Point(0, 0);
+            for (int i = 0; i < rooms.Count; i++)
+            {
+                for (int j = 0; j < rooms[i].walls.Count; j++)
+                {
+                    Point rwl = rooms[i].walls[j].StartPoint;
+
+                    double dist = Computation.EuclideanDist(rwl, point);
+                    if (mindist > dist)
+                    {
+                        mindist = dist;
+                        minPoint = rwl;
+                    }
+
+                }
+            }
+            if (RoomMaker.SNAPPING_TRHES > mindist)
+                return minPoint;
+            return point;
+        }
+        
         private static void SnapRectangleRoom(Room room)
         {
-            bool[] hasChanged = new bool[room.walls.Count];
+            int n = room.walls.Count;
+            bool[] hasChanged = new bool[n];
             Array.Clear(hasChanged, 0, hasChanged.Length);
 
-            if (rooms.Count == 0) return;
+            if (rooms.Count == 0 || n == 0) return;
 
             double mindist = 0;
             while (mindist < SNAPPING_TRHES)
@@ -493,7 +516,7 @@ namespace midas_challenge
                 mindist = 1000.0;
                 Point minPoint = new Point(0, 0);
                 int mw = -1;
-                for (int w = 0; w < 4; w += 1)
+                for (int w = 0; w < n; w += 1)
                 {
                     if (hasChanged[w]) continue;
                     for (int i = 0; i < rooms.Count; i++)
@@ -501,6 +524,7 @@ namespace midas_challenge
                         for (int j = 0; j < rooms[i].walls.Count; j++)
                         {
                             Point rwl = rooms[i].walls[j].StartPoint;
+                            
                             double dist = Computation.EuclideanDist(rwl, room.walls[w].StartPoint);
                             if (mindist > dist)
                             {
@@ -508,6 +532,7 @@ namespace midas_challenge
                                 minPoint = rwl;
                                 mw = w;
                             }
+
                         }
                     }
                 }
@@ -549,11 +574,8 @@ namespace midas_challenge
             else
                 return 0;
         }
-
-
-        private static bool Intersect(List<Room> rooms, Room curr_room)
+        private static bool IntersectWall(List<Room> rooms, Room curr_room)
         {
-            //  public List<Wall> walls;
             foreach (Wall curWall in curr_room.walls)
             {
                 foreach (Room room in rooms)
@@ -567,7 +589,12 @@ namespace midas_challenge
                     }
                 }
             }
-
+            return false;
+        }
+        private static bool Intersect(List<Room> rooms, Room curr_room)
+        {
+            //  public List<Wall> walls;
+            if (IntersectWall(rooms, curr_room)) return true;
             int ccw, pre = -2;
             foreach (Room room in rooms)
             {
@@ -590,7 +617,6 @@ namespace midas_challenge
                     return true;
                 }
             }
-
             return false;
         }
 

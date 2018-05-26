@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
@@ -64,7 +65,7 @@ namespace midas_challenge
             panel_workspace.Refresh();
         }
         private void panel_canvas_Paint(object sender, PaintEventArgs e)
-        {            
+        {
             e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
 
             Pen pen = new Pen(Color.Black, 3);
@@ -85,8 +86,9 @@ namespace midas_challenge
                         RoomMaker.rooms[i].walls[j].EndPoint
                     };
                                       
-                    pointList[cnt++] = p[0];                    
-                    pointList[cnt++] = p[1];
+                    // pointList[cnt++] = p[0];                    
+                    // pointList[cnt++] = p[1];
+                    /*
                     if (cnt == RoomMaker.rooms[i].walls.Count )
                     {
                         HatchStyle h = (HatchStyle)3;
@@ -94,6 +96,7 @@ namespace midas_challenge
                         e.Graphics.FillPolygon(brush, pointList);
                         cnt = 0;
                     }
+                    */
                     
                     e.Graphics.DrawPolygon(pen, p);                  
                 }              
@@ -166,12 +169,12 @@ namespace midas_challenge
                     sp = e.Location;
                     ep = e.Location;
                     isLine = true;
-                    RoomMaker.PushVertex(sp);
+                    RoomMaker.PushVertex(ref sp);
                 }
                 else
                 {
                     ep = e.Location;
-                    if(RoomMaker.PushVertex(ep) == 1)
+                    if(RoomMaker.PushVertex(ref ep) == 1)
                     {
                         isPolygon = false;
                         isLine = false;
