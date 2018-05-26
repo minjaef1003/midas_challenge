@@ -140,13 +140,15 @@ namespace midas_challenge
             return 0;
         }
 
-        static public int PushRectangle(Point[] coords, bool snapmode = false)
+        static public int PushRectangle(List<Point> coords, bool snapmode = false)
         {
             curr_room.pushVertex(coords[0]);
             curr_room.pushVertex(coords[1]);
             curr_room.pushVertex(coords[2]);
             curr_room.pushVertex(coords[3]);
             curr_room.makeClose();
+            if (snapmode) DoSnapCurrentRoom();
+
             rooms.Add(curr_room);
             curr_room = new Room();
             return 1;
