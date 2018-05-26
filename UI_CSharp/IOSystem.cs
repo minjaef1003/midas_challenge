@@ -29,14 +29,14 @@ namespace midas_challenge
             AddImg("Closet", Properties.Resources.icons8_Closet_100px);
         }
 
-        public static Tuple<List<Room>, List<Furniture>> Read()
+        public static Tuple<List<Room>, List<Furniture>> Read(string fileName)
         {
             List<Room> rooms;
             List<Furniture> furnitures;
 
             int roomCount = 0, furnitureCount = 0;
             string line;
-            StreamReader sr = new StreamReader("test.txt");
+            StreamReader sr = new StreamReader(fileName);
 
             if ((line = sr.ReadLine()) != null) {
                 roomCount = Int32.Parse(line);

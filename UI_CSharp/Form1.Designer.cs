@@ -370,20 +370,22 @@
             // 새문서ToolStripMenuItem
             // 
             this.새문서ToolStripMenuItem.Name = "새문서ToolStripMenuItem";
-            this.새문서ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
+            this.새문서ToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.새문서ToolStripMenuItem.Text = "새문서";
             // 
             // 저장ToolStripMenuItem
             // 
             this.저장ToolStripMenuItem.Name = "저장ToolStripMenuItem";
-            this.저장ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
+            this.저장ToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.저장ToolStripMenuItem.Text = "저장";
+            this.저장ToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
             // 
             // 불러오기ToolStripMenuItem
             // 
             this.불러오기ToolStripMenuItem.Name = "불러오기ToolStripMenuItem";
-            this.불러오기ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
+            this.불러오기ToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.불러오기ToolStripMenuItem.Text = "불러오기";
+            this.불러오기ToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
             // 
             // timer_menu_slide
             // 

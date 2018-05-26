@@ -236,11 +236,23 @@ namespace midas_challenge
             if (isDoor) isDoor = false;
             else isDoor = true;
         }
-
         private void button_create_window_Click(object sender, EventArgs e)
         {
             if (isWindow) isWindow = false;
             else isWindow = true;
+        }
+        private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string fileName = "test.txt";
+            Tuple<List<Room>, List<Furniture>> readDate;
+            readDate = Read(fileName);
+            RoomMaker.rooms = readDate.Item1;
+            RoomMaker.furnitures = readDate.Item2;
+        }
+        private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+            Write(RoomMaker.rooms, RoomMaker.furnitures);
         }
 
         private void button_createroom_rect_Click(object sender, EventArgs e)
