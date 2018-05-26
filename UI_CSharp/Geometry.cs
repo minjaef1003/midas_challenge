@@ -359,7 +359,9 @@ namespace midas_challenge
                 
                 rooms.Add(curr_room);
                 curr_room = new Room();
-                Form_Main.count = rooms.Count;
+                Form_Main.history.Add(1);
+                Form_Main.count++;
+               
                 return 1;
             }
 
@@ -389,7 +391,8 @@ namespace midas_challenge
                 rooms.Add(curr_room);
             }
             curr_room = new Room();
-            Form_Main.count = rooms.Count;
+            Form_Main.count++;
+            Form_Main.history.Add(1);
             return 1;
         }
 
@@ -638,6 +641,8 @@ namespace midas_challenge
             }
 
             furnitures.Add(ft);
+            Form_Main.history.Add(2);
+            Form_Main.count++;
             return 0;
         }
 

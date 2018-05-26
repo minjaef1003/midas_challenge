@@ -142,9 +142,10 @@
             this.button_redo.Image = ((System.Drawing.Image)(resources.GetObject("button_redo.Image")));
             this.button_redo.Location = new System.Drawing.Point(86, 542);
             this.button_redo.Name = "button_redo";
-            this.button_redo.Size = new System.Drawing.Size(75, 61);
+            this.button_redo.Size = new System.Drawing.Size(75, 79);
             this.button_redo.TabIndex = 1;
             this.button_redo.Text = "Redo";
+            this.button_redo.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.button_redo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.button_redo.UseVisualStyleBackColor = true;
             this.button_redo.Click += new System.EventHandler(this.button_redo_Click);
@@ -156,9 +157,10 @@
             this.button_undo.Image = ((System.Drawing.Image)(resources.GetObject("button_undo.Image")));
             this.button_undo.Location = new System.Drawing.Point(10, 542);
             this.button_undo.Name = "button_undo";
-            this.button_undo.Size = new System.Drawing.Size(75, 61);
+            this.button_undo.Size = new System.Drawing.Size(75, 79);
             this.button_undo.TabIndex = 1;
             this.button_undo.Text = "Undo";
+            this.button_undo.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.button_undo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.button_undo.UseVisualStyleBackColor = true;
             this.button_undo.Click += new System.EventHandler(this.button_undo_Click);
