@@ -507,7 +507,7 @@ namespace midas_challenge
         {
             if (selected_room != null)
             {
-                if (selected_room.walls.Count == 4)
+                if (selected_room.walls.Count != 4)
                 {
                     MessageBox.Show("사각형 방만 가능...");
                     return;
@@ -518,8 +518,9 @@ namespace midas_challenge
                     width = fc.width;
                     height = fc.height;
                     selected_room.resize(width, height);
+                    panel_canvas.Refresh();
                 }
-                
+
             }
          }
 

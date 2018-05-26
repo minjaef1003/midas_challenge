@@ -352,6 +352,7 @@ namespace midas_challenge
 
         public void resize(int width, int height)
         {
+            IsStart = false;
             Point cr = walls[0].StartPoint;
             walls.Clear();
             doors.Clear();

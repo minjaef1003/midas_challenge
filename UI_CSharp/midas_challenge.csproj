@@ -68,6 +68,9 @@
     <Compile Include="RoomResize.Designer.cs">
       <DependentUpon>RoomResize.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="RoomResize.resx">
+      <DependentUpon>RoomResize.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="test.cs" />
     <Compile Include="IOSystem.cs">
       <SubType>Form</SubType>
