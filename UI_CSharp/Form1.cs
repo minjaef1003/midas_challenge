@@ -26,6 +26,7 @@ namespace midas_challenge
             InitializeComponent();
             menu_width = panel_createroom_menu.Width;
             panel_createroom_menu.Width = 0;
+            panel_furniture_menu.Width = 0;
 
 
         }
@@ -76,6 +77,7 @@ namespace midas_challenge
                     int height = e.Y - sp.Y;
                     rect = new Rectangle(sp.X, sp.Y, width, height);
                     panel_canvas.Refresh();
+
                 }
                 else if (isPolygon)
                 {
@@ -89,8 +91,8 @@ namespace midas_challenge
             isDraw = false;
         }
         private void button_create_room_Click(object sender, EventArgs e)
-        {        
-            if(isCreateMenu == 1)
+        {
+            if (isCreateMenu == 1)
             {
                 isCreateMenu = 0;
                 panel_createroom_menu.Width = 0;
@@ -99,8 +101,21 @@ namespace midas_challenge
             {
                 isCreateMenu = 1;
                 timer_menu_slide.Start();
+            }                      
+        }
+
+        private void button_create_furniture_Click(object sender, EventArgs e)
+        {
+            if (isCreateMenu == 2)
+            {
+                isCreateMenu = 0;
+                panel_furniture_menu.Width = 0;
             }
-            
+            else
+            {
+                isCreateMenu = 2;
+                timer_menu_slide.Start();
+            }
         }
 
         private void timer_menu_slide_Tick(object sender, EventArgs e)
@@ -112,7 +127,14 @@ namespace midas_challenge
             else if (isCreateMenu == 1 && panel_createroom_menu.Width > menu_width)
             {
                 timer_menu_slide.Stop();
-
+            }
+            if (isCreateMenu == 2 && panel_furniture_menu.Width <= menu_width)
+            {
+                panel_furniture_menu.Width += 4;
+            }
+            else if (isCreateMenu == 2 && panel_furniture_menu.Width > menu_width)
+            {
+                timer_menu_slide.Stop();
             }
         }
 
