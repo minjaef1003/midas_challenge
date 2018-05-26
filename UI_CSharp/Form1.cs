@@ -209,6 +209,21 @@ namespace midas_challenge
             isPolygon = true; isRect = false;
         }
 
+        private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string fileName = "test.txt";
+            Tuple<List<Room>, List<Furniture>> readDate;
+            readDate = Read(fileName);
+            RoomMaker.rooms = readDate.Item1;
+            RoomMaker.furnitures = readDate.Item2;
+        }
+
+        private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+            Write(RoomMaker.rooms, RoomMaker.furnitures);
+        }
+
         private void button_createroom_rect_Click(object sender, EventArgs e)
         {
             isRect = true; isPolygon = false;
