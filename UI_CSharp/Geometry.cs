@@ -301,6 +301,18 @@ namespace midas_challenge
                 return false;
             }
         }
+        /*
+        public List<int> getRectangle()
+        {
+            int minx = 10000;
+            int miny = 10000;
+            int maxx = -10000;
+            int maxy = -10000;
+            
+            return List<int>(){ minx, miny, maxx, maxy};
+        }
+        */
+
         public void MoveRoom(Point start, Point end)
         {
             int dx = end.X - start.X;

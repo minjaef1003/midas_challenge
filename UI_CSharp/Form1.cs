@@ -210,6 +210,13 @@ namespace midas_challenge
             if (e.Button == MouseButtons.Right)
                 contextMenuStrip1.Show(new Point(MousePosition.X, MousePosition.Y));
 
+            //if (isCreateMenu == 3)
+            //{
+            //    Room selected_room = RoomMaker.CheckInnerPoint(new Point(MousePosition.X, MousePosition.Y));
+            //    Rectangle selected_rect = new Rectangle(selected_room.getRectangle()[0], selected_room.getRectangle()[1], )
+            //    e.Graphics.DrawRectangle(pen, rect);
+            //}
+
             isDraw = true;
         }
         private void panel_canvas_MouseMove(object sender, MouseEventArgs e)
@@ -356,6 +363,26 @@ namespace midas_challenge
                 if (idx == 1) bmp.Save(saveFileDialog1.FileName, ImageFormat.Png);
                 else bmp.Save(saveFileDialog1.FileName, ImageFormat.Jpeg);
             }
+        }
+
+        private void button_editmode_Click(object sender, EventArgs e)
+        {
+            if (isCreateMenu == 3)
+            {
+                Cursor.Current = Cursors.Default;
+
+            }
+            else
+            {
+                isCreateMenu = 3;
+
+                isRect = false;
+                Cursor.Current = Cursors.Hand;
+
+
+            }
+
+
         }
 
         private void button_createroom_rect_Click(object sender, EventArgs e)
