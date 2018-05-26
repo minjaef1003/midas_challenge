@@ -13,11 +13,13 @@ namespace midas_challenge
 {
     public partial class Form_Main : Form
     {
+        private List<Rectangle> rectList;
         private DoubleBufferPannel panel_canvas;
         private int menu_width;
-        //isCreateMenu : 0:선택x, 1:room, 2:furniture
+        //isCreateMenu : 1:room 2:furniture
         private int isCreateMenu = 0;
-        private bool isRect = false, isPolygon = false, isDraw = false, isLine = false;
+        private bool isRect = false, isPolygon = false, 
+            isDraw = false, isLine = false;
         private Point sp, ep, loc; // start point, end point;
         private Rectangle rect;
         private int selectFurn = 0;
@@ -29,8 +31,7 @@ namespace midas_challenge
             menu_width = panel_createroom_menu.Width;
             panel_createroom_menu.Width = 0;
             panel_furniture_menu.Width = 0;
-
-
+            rectList = new List<Rectangle>();
         }
         private void button_new_document_Click(object sender, EventArgs e)
         {
@@ -52,14 +53,18 @@ namespace midas_challenge
         private void panel_canvas_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
-            if (isRect)
+
+            Pen pen = new Pen(Color.Black, 3);
+            for (int i=0; i<rectList.Count(); i++)
             {
-                Pen pen = new Pen(Color.Black, 3);
+                e.Graphics.DrawRectangle(pen, rectList[i]);
+            }
+            if (isRect)
+            {                
                 e.Graphics.DrawRectangle(pen, rect);
             }
             else if (isPolygon && isLine)
-            {
-                Pen pen = new Pen(Color.Black, 3);
+            {             
                 e.Graphics.DrawLine(pen, sp, ep);
             }
 
@@ -67,16 +72,6 @@ namespace midas_challenge
             {
                 e.Graphics.DrawImage(furnImage, loc.X-50, loc.Y-50);
             }
-            /*
-            switch (selectFurn)
-            {
-                case 1:
-
-                case 2:
-                default:
-                    break;
-            }
-            */
         }
 
         private void panel_canvas_MouseDown(object sender, MouseEventArgs e)
@@ -122,6 +117,7 @@ namespace midas_challenge
         }
         private void panel_canvas_MouseUp(object sender, MouseEventArgs e)
         {
+            rectList.Add(rect);
             isDraw = false;
         }
         private void button_create_room_Click(object sender, EventArgs e)
