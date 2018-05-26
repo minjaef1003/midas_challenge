@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Reflection.Emit;
@@ -91,13 +92,15 @@ namespace midas_challenge
         public Image img;
         public System.Windows.Forms.Label name;
         public Rectangle imgSize;
-        public Furniture(Image _img, string _name, Rectangle rect)
+        public string type;
+        public Furniture(Image _img, string _name, Rectangle rect, string _type)
         {
             img = _img;
             name = new System.Windows.Forms.Label();
             name.Text = _name;
             imgSize = new Rectangle();
             imgSize = rect;
+            type = _type;
         }
     }
 
@@ -111,18 +114,13 @@ namespace midas_challenge
 
         static public int PushVertex(Point coord, bool snapmode = false)
         {
-            
-            if (Intersect(rooms, curr_room))
-            {
-
-            }
-
             if (curr_room.walls.Count > 2 && IsClosed(curr_room, coord))
             {
                 curr_room.makeClose();
-                if (isSimple(curr_room))
+                if (!isSimplePolygon(curr_room))
                 {
-
+                    Debug.Print("This is Not Simple");
+                    return -1;
                 }
                 rooms.Add(curr_room);
                 curr_room = new Room();
@@ -130,19 +128,25 @@ namespace midas_challenge
             }
 
             if (snapmode) DoSnap(ref coord);
+            if (Intersect(rooms, curr_room))
+            {
+
+            }
+
             curr_room.pushVertex(coord);
 
 
             return 0;
         }
 
-        private static bool isSimple(Room curr_room)
+        private static bool isSimplePolygon(Room curr_room)
         {
             for (int i = 0; i < curr_room.walls.Count - 1; i++)
             {
                 for (int j = i; j < curr_room.walls.Count; j++)
                 {
-                    
+                    if (Computation.DoIntersect_easy(curr_room.walls[i], curr_room.walls[j]))
+                        return false;
                 }
             }
             return true;
@@ -150,24 +154,30 @@ namespace midas_challenge
 
         private static bool Intersect(List<Room> rooms, Room curr_room)
         {
-            Console.Write("TODO");
+            Debug.Print("Intersect TODO");
             return false;
         }
 
         static public int PushFurniture(Furniture ft)
         {
-            if (CheckOverlap(ft))
+            if (CheckOverlap(ft) || CheckOutside(ft))
             {
                 return 1;
             }
-            
+
             furnitures.Add(ft);
             return 0;
         }
 
+        private static bool CheckOutside(Furniture ft)
+        {
+            Debug.Print("CheckOutside TODO");
+            return false;
+        }
+
         private static void DoSnap(ref Point coord)
         {
-            Console.Write("TODO");
+            Debug.Print("DoSnap TODO");
             return;
         }
 
