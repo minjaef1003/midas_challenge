@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -34,6 +36,8 @@ namespace midas_challenge
     {
         private Coordinate lowerLeft;
         private Coordinate upperRight;
+        private Image img;
+        private Label name;
     }
 
     public class RoomMaker
