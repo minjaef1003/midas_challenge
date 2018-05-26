@@ -85,7 +85,7 @@ namespace midas_challenge
                     else if (str[0].Equals("Window"))
                     {
                         rooms[i].windows.Add(new Door(new Point(Int32.Parse(str[1]), Int32.Parse(str[2])), new Point(Int32.Parse(str[3]), Int32.Parse(str[4]))));
-                        rooms[i].windows[rooms[i].windows.Count() - 1].isDoor = flase;
+                        rooms[i].windows[rooms[i].windows.Count() - 1].isDoor = false;
                     }
                     else
                     {
