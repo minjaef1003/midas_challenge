@@ -118,13 +118,15 @@
     <ClInclude Include="geometry.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Door.cpp" />
+    <ClCompile Include="Furniture.cpp" />
     <ClCompile Include="Line.cpp" />
-    <ClCompile Include="Object.cpp" />
     <ClCompile Include="Openings.cpp" />
     <ClCompile Include="Polygon.cpp" />
     <ClCompile Include="Room.cpp" />
     <ClCompile Include="Vertex.cpp" />
     <ClCompile Include="Wall.cpp" />
+    <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

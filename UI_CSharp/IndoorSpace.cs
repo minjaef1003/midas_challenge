@@ -31,12 +31,12 @@ namespace midas_challenge
 
         public int removeRoom(int room_id, List<int> coords)
         {
-
+            return 0;
         }
 
         public List<KeyValuePair<int, List<int>>> readRoomList()
         {
-
+            return null;
         }
 
     }
