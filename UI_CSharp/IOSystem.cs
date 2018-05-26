@@ -40,31 +40,25 @@ namespace midas_challenge
         }
         public static void InitFurnitureRoom()
         {
+            List<string> rooms = new List<string> {"BedRoom"};
+            AddFurnitureRoom("Bed", rooms);
 
-            //new List<string> { "BedRoom", "Toilet", "LivingRoom", "Terrace" };
-            //AddFurnitureRoom("None");
+            rooms = new List<string> { "BedRoom", "LivingRoom" };
+            AddFurnitureRoom("Table", rooms);
+            AddFurnitureRoom("Bureau", rooms);
+            AddFurnitureRoom("Closet", rooms);
+            AddFurnitureRoom("Wardrobe", rooms);
 
-            //new List<string>("BedRoom", "LivingRoom", "Terrace");
-            //AddFurnitureRoom("Lamp", Properties.Resources.icons8_Lamp_100px);
+            rooms = new List<string> { "BedRoom", "LivingRoom", "Terrace" };
+            AddFurnitureRoom("Lamp", rooms);
 
-            //new List<string>("BedRoom", "LivingRoom");
-            //AddFurnitureRoom("Table", Properties.Resources.icons8_Table_100px);
-            //AddFurnitureRoom("Bureau", Properties.Resources.icons8_Bureau_100px);
-            //AddFurnitureRoom("Closet", Properties.Resources.icons8_Closet_100px);
-            //AddFurnitureRoom("Wardrobe", Properties.Resources.icons8_Wardrobe_100px);
+            rooms = new List<string> { "BedRoom", "LivingRoom", "Terrace", "Toilet" };
+            AddFurnitureRoom("None", rooms);
 
-            //new List<string>("BedRoom");
-            //AddFurnitureRoom("Bed", Properties.Resources.icons8_Bed_100px);
-
-            //new List<string>("Toilet");
-            //AddFurnitureRoom("Toilet_Bowl", Properties.Resources.icons8_Toilet_Bowl_96px);
-
-            //new List<string>("Toilet", "Terrace");
-            //AddFurnitureRoom("Washing_Machine", Properties.Resources.icons8_Washing_Machine_100px_1);
-
-   
-
-
+            rooms = new List<string>{"Toilet"};
+            AddFurnitureRoom("Toilet_Bowl",rooms);
+            rooms = new List<string> { "Toilet", "Terrace" };
+            AddFurnitureRoom("Washing_Machine", rooms);
         }
 
         public static Tuple<List<Room>, List<Furniture>> Read(string fileName)
