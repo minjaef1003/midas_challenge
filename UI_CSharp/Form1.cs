@@ -350,9 +350,13 @@ namespace midas_challenge
         }
 
         private void button_save_image_Click(object sender, EventArgs e)
-        {         
+        {
+            if (panel_canvas == null)
+            {
+                button_new_document_Click(sender, e);
+            }
             Bitmap bmp = new Bitmap(panel_canvas.Width, panel_canvas.Height);
-            panel_canvas.DrawToBitmap(bmp, new Rectangle(0, 0, panel_canvas.Width, panel_canvas.Height));        
+            panel_canvas.DrawToBitmap(bmp, new Rectangle(0, 0, panel_canvas.Width, panel_canvas.Height));
             saveFileDialog1.Filter = "png files (*.png)|*.png|jpeg files (*.jpeg)|*.jpeg";
             saveFileDialog1.FilterIndex = 2;
             saveFileDialog1.RestoreDirectory = true;
@@ -362,6 +366,7 @@ namespace midas_challenge
                 if (idx == 1) bmp.Save(saveFileDialog1.FileName, ImageFormat.Png);
                 else bmp.Save(saveFileDialog1.FileName, ImageFormat.Jpeg);
             }
+            button_new_document_Click(sender, e);
         }
 
         private void button_editmode_Click(object sender, EventArgs e)
