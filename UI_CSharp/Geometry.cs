@@ -117,9 +117,10 @@ namespace midas_challenge
             if (curr_room.walls.Count > 2 && IsClosed(curr_room, coord))
             {
                 curr_room.makeClose();
-                if (!isSimplePolygon(curr_room))
+                if (!IsSimplePolygon(curr_room))
                 {
                     Debug.Print("This is Not Simple");
+                    curr_room = new Room();
                     return -1;
                 }
                 rooms.Add(curr_room);
@@ -139,7 +140,19 @@ namespace midas_challenge
             return 0;
         }
 
-        private static bool isSimplePolygon(Room curr_room)
+        static public int PushRectangle(Point[] coords, bool snapmode = false)
+        {
+            curr_room.pushVertex(coords[0]);
+            curr_room.pushVertex(coords[1]);
+            curr_room.pushVertex(coords[2]);
+            curr_room.pushVertex(coords[3]);
+            curr_room.makeClose();
+            rooms.Add(curr_room);
+            curr_room = new Room();
+            return 1;
+        }
+
+        private static bool IsSimplePolygon(Room curr_room)
         {
             for (int i = 0; i < curr_room.walls.Count - 1; i++)
             {
