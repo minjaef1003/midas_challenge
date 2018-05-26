@@ -116,9 +116,9 @@ namespace midas_challenge
         }
 
 
-        public static void Write(List<Room> rooms, List<Furniture> furnitures)
+        public static void Write(List<Room> rooms, List<Furniture> furnitures, string name)
         {
-            StreamWriter sw = new StreamWriter("test.txt");
+            StreamWriter sw = new StreamWriter(name);
             string str;
             int i = 0;
             sw.WriteLine("Rooms count: " + rooms.Count());

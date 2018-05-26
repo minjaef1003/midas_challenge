@@ -5,6 +5,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -192,7 +193,7 @@ namespace midas_challenge
                 else
                 {
                     ep = e.Location;
-                    if(RoomMaker.PushVertex(ref ep) == 1)
+                    if (RoomMaker.PushVertex(ref ep) == 1)
                     {
                         isPolygon = false;
                         isLine = false;
@@ -313,10 +314,18 @@ namespace midas_challenge
         }
         private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            string openFileName = "";
+            DialogResult result = openFileDialog1.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                openFileName = openFileDialog1.FileName;                
+            }
+            else if (result == DialogResult.Cancel) return;
+
             button_new_document_Click(sender, e);
-            string fileName = "test.txt";
+           
             Tuple<List<Room>, List<Furniture>> readDate;
-            readDate = Read(fileName);
+            readDate = Read(openFileName);
             RoomMaker.rooms = readDate.Item1;
             RoomMaker.furnitures = readDate.Item2;
             Form_Main.count = RoomMaker.rooms.Count;
@@ -324,8 +333,28 @@ namespace midas_challenge
 
         private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            saveFileDialog1.Filter = "txt files (*.txt)|*.txt";
+            saveFileDialog1.FilterIndex = 1;
+            saveFileDialog1.RestoreDirectory = true;
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                Write(RoomMaker.rooms, RoomMaker.furnitures,saveFileDialog1.FileName);
+            }
+        }
 
-            Write(RoomMaker.rooms, RoomMaker.furnitures);
+        private void button_save_image_Click(object sender, EventArgs e)
+        {         
+            Bitmap bmp = new Bitmap(panel_canvas.Width, panel_canvas.Height);
+            panel_canvas.DrawToBitmap(bmp, new Rectangle(0, 0, panel_canvas.Width, panel_canvas.Height));        
+            saveFileDialog1.Filter = "png files (*.png)|*.png|jpeg files (*.jpeg)|*.jpeg";
+            saveFileDialog1.FilterIndex = 2;
+            saveFileDialog1.RestoreDirectory = true;
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                int idx = saveFileDialog1.FilterIndex;
+                if (idx == 1) bmp.Save(saveFileDialog1.FileName, ImageFormat.Png);
+                else bmp.Save(saveFileDialog1.FileName, ImageFormat.Jpeg);
+            }
         }
 
         private void button_createroom_rect_Click(object sender, EventArgs e)
