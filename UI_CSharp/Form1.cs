@@ -146,9 +146,12 @@ namespace midas_challenge
 
             if(selectFurn != 0)
             {
-                f.imgSize.X = e.X; f.imgSize.Y = e.Y;
-                if(RoomMaker.PushFurniture(f) == 1)
-                    selectFurn = 0;            
+                Room room = RoomMaker.CheckInnerPoint(new Point(e.X, e.Y));
+                if (room != null) {
+                    f.imgSize.X = e.X; f.imgSize.Y = e.Y;
+                    if (RoomMaker.PushFurniture(f) == 1)
+                        selectFurn = 0;
+                }
             }
             if(isDoor)
             {
