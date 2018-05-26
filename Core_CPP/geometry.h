@@ -94,7 +94,7 @@ private:
 public:
 	Polygon();
 	void addLine(Line*);
-	void addVecLine(vector<Line*>);
+	void addVecLine(vector<Line*>&);
 };
 
 //Room
@@ -104,7 +104,7 @@ private:
 	
 public:
 	Room();
-	Room(vector<Line*>*);
+	Room(vector<Line*>&);
 	bool checkClosure();
 };
 

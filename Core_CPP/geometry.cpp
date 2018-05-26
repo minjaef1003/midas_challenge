@@ -100,8 +100,11 @@ void Polygon::addLine(Line *)
 {
 }
 
-void Polygon::addVecLine(vector<Line*>)
+void Polygon::addVecLine(vector<Line*>& _vecLine)
 {
+	for (size_t i = 0; i < _vecLine.size(); i++) {
+		vecLine.push_back(_vecLine.at(i));
+	}
 }
 
 //Room
@@ -109,9 +112,9 @@ Room::Room()
 {
 }
 
-Room::Room(vector<Line*>*)
+Room::Room(vector<Line*>& _vecLine)
 {
-
+	addVecLine(_vecLine);
 }
 
 bool Room::checkClosure()
