@@ -29,9 +29,7 @@ namespace midas_challenge
         private Rectangle rect;
         private int selectFurn = 0;
         Furniture f;
-        Image imgDoor, imgWindow;
-        Point[] pointList;
-        int cnt = 0;
+        Image imgDoor, imgWindow;                
 
         // Edit mode
         Room selected_room = null;
@@ -67,7 +65,7 @@ namespace midas_challenge
                 panel_canvas.Dock = DockStyle.Fill;
                 panel_canvas.Name = "panel_canvas";
                 panel_canvas.Size = new Size(876, 555);
-                panel_canvas.BackColor = Color.FromArgb(255, 255, 255, 253);
+                panel_canvas.BackColor = Color.MistyRose;
                 panel_canvas.Paint += new PaintEventHandler(this.panel_canvas_Paint);
                 panel_canvas.MouseDown += new MouseEventHandler(this.panel_canvas_MouseDown);
                 panel_canvas.MouseMove += new MouseEventHandler(this.panel_canvas_MouseMove);
@@ -102,7 +100,7 @@ namespace midas_challenge
                     p[j] = plist[j];
                 
                 HatchStyle h = (HatchStyle)3;
-                HatchBrush hatch = new HatchBrush(h, Color.SkyBlue, Color.White);
+                HatchBrush hatch = new HatchBrush(h, Color.Gold, Color.White);
                 e.Graphics.FillPolygon(hatch, p);
                 e.Graphics.DrawPolygon(pen, p);
             }
@@ -128,12 +126,22 @@ namespace midas_challenge
                     var doors = RoomMaker.rooms[i].doors;
                     pen1.Color = Color.Black;
                     e.Graphics.DrawLine(pen1, doors[j].StartPoint, doors[j].EndPoint);
+                    if(doors[j].StartPoint.X == doors[j].EndPoint.X)
+                    {
+                        e.Graphics.DrawLine(new Pen(Color.Black, 3), doors[j].EndPoint.X,doors[j].EndPoint.Y, doors[j].EndPoint.X - 20, doors[j].EndPoint.Y + 40);
+                    }
+                    else if((doors[j].StartPoint.Y == doors[j].EndPoint.Y))
+                    {
+                        e.Graphics.DrawLine(new Pen(Color.Black, 3), doors[j].StartPoint.X, doors[j].StartPoint.Y, doors[j].StartPoint.X + 20, doors[j].StartPoint.Y + 40);
+                    }
 
                 }
                 for (int j = 0; j < RoomMaker.rooms[i].windows.Count; j++)
                 {
                     var windows = RoomMaker.rooms[i].windows;
                     pen1.Color = Color.Red;
+                    pen1.StartCap = LineCap.DiamondAnchor;
+                    pen1.EndCap = LineCap.DiamondAnchor;
                     e.Graphics.DrawLine(pen1, windows[j].StartPoint, windows[j].EndPoint);
 
                 }
@@ -587,20 +595,20 @@ namespace midas_challenge
 
         private void button_undo_Click(object sender, EventArgs e)
         {
-            if (history.Count > 0)
+            if ( Form_Main.count > 0)
             {
-                
+                Form_Main.count--;
+                panel_canvas.Refresh();
             }
         }
 
         private void button_redo_Click(object sender, EventArgs e)
         {
-            if ( Form_Main.count <  history.Count )
+            if ( Form_Main.count <  RoomMaker.rooms.Count )
             {
-                
+                Form_Main.count++;
                 panel_canvas.Refresh();
             }
         }
     }
-
 }
