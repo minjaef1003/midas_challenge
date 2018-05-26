@@ -217,7 +217,13 @@ namespace midas_challenge
                 else
                 {
                     ep = e.Location;
-                    if (RoomMaker.PushVertex(ref ep) == 1)
+                    int result = RoomMaker.PushVertex(ref ep);
+                    if (result == 1)
+                    {
+                        isPolygon = false;
+                        isLine = false;
+                    }
+                    else if (result == -1)
                     {
                         isPolygon = false;
                         isLine = false;
