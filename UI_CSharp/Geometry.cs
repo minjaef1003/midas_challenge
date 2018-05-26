@@ -355,8 +355,6 @@ namespace midas_challenge
                     curr_room = new Room();
                     return -1;
                 }
-                // if (snapmode) SnapRectangleRoom(curr_room);
-                
                 rooms.Add(curr_room);
                 curr_room = new Room();
                 Form_Main.count = rooms.Count;
@@ -515,44 +513,40 @@ namespace midas_challenge
         private static void SnapRectangleRoom(Room room)
         {
             int n = room.walls.Count;
-            bool[] hasChanged = new bool[n];
-            Array.Clear(hasChanged, 0, hasChanged.Length);
 
             if (rooms.Count == 0 || n == 0) return;
 
             double mindist = 0;
-            while (mindist < SNAPPING_TRHES)
+            mindist = 1000.0;
+            Point minPoint = new Point(0, 0);
+            int mw = -1;
+            for (int w = 0; w < n; w += 1)
             {
-                mindist = 1000.0;
-                Point minPoint = new Point(0, 0);
-                int mw = -1;
-                for (int w = 0; w < n; w += 1)
+                for (int i = 0; i < rooms.Count; i++)
                 {
-                    if (hasChanged[w]) continue;
-                    for (int i = 0; i < rooms.Count; i++)
+                    for (int j = 0; j < rooms[i].walls.Count; j++)
                     {
-                        for (int j = 0; j < rooms[i].walls.Count; j++)
-                        {
-                            Point rwl = rooms[i].walls[j].StartPoint;
+                        Point rwl = rooms[i].walls[j].StartPoint;
                             
-                            double dist = Computation.EuclideanDist(rwl, room.walls[w].StartPoint);
-                            if (mindist > dist)
-                            {
-                                mindist = dist;
-                                minPoint = rwl;
-                                mw = w;
-                            }
-
+                        double dist = Computation.EuclideanDist(rwl, room.walls[w].StartPoint);
+                        if (mindist > dist)
+                        {
+                            mindist = dist;
+                            minPoint = rwl;
+                            mw = w;
                         }
+
                     }
                 }
-                if (mw != -1 && mindist < SNAPPING_TRHES)
-                {
-                    room.translateStartPoint(mw, minPoint.X, minPoint.Y);
-                    hasChanged[mw] = true;
-                }
-                if (mindist > SNAPPING_TRHES) break;
             }
+            if (mw != -1 && mindist < SNAPPING_TRHES)
+            {
+                mw = -1;
+                mindist = 1000.0;
+                room.MoveRoom(room.walls[mw].StartPoint, minPoint);
+            }
+
+
             return;
         }
 

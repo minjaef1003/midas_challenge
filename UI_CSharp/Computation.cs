@@ -38,7 +38,10 @@ namespace midas_challenge
         {
             return DoIntersect_strict(line1.StartPoint, line1.EndPoint, line2.StartPoint, line2.EndPoint);
         }
-
+        /**
+         * Intersection
+         * https://www.geeksforgeeks.org/check-if-two-given-line-segments-intersect/
+         * */
         public static bool DoIntersect_easy(Point p1, Point q1, Point p2, Point q2)
         {
             // Find the four orientations needed for general and
@@ -85,12 +88,14 @@ namespace midas_challenge
 
             return false; // Doesn't fall in any of the above cases
         }
+
         public static double EuclideanDist(Point coord1, Point coord2)
         {
             return Math.Sqrt(Math.Pow((double)(coord1.X - coord2.X), 2.0) + Math.Pow((double)(coord2.Y - coord1.Y), 2.0));
         }
 
-        internal static double EuclideanDist(Wall wall, Point center, out Point closest)
+        //http://csharphelper.com/blog/2016/09/find-the-shortest-distance-between-a-point-and-a-line-segment-in-c/
+        public static double EuclideanDist(Wall wall, Point center, out Point closest)
         {
             Point pt = center;
             Point p1 = wall.StartPoint;
@@ -100,16 +105,6 @@ namespace midas_challenge
             // Calculate the t that minimizes the distance.
             double t = ((pt.X - p1.X) * dx + (pt.Y - p1.Y) * dy) / (dx * dx + dy * dy);
 
-            //int ymax = Math.Max(p2.Y, p1.Y);
-            //int ymin = Math.Min(p2.Y, p1.Y);
-            //if (dx == 0.0)
-            //{
-            //    if (ymax >= pt.Y && ymin <= pt.Y)
-            //    {
-            //        closest = new Point(p1.X, pt.Y);
-            //        return dy;
-            //    }
-            //}
             // See if this represents one of the segment's
             // end points or a point in the middle.
             if (t < 0)
