@@ -32,7 +32,15 @@ namespace midas_challenge
             IsStart = false;
         }
 
-        public List<Coordinate> getAllCoordinate() { }
+        public List<Coordinate> getAllCoordinate() {
+
+            List<Coordinate> coords = new List<Coordinate>();
+            foreach (Wall wall in walls)
+            {
+                coords.Add(wall.Line.Key);
+            }
+            return coords;
+        }
 
         public void pushVertex(Coordinate coord)
         {
