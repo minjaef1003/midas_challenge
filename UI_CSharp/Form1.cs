@@ -68,9 +68,18 @@ namespace midas_challenge
             {
                 for(int j=0; j<RoomMaker.rooms[i].walls.Count; j++)
                 {
-                    Point sp = RoomMaker.rooms[i].walls[j].StartPoint;
-                    Point ep = RoomMaker.rooms[i].walls[j].EndPoint;
-                    e.Graphics.DrawLine(pen, sp, ep);
+                    HatchStyle h = (HatchStyle)3;
+                    HatchBrush brush = new HatchBrush(h, Color.Brown, Color.White);
+                    //Point sp = RoomMaker.rooms[i].walls[j].StartPoint;
+                    //Point ep = RoomMaker.rooms[i].walls[j].EndPoint;
+                    Point[] p =
+                    {
+                        RoomMaker.rooms[i].walls[j].StartPoint,
+                        RoomMaker.rooms[i].walls[j].EndPoint
+                    };
+                    //e.Graphics.DrawLine(pen, sp, ep);
+                    
+                    e.Graphics.DrawPolygon(pen, p);
                 }              
             }
             for(int i=0; i<RoomMaker.furnitures.Count; i++)
@@ -193,8 +202,9 @@ namespace midas_challenge
 
         private void button_create_furniture_Click(object sender, EventArgs e)
         {
+            isRect = false;
             if (isCreateMenu == 2)
-            {
+            {                
                 selectFurn = 0;
                 isCreateMenu = 0;
                 panel_furniture_menu.Width = 0;

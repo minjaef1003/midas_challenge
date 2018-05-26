@@ -63,9 +63,9 @@
     </Compile>
     <Compile Include="Geometry.cs" />
     <None Include="test.cs" />
-    <None Include="IOSystem.cs">
+    <Compile Include="IOSystem.cs">
       <SubType>Form</SubType>
-    </None>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
