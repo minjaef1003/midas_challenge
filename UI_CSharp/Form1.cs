@@ -16,7 +16,7 @@ namespace midas_challenge
     public partial class Form_Main : Form
     {
         public static int count = 0;
-        public static List<int> history;
+        public static Tuple<int, int> history;
         private List<Rectangle> rectList;
         private DoubleBufferPannel panel_canvas;
         private int menu_width, width, height;
@@ -41,7 +41,7 @@ namespace midas_challenge
             panel_createroom_menu.Width = 0;
             panel_furniture_menu.Width = 0;
             rectList = new List<Rectangle>();
-            history = new List<int>();
+            history = new Tuple<int, int>(0, 0);
             RoomMaker.curr_room = new Room();
             RoomMaker.rooms = new List<Room>();
             RoomMaker.furnitures = new List<Furniture>();
@@ -412,20 +412,20 @@ namespace midas_challenge
 
         private void button_undo_Click(object sender, EventArgs e)
         {
-            if (history.Count > 0)
+            if (Form_Main.count > 0)
             {
-                
+                Form_Main.count--;
+                panel_canvas.Refresh();
             }
         }
 
         private void button_redo_Click(object sender, EventArgs e)
         {
-            if ( Form_Main.count <  history.Count )
+            if (Form_Main.count < RoomMaker.rooms.Count)
             {
-                
+                Form_Main.count++;
                 panel_canvas.Refresh();
             }
         }
     }
-
 }
