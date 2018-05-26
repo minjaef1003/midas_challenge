@@ -35,10 +35,8 @@
             this.panel_createroom_menu = new System.Windows.Forms.Panel();
             this.button_createroom_rect = new System.Windows.Forms.Button();
             this.button_createroom_line = new System.Windows.Forms.Button();
-            this.panel_log = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.panel_menu = new System.Windows.Forms.Panel();
+            this.button_redo = new System.Windows.Forms.Button();
             this.button_undo = new System.Windows.Forms.Button();
             this.button_create_window = new System.Windows.Forms.Button();
             this.button_create_door = new System.Windows.Forms.Button();
@@ -65,16 +63,17 @@
             this.기본바닥ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.타일바닥ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.button_redo = new System.Windows.Forms.Button();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.label_status = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel_outline.SuspendLayout();
             this.panel_workspace.SuspendLayout();
             this.panel_createroom_menu.SuspendLayout();
-            this.panel_log.SuspendLayout();
             this.panel_menu.SuspendLayout();
             this.panel_furniture_menu.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel_outline
@@ -82,8 +81,6 @@
             this.panel_outline.BackColor = System.Drawing.SystemColors.Control;
             this.panel_outline.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel_outline.Controls.Add(this.panel_workspace);
-            this.panel_outline.Controls.Add(this.panel_log);
-            this.panel_outline.Controls.Add(this.panel_menu);
             this.panel_outline.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel_outline.Location = new System.Drawing.Point(0, 68);
             this.panel_outline.Name = "panel_outline";
@@ -92,11 +89,13 @@
             // 
             // panel_workspace
             // 
+            this.panel_workspace.Controls.Add(this.statusStrip1);
+            this.panel_workspace.Controls.Add(this.panel_menu);
             this.panel_workspace.Controls.Add(this.panel_createroom_menu);
             this.panel_workspace.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel_workspace.Location = new System.Drawing.Point(166, 0);
+            this.panel_workspace.Location = new System.Drawing.Point(0, 0);
             this.panel_workspace.Name = "panel_workspace";
-            this.panel_workspace.Size = new System.Drawing.Size(1103, 543);
+            this.panel_workspace.Size = new System.Drawing.Size(1269, 717);
             this.panel_workspace.TabIndex = 2;
             // 
             // panel_createroom_menu
@@ -105,7 +104,7 @@
             this.panel_createroom_menu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel_createroom_menu.Controls.Add(this.button_createroom_rect);
             this.panel_createroom_menu.Controls.Add(this.button_createroom_line);
-            this.panel_createroom_menu.Location = new System.Drawing.Point(0, 0);
+            this.panel_createroom_menu.Location = new System.Drawing.Point(171, 4);
             this.panel_createroom_menu.Name = "panel_createroom_menu";
             this.panel_createroom_menu.Size = new System.Drawing.Size(89, 168);
             this.panel_createroom_menu.TabIndex = 0;
@@ -142,39 +141,6 @@
             this.button_createroom_line.UseVisualStyleBackColor = true;
             this.button_createroom_line.Click += new System.EventHandler(this.button_createroom_line_Click);
             // 
-            // panel_log
-            // 
-            this.panel_log.BackColor = System.Drawing.Color.White;
-            this.panel_log.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel_log.Controls.Add(this.label1);
-            this.panel_log.Controls.Add(this.richTextBox1);
-            this.panel_log.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_log.Location = new System.Drawing.Point(166, 543);
-            this.panel_log.Name = "panel_log";
-            this.panel_log.Size = new System.Drawing.Size(1103, 174);
-            this.panel_log.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(5, 2);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 21);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "log";
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.BackColor = System.Drawing.Color.White;
-            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.richTextBox1.Location = new System.Drawing.Point(0, 27);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(1101, 145);
-            this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "";
-            // 
             // panel_menu
             // 
             this.panel_menu.BackColor = System.Drawing.Color.White;
@@ -185,11 +151,20 @@
             this.panel_menu.Controls.Add(this.button_create_door);
             this.panel_menu.Controls.Add(this.button_create_furniture);
             this.panel_menu.Controls.Add(this.button_create_room);
-            this.panel_menu.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel_menu.Location = new System.Drawing.Point(0, 0);
+            this.panel_menu.Location = new System.Drawing.Point(0, 1);
             this.panel_menu.Name = "panel_menu";
-            this.panel_menu.Size = new System.Drawing.Size(166, 717);
+            this.panel_menu.Size = new System.Drawing.Size(166, 688);
             this.panel_menu.TabIndex = 0;
+            // 
+            // button_redo
+            // 
+            this.button_redo.Location = new System.Drawing.Point(50, 467);
+            this.button_redo.Name = "button_redo";
+            this.button_redo.Size = new System.Drawing.Size(75, 23);
+            this.button_redo.TabIndex = 1;
+            this.button_redo.Text = "redo";
+            this.button_redo.UseVisualStyleBackColor = true;
+            this.button_redo.Click += new System.EventHandler(this.button_redo_Click);
             // 
             // button_undo
             // 
@@ -258,7 +233,7 @@
             this.button_create_room.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_create_room.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_create_room.Image = ((System.Drawing.Image)(resources.GetObject("button_create_room.Image")));
-            this.button_create_room.Location = new System.Drawing.Point(0, 0);
+            this.button_create_room.Location = new System.Drawing.Point(0, -2);
             this.button_create_room.Margin = new System.Windows.Forms.Padding(0);
             this.button_create_room.Name = "button_create_room";
             this.button_create_room.Size = new System.Drawing.Size(164, 101);
@@ -279,7 +254,7 @@
             this.panel_furniture_menu.Controls.Add(this.button_fur_table);
             this.panel_furniture_menu.Controls.Add(this.button_fur_bureau);
             this.panel_furniture_menu.Controls.Add(this.button_fur_closet);
-            this.panel_furniture_menu.Location = new System.Drawing.Point(168, 69);
+            this.panel_furniture_menu.Location = new System.Drawing.Point(170, 72);
             this.panel_furniture_menu.Name = "panel_furniture_menu";
             this.panel_furniture_menu.Size = new System.Drawing.Size(89, 543);
             this.panel_furniture_menu.TabIndex = 1;
@@ -479,15 +454,22 @@
             this.contextMenuStrip2.Name = "contextMenuStrip2";
             this.contextMenuStrip2.Size = new System.Drawing.Size(61, 4);
             // 
-            // button_redo
+            // statusStrip1
             // 
-            this.button_redo.Location = new System.Drawing.Point(50, 467);
-            this.button_redo.Name = "button_redo";
-            this.button_redo.Size = new System.Drawing.Size(75, 23);
-            this.button_redo.TabIndex = 1;
-            this.button_redo.Text = "redo";
-            this.button_redo.UseVisualStyleBackColor = true;
-            this.button_redo.Click += new System.EventHandler(this.button_redo_Click);
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.label_status});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 692);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(1269, 25);
+            this.statusStrip1.TabIndex = 1;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // label_status
+            // 
+            this.label_status.Name = "label_status";
+            this.label_status.Size = new System.Drawing.Size(104, 20);
+            this.label_status.Text = "프로그램 시작";
             // 
             // Form_Main
             // 
@@ -506,9 +488,8 @@
             this.Text = "self interior";
             this.panel_outline.ResumeLayout(false);
             this.panel_workspace.ResumeLayout(false);
+            this.panel_workspace.PerformLayout();
             this.panel_createroom_menu.ResumeLayout(false);
-            this.panel_log.ResumeLayout(false);
-            this.panel_log.PerformLayout();
             this.panel_menu.ResumeLayout(false);
             this.panel_furniture_menu.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
@@ -516,6 +497,8 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -533,10 +516,7 @@
         private System.Windows.Forms.ToolStripMenuItem 새문서ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 저장ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 불러오기ToolStripMenuItem;        
-        private System.Windows.Forms.Panel panel_log;
         private System.Windows.Forms.Panel panel_menu;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Button button_create_room;
         private System.Windows.Forms.Panel panel_workspace;
         private System.Windows.Forms.Panel panel_createroom_menu;
@@ -559,6 +539,8 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
         private System.Windows.Forms.Button button_undo;
         private System.Windows.Forms.Button button_redo;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel label_status;
     }
 }
 
