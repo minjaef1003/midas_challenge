@@ -48,6 +48,8 @@ namespace midas_challenge
             int o3 = orientation(p2, q2, p1);
             int o4 = orientation(p2, q2, q1);
 
+            if (o1 == 0 || o2 == 0 || o3 == 0 || 04 == 0)
+                return false;
             // General case
             if (o1 != o2 && o3 != o4)
                 return true;

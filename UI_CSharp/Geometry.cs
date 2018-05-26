@@ -93,7 +93,7 @@ namespace midas_challenge
         public System.Windows.Forms.Label name;
         public Rectangle imgSize;
         public string type;
-        public Furniture(Image _img, string _name, Rectangle rect, string _type)
+        public Furniture(Image _img, string _name, Rectangle rect, string _type="None")
         {
             img = _img;
             name = new System.Windows.Forms.Label();
