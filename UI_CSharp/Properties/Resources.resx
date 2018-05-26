@@ -118,14 +118,38 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="icons8_Bed_100px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\res\icons8_Bed_100px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icons8_Bureau_100px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\bin\Debug\res\icons8_Bureau_100px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons8_Bureau_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\res\icons8_Bureau_32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icons8_Closet_100px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\bin\Debug\res\icons8_Closet_100px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="icons8_Closet_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\res\icons8_Closet_32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons8_Closet_40px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\res\icons8_Closet_40px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons8_Door_40px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\res\icons8_Door_40px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons8_Floor_Plan_40px_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\res\icons8_Floor_Plan_40px_1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icons8_Lamp_100px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\bin\Debug\res\icons8_Lamp_100px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons8_Lamp_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\res\icons8_Lamp_32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons8_Living_Room_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\res\icons8_Living_Room_32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icons8_Living_Room_96px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\bin\Debug\res\icons8_Living_Room_96px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -133,8 +157,23 @@
   <data name="icons8_None_800px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\bin\Debug\res\icons8_None_800px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="icons8_Open_Window_40px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\res\icons8_Open_Window_40px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons8_Polygon_32px_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\res\icons8_Polygon_32px_1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons8_Rectangular_32px_4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\res\icons8_Rectangular_32px_4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icons8_Table_100px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\bin\Debug\res\icons8_Table_100px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons8_Table_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\res\icons8_Table_32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons8_Toilet_Bowl_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\res\icons8_Toilet_Bowl_32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icons8_Toilet_Bowl_96px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\bin\Debug\res\icons8_Toilet_Bowl_96px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -142,7 +181,13 @@
   <data name="icons8_Wardrobe_100px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\bin\Debug\res\icons8_Wardrobe_100px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="icons8_Wardrobe_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\res\icons8_Wardrobe_32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icons8_Washing_Machine_100px_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\bin\Debug\res\icons8_Washing_Machine_100px_1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons8_Washing_Machine_32px_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\res\icons8_Washing_Machine_32px_1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

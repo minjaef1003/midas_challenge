@@ -151,5 +151,26 @@
   <ItemGroup>
     <None Include="bin\Debug\res\icons8_None_800px.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\icons8_Door_40px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\icons8_Open_Window_40px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\icons8_Rectangular_32px_4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\icons8_Polygon_32px_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\icons8_Closet_40px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\icons8_Floor_Plan_40px_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\icons8_Bed_100px.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

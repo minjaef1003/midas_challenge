@@ -33,6 +33,7 @@ namespace midas_challenge
         public Form_Main()
         {
             InitializeComponent();
+            InitImgFurnitureDic();
             menu_width = panel_createroom_menu.Width;
             panel_createroom_menu.Width = 0;
             panel_furniture_menu.Width = 0;
@@ -261,6 +262,7 @@ namespace midas_challenge
         }
         private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            button_new_document_Click(sender, e);
             string fileName = "test.txt";
             Tuple<List<Room>, List<Furniture>> readDate;
             readDate = Read(fileName);
