@@ -30,8 +30,7 @@ namespace midas_challenge
         private int selectFurn = 0;
         Furniture f;
         Image imgDoor, imgWindow;
-        Point[] pointList;
-        int cnt = 0;
+
         public Form_Main()
         {
             InitializeComponent();
@@ -370,7 +369,6 @@ namespace midas_challenge
             if (isCreateMenu == 3)
             {
                 Cursor.Current = Cursors.Default;
-
             }
             else
             {
@@ -378,11 +376,7 @@ namespace midas_challenge
 
                 isRect = false;
                 Cursor.Current = Cursors.Hand;
-
-
             }
-
-
         }
 
         private void button_createroom_rect_Click(object sender, EventArgs e)
