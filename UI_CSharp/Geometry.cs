@@ -190,108 +190,28 @@ namespace midas_challenge
 
         public bool CheckInnerPoint(Point p)
         {
-            int LCount = 0, UCount = 0, RCount = 0, DCount = 0;
-            // 직선과 동일범위인지 확인.
-            foreach (Wall wall in walls)
+            int LX = -650, RX = 650, UY= 650, DY =-650;
+            Line L = new Line(new Point(LX, p.Y), p);
+            Line R = new Line(new Point(RX, p.Y), p);
+            Line U = new Line(new Point(p.X, UY), p);
+            Line D = new Line(new Point(p.X, DY), p);
+
+            int Rc = 0, Lc = 0, Uc = 0, Dc = 0;
+            foreach(Wall wall in walls)
             {
-                int minX, minY, maxX, maxY;
-                if (wall.StartPoint.X > wall.EndPoint.X)
-                {
-                    minX = wall.EndPoint.X;
-                    maxX = wall.StartPoint.X;
-                }
-                else
-                {
-                    minX = wall.StartPoint.X;
-                    maxX = wall.EndPoint.X;
-                }
-                if (wall.StartPoint.Y > wall.EndPoint.Y)
-                {
-                    minY = wall.EndPoint.Y;
-                    maxY = wall.StartPoint.Y;
-                }
-                else
-                {
-                    minY = wall.StartPoint.Y;
-                    maxY = wall.EndPoint.Y;
-                }
-
-                if (minX == maxX)
-                {
-                    if (minY < p.Y && p.Y < maxY)
-                    {
-                        if (minX < p.X)
-                            RCount++;
-                        else if (minX > p.X)
-                            LCount++;
-                        else
-                            return true;
-                    }
-                    else if (minY == p.Y || maxY == p.Y)
-                    {
-                        // 선위.
-                        return true;
-                    }
-                }
-                else if (minY == maxY)
-                {
-                    if (minX < p.X && p.X < maxX)
-                    {
-                        if (minY < p.Y)
-                            UCount++;
-                        else if (minY > p.Y)
-                            DCount++;
-                        else
-                            return true;
-                    }
-                    else if (minX == p.X || maxX == p.X)
-                    {
-                        // 선위.
-                        return true;
-                    }
-                }
-                else if (minX <= p.X && p.X <= maxX)
-                {
-                    int ccw = RoomMaker.CCW(wall, p);
-
-                    if (ccw == 1)
-                        DCount++;
-                    else if (ccw == -1)
-                        UCount++;
-                    else
-                        return true;
-
-                }
-                else if (minY <= p.Y && p.Y <= maxY)
-                {
-                    int ccw = RoomMaker.CCW(wall, p);
-
-                    if (wall.EndPoint.Y > wall.StartPoint.Y)
-                    {
-                        if (ccw == 1)
-                            RCount++;
-                        else if (ccw == -1)
-                            LCount++;
-                        else
-                            return true;
-
-                    }
-                    else
-                    {
-                        if (ccw == 1)
-                            LCount++;
-                        else if (ccw == -1)
-                            RCount++;
-                        else
-                            return true;
-                    }
-                }
+                if (Computation.DoIntersect_strict(L, wall))
+                    Lc++;
+                if (Computation.DoIntersect_strict(R, wall))
+                    Rc++;
+                if (Computation.DoIntersect_strict(U, wall))
+                    Uc++;
+                if (Computation.DoIntersect_strict(D, wall))
+                    Dc++;
             }
-            //동일범위라면 x, y같은 선상에서 만나는지 카운트 
-            if (UCount * DCount * RCount * LCount == 0)
+            if (Uc * Dc * Rc * Lc == 0)
                 return false;
             //하나라도 0이면 false;
-            else if ((UCount % 2) + (DCount % 2) + (RCount % 2) + (LCount % 2) == 4)
+            else if ((Uc % 2) + (Dc % 2) + (Rc % 2) + (Lc % 2) == 4)
             {
                 return true;
             }
