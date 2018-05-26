@@ -47,7 +47,6 @@ namespace midas_challenge
 
         public int pushCoord(KeyValuePair<int, int> coord)
         {
-
         }
     }
 
