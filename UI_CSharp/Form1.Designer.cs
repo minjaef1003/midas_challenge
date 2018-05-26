@@ -55,6 +55,7 @@
             this.button_new_document = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
+            this.button_save_image = new System.Windows.Forms.ToolStripButton();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.파일ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.새문서ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -65,9 +66,9 @@
             this.기본바닥ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.타일바닥ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.button_save_image = new System.Windows.Forms.ToolStripButton();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.button_editmode = new System.Windows.Forms.Button();
             this.panel_outline.SuspendLayout();
             this.panel_workspace.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -127,6 +128,7 @@
             this.panel_menu.Controls.Add(this.button_create_window);
             this.panel_menu.Controls.Add(this.button_create_door);
             this.panel_menu.Controls.Add(this.button_create_furniture);
+            this.panel_menu.Controls.Add(this.button_editmode);
             this.panel_menu.Controls.Add(this.button_create_room);
             this.panel_menu.Location = new System.Drawing.Point(0, 1);
             this.panel_menu.Name = "panel_menu";
@@ -135,21 +137,29 @@
             // 
             // button_redo
             // 
-            this.button_redo.Location = new System.Drawing.Point(50, 467);
+            this.button_redo.FlatAppearance.BorderSize = 0;
+            this.button_redo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_redo.Image = ((System.Drawing.Image)(resources.GetObject("button_redo.Image")));
+            this.button_redo.Location = new System.Drawing.Point(86, 542);
             this.button_redo.Name = "button_redo";
-            this.button_redo.Size = new System.Drawing.Size(75, 23);
+            this.button_redo.Size = new System.Drawing.Size(75, 61);
             this.button_redo.TabIndex = 1;
-            this.button_redo.Text = "redo";
+            this.button_redo.Text = "Redo";
+            this.button_redo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.button_redo.UseVisualStyleBackColor = true;
             this.button_redo.Click += new System.EventHandler(this.button_redo_Click);
             // 
             // button_undo
             // 
-            this.button_undo.Location = new System.Drawing.Point(50, 438);
+            this.button_undo.FlatAppearance.BorderSize = 0;
+            this.button_undo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_undo.Image = ((System.Drawing.Image)(resources.GetObject("button_undo.Image")));
+            this.button_undo.Location = new System.Drawing.Point(10, 542);
             this.button_undo.Name = "button_undo";
-            this.button_undo.Size = new System.Drawing.Size(75, 23);
+            this.button_undo.Size = new System.Drawing.Size(75, 61);
             this.button_undo.TabIndex = 1;
-            this.button_undo.Text = "undo";
+            this.button_undo.Text = "Undo";
+            this.button_undo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.button_undo.UseVisualStyleBackColor = true;
             this.button_undo.Click += new System.EventHandler(this.button_undo_Click);
             // 
@@ -159,7 +169,7 @@
             this.button_create_window.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_create_window.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_create_window.Image = ((System.Drawing.Image)(resources.GetObject("button_create_window.Image")));
-            this.button_create_window.Location = new System.Drawing.Point(1, 308);
+            this.button_create_window.Location = new System.Drawing.Point(1, 415);
             this.button_create_window.Margin = new System.Windows.Forms.Padding(0);
             this.button_create_window.Name = "button_create_window";
             this.button_create_window.Size = new System.Drawing.Size(164, 101);
@@ -176,7 +186,7 @@
             this.button_create_door.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_create_door.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_create_door.Image = ((System.Drawing.Image)(resources.GetObject("button_create_door.Image")));
-            this.button_create_door.Location = new System.Drawing.Point(1, 207);
+            this.button_create_door.Location = new System.Drawing.Point(1, 314);
             this.button_create_door.Margin = new System.Windows.Forms.Padding(0);
             this.button_create_door.Name = "button_create_door";
             this.button_create_door.Size = new System.Drawing.Size(164, 101);
@@ -193,7 +203,7 @@
             this.button_create_furniture.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_create_furniture.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_create_furniture.Image = ((System.Drawing.Image)(resources.GetObject("button_create_furniture.Image")));
-            this.button_create_furniture.Location = new System.Drawing.Point(0, 106);
+            this.button_create_furniture.Location = new System.Drawing.Point(0, 213);
             this.button_create_furniture.Margin = new System.Windows.Forms.Padding(0);
             this.button_create_furniture.Name = "button_create_furniture";
             this.button_create_furniture.Size = new System.Drawing.Size(164, 101);
@@ -210,7 +220,7 @@
             this.button_create_room.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_create_room.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_create_room.Image = ((System.Drawing.Image)(resources.GetObject("button_create_room.Image")));
-            this.button_create_room.Location = new System.Drawing.Point(0, -2);
+            this.button_create_room.Location = new System.Drawing.Point(0, 105);
             this.button_create_room.Margin = new System.Windows.Forms.Padding(0);
             this.button_create_room.Name = "button_create_room";
             this.button_create_room.Size = new System.Drawing.Size(164, 101);
@@ -401,6 +411,16 @@
             this.toolStripButton3.Text = "toolStripButton3";
             this.toolStripButton3.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
             // 
+            // button_save_image
+            // 
+            this.button_save_image.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.button_save_image.Image = ((System.Drawing.Image)(resources.GetObject("button_save_image.Image")));
+            this.button_save_image.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.button_save_image.Name = "button_save_image";
+            this.button_save_image.Size = new System.Drawing.Size(24, 24);
+            this.button_save_image.Text = "toolStripButton1";
+            this.button_save_image.Click += new System.EventHandler(this.button_save_image_Click);
+            // 
             // menuStrip1
             // 
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -475,19 +495,26 @@
             this.contextMenuStrip2.Name = "contextMenuStrip2";
             this.contextMenuStrip2.Size = new System.Drawing.Size(61, 4);
             // 
-            // button_save_image
-            // 
-            this.button_save_image.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.button_save_image.Image = ((System.Drawing.Image)(resources.GetObject("button_save_image.Image")));
-            this.button_save_image.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.button_save_image.Name = "button_save_image";
-            this.button_save_image.Size = new System.Drawing.Size(24, 24);
-            this.button_save_image.Text = "toolStripButton1";
-            this.button_save_image.Click += new System.EventHandler(this.button_save_image_Click);
-            // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // button_editmode
+            // 
+            this.button_editmode.FlatAppearance.BorderSize = 0;
+            this.button_editmode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_editmode.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_editmode.Image = ((System.Drawing.Image)(resources.GetObject("button_editmode.Image")));
+            this.button_editmode.Location = new System.Drawing.Point(1, 4);
+            this.button_editmode.Margin = new System.Windows.Forms.Padding(0);
+            this.button_editmode.Name = "button_editmode";
+            this.button_editmode.Size = new System.Drawing.Size(164, 101);
+            this.button_editmode.TabIndex = 0;
+            this.button_editmode.Text = "Edit_Mode";
+            this.button_editmode.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.button_editmode.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.button_editmode.UseVisualStyleBackColor = true;
+            this.button_editmode.Click += new System.EventHandler(this.button_create_room_Click);
             // 
             // Form_Main
             // 
@@ -562,6 +589,7 @@
         private System.Windows.Forms.ToolStripButton button_save_image;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Button button_editmode;
     }
 }
 
