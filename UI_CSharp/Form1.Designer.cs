@@ -101,6 +101,7 @@
             // 
             // panel_workspace
             // 
+            this.panel_workspace.BackColor = System.Drawing.Color.MistyRose;
             this.panel_workspace.Controls.Add(this.statusStrip1);
             this.panel_workspace.Controls.Add(this.panel_menu);
             this.panel_workspace.Controls.Add(this.panel_createroom_menu);

@@ -66,7 +66,7 @@ namespace midas_challenge
                 panel_canvas.Dock = DockStyle.Fill;
                 panel_canvas.Name = "panel_canvas";
                 panel_canvas.Size = new Size(876, 555);
-                panel_canvas.BackColor = Color.FromArgb(255, 255, 255, 253);
+                panel_canvas.BackColor = Color.MistyRose;
                 panel_canvas.Paint += new PaintEventHandler(this.panel_canvas_Paint);
                 panel_canvas.MouseDown += new MouseEventHandler(this.panel_canvas_MouseDown);
                 panel_canvas.MouseMove += new MouseEventHandler(this.panel_canvas_MouseMove);
@@ -101,7 +101,7 @@ namespace midas_challenge
                     p[j] = plist[j];
                 
                 HatchStyle h = (HatchStyle)3;
-                HatchBrush hatch = new HatchBrush(h, Color.SkyBlue, Color.White);
+                HatchBrush hatch = new HatchBrush(h, Color.Gold, Color.White);
                 e.Graphics.FillPolygon(hatch, p);
                 e.Graphics.DrawPolygon(pen, p);
             }
