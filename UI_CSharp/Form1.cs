@@ -58,7 +58,7 @@ namespace midas_challenge
             e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
 
             Pen pen = new Pen(Color.Black, 3);
-            for (int i=0; i<rectList.Count(); i++)
+            for (int i=0; i<RoomMaker.rooms.Count(); i++)
             {
                 e.Graphics.DrawRectangle(pen, rectList[i]);
             }
@@ -135,6 +135,11 @@ namespace midas_challenge
                 RoomMaker.PushVertex(p);
                 p = new KeyValuePair<int, int>(rect.X, rect.Y + rect.Height);
                 RoomMaker.PushVertex(p);
+                p = new KeyValuePair<int, int>(rect.X, rect.Y);
+                if(RoomMaker.PushVertex(p) == 1)
+                {
+
+                }
             }
             
             isDraw = false;

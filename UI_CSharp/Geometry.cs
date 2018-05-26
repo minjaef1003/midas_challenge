@@ -32,6 +32,8 @@ namespace midas_challenge
             IsStart = false;
         }
 
+        public List<Coordinate> getAllCoordinate() { }
+
         public void pushVertex(Coordinate coord)
         {
             if (!IsStart)
