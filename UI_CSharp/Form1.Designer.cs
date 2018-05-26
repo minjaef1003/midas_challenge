@@ -32,6 +32,13 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Main));
             this.panel_outline = new System.Windows.Forms.Panel();
             this.panel_workspace = new System.Windows.Forms.Panel();
+            this.panel_furniture_menu = new System.Windows.Forms.Panel();
+            this.button_fur_lamp = new System.Windows.Forms.Button();
+            this.button_fur_washing = new System.Windows.Forms.Button();
+            this.button_fur_toilet = new System.Windows.Forms.Button();
+            this.button_fur_table = new System.Windows.Forms.Button();
+            this.button_fur_bureau = new System.Windows.Forms.Button();
+            this.button_fur_closet = new System.Windows.Forms.Button();
             this.panel_createroom_menu = new System.Windows.Forms.Panel();
             this.button_createroom_rect = new System.Windows.Forms.Button();
             this.button_createroom_line = new System.Windows.Forms.Button();
@@ -39,6 +46,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.panel_menu = new System.Windows.Forms.Panel();
+            this.button_create_furniture = new System.Windows.Forms.Button();
             this.button_create_room = new System.Windows.Forms.Button();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.button_new_document = new System.Windows.Forms.ToolStripButton();
@@ -50,22 +58,14 @@
             this.저장ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.불러오기ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timer_menu_slide = new System.Windows.Forms.Timer(this.components);
-            this.button_create_furniture = new System.Windows.Forms.Button();
-            this.panel_furniture_menu = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
             this.panel_outline.SuspendLayout();
             this.panel_workspace.SuspendLayout();
+            this.panel_furniture_menu.SuspendLayout();
             this.panel_createroom_menu.SuspendLayout();
             this.panel_log.SuspendLayout();
             this.panel_menu.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            this.panel_furniture_menu.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel_outline
@@ -90,6 +90,99 @@
             this.panel_workspace.Name = "panel_workspace";
             this.panel_workspace.Size = new System.Drawing.Size(1103, 543);
             this.panel_workspace.TabIndex = 2;
+            // 
+            // panel_furniture_menu
+            // 
+            this.panel_furniture_menu.BackColor = System.Drawing.Color.White;
+            this.panel_furniture_menu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel_furniture_menu.Controls.Add(this.button_fur_lamp);
+            this.panel_furniture_menu.Controls.Add(this.button_fur_washing);
+            this.panel_furniture_menu.Controls.Add(this.button_fur_toilet);
+            this.panel_furniture_menu.Controls.Add(this.button_fur_table);
+            this.panel_furniture_menu.Controls.Add(this.button_fur_bureau);
+            this.panel_furniture_menu.Controls.Add(this.button_fur_closet);
+            this.panel_furniture_menu.Location = new System.Drawing.Point(1, 0);
+            this.panel_furniture_menu.Name = "panel_furniture_menu";
+            this.panel_furniture_menu.Size = new System.Drawing.Size(89, 543);
+            this.panel_furniture_menu.TabIndex = 1;
+            // 
+            // button_fur_lamp
+            // 
+            this.button_fur_lamp.FlatAppearance.BorderSize = 0;
+            this.button_fur_lamp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_fur_lamp.Image = ((System.Drawing.Image)(resources.GetObject("button_fur_lamp.Image")));
+            this.button_fur_lamp.Location = new System.Drawing.Point(-3, 426);
+            this.button_fur_lamp.Margin = new System.Windows.Forms.Padding(0);
+            this.button_fur_lamp.Name = "button_fur_lamp";
+            this.button_fur_lamp.Size = new System.Drawing.Size(89, 80);
+            this.button_fur_lamp.TabIndex = 2;
+            this.button_fur_lamp.UseVisualStyleBackColor = true;
+            this.button_fur_lamp.Click += new System.EventHandler(this.button_fur_lamp_Click);
+            // 
+            // button_fur_washing
+            // 
+            this.button_fur_washing.FlatAppearance.BorderSize = 0;
+            this.button_fur_washing.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_fur_washing.Image = ((System.Drawing.Image)(resources.GetObject("button_fur_washing.Image")));
+            this.button_fur_washing.Location = new System.Drawing.Point(-3, 337);
+            this.button_fur_washing.Margin = new System.Windows.Forms.Padding(0);
+            this.button_fur_washing.Name = "button_fur_washing";
+            this.button_fur_washing.Size = new System.Drawing.Size(89, 80);
+            this.button_fur_washing.TabIndex = 2;
+            this.button_fur_washing.UseVisualStyleBackColor = true;
+            this.button_fur_washing.Click += new System.EventHandler(this.button_fur_washing_Click);
+            // 
+            // button_fur_toilet
+            // 
+            this.button_fur_toilet.FlatAppearance.BorderSize = 0;
+            this.button_fur_toilet.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_fur_toilet.Image = ((System.Drawing.Image)(resources.GetObject("button_fur_toilet.Image")));
+            this.button_fur_toilet.Location = new System.Drawing.Point(-3, 253);
+            this.button_fur_toilet.Margin = new System.Windows.Forms.Padding(0);
+            this.button_fur_toilet.Name = "button_fur_toilet";
+            this.button_fur_toilet.Size = new System.Drawing.Size(89, 80);
+            this.button_fur_toilet.TabIndex = 2;
+            this.button_fur_toilet.UseVisualStyleBackColor = true;
+            this.button_fur_toilet.Click += new System.EventHandler(this.button_fur_toilet_Click);
+            // 
+            // button_fur_table
+            // 
+            this.button_fur_table.FlatAppearance.BorderSize = 0;
+            this.button_fur_table.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_fur_table.Image = ((System.Drawing.Image)(resources.GetObject("button_fur_table.Image")));
+            this.button_fur_table.Location = new System.Drawing.Point(-2, 168);
+            this.button_fur_table.Margin = new System.Windows.Forms.Padding(0);
+            this.button_fur_table.Name = "button_fur_table";
+            this.button_fur_table.Size = new System.Drawing.Size(89, 80);
+            this.button_fur_table.TabIndex = 2;
+            this.button_fur_table.UseVisualStyleBackColor = true;
+            this.button_fur_table.Click += new System.EventHandler(this.button_fur_table_Click);
+            // 
+            // button_fur_bureau
+            // 
+            this.button_fur_bureau.FlatAppearance.BorderSize = 0;
+            this.button_fur_bureau.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_fur_bureau.Image = ((System.Drawing.Image)(resources.GetObject("button_fur_bureau.Image")));
+            this.button_fur_bureau.Location = new System.Drawing.Point(-1, 84);
+            this.button_fur_bureau.Margin = new System.Windows.Forms.Padding(0);
+            this.button_fur_bureau.Name = "button_fur_bureau";
+            this.button_fur_bureau.Size = new System.Drawing.Size(89, 80);
+            this.button_fur_bureau.TabIndex = 2;
+            this.button_fur_bureau.UseVisualStyleBackColor = true;
+            this.button_fur_bureau.Click += new System.EventHandler(this.button_fur_bureau_Click);
+            // 
+            // button_fur_closet
+            // 
+            this.button_fur_closet.FlatAppearance.BorderSize = 0;
+            this.button_fur_closet.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_fur_closet.Image = ((System.Drawing.Image)(resources.GetObject("button_fur_closet.Image")));
+            this.button_fur_closet.Location = new System.Drawing.Point(-2, -2);
+            this.button_fur_closet.Margin = new System.Windows.Forms.Padding(0);
+            this.button_fur_closet.Name = "button_fur_closet";
+            this.button_fur_closet.Size = new System.Drawing.Size(89, 80);
+            this.button_fur_closet.TabIndex = 2;
+            this.button_fur_closet.UseVisualStyleBackColor = true;
+            this.button_fur_closet.Click += new System.EventHandler(this.button_fur_closet_Click);
             // 
             // panel_createroom_menu
             // 
@@ -173,6 +266,23 @@
             this.panel_menu.Name = "panel_menu";
             this.panel_menu.Size = new System.Drawing.Size(166, 717);
             this.panel_menu.TabIndex = 0;
+            // 
+            // button_create_furniture
+            // 
+            this.button_create_furniture.FlatAppearance.BorderSize = 0;
+            this.button_create_furniture.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_create_furniture.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_create_furniture.Image = ((System.Drawing.Image)(resources.GetObject("button_create_furniture.Image")));
+            this.button_create_furniture.Location = new System.Drawing.Point(0, 106);
+            this.button_create_furniture.Margin = new System.Windows.Forms.Padding(0);
+            this.button_create_furniture.Name = "button_create_furniture";
+            this.button_create_furniture.Size = new System.Drawing.Size(164, 101);
+            this.button_create_furniture.TabIndex = 0;
+            this.button_create_furniture.Text = "Create Furniture";
+            this.button_create_furniture.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.button_create_furniture.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.button_create_furniture.UseVisualStyleBackColor = true;
+            this.button_create_furniture.Click += new System.EventHandler(this.button_create_furniture_Click);
             // 
             // button_create_room
             // 
@@ -276,110 +386,6 @@
             this.timer_menu_slide.Interval = 5;
             this.timer_menu_slide.Tick += new System.EventHandler(this.timer_menu_slide_Tick);
             // 
-            // button_create_furniture
-            // 
-            this.button_create_furniture.FlatAppearance.BorderSize = 0;
-            this.button_create_furniture.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button_create_furniture.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_create_furniture.Image = ((System.Drawing.Image)(resources.GetObject("button_create_furniture.Image")));
-            this.button_create_furniture.Location = new System.Drawing.Point(0, 106);
-            this.button_create_furniture.Margin = new System.Windows.Forms.Padding(0);
-            this.button_create_furniture.Name = "button_create_furniture";
-            this.button_create_furniture.Size = new System.Drawing.Size(164, 101);
-            this.button_create_furniture.TabIndex = 0;
-            this.button_create_furniture.Text = "Create Furniture";
-            this.button_create_furniture.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button_create_furniture.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button_create_furniture.UseVisualStyleBackColor = true;
-            this.button_create_furniture.Click += new System.EventHandler(this.button_create_furniture_Click);
-            // 
-            // panel_furniture_menu
-            // 
-            this.panel_furniture_menu.BackColor = System.Drawing.Color.White;
-            this.panel_furniture_menu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel_furniture_menu.Controls.Add(this.button6);
-            this.panel_furniture_menu.Controls.Add(this.button5);
-            this.panel_furniture_menu.Controls.Add(this.button4);
-            this.panel_furniture_menu.Controls.Add(this.button3);
-            this.panel_furniture_menu.Controls.Add(this.button2);
-            this.panel_furniture_menu.Controls.Add(this.button1);
-            this.panel_furniture_menu.Location = new System.Drawing.Point(1, 0);
-            this.panel_furniture_menu.Name = "panel_furniture_menu";
-            this.panel_furniture_menu.Size = new System.Drawing.Size(89, 543);
-            this.panel_furniture_menu.TabIndex = 1;
-            // 
-            // button1
-            // 
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.Location = new System.Drawing.Point(-2, -2);
-            this.button1.Margin = new System.Windows.Forms.Padding(0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(89, 80);
-            this.button1.TabIndex = 2;
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
-            this.button2.Location = new System.Drawing.Point(-1, 84);
-            this.button2.Margin = new System.Windows.Forms.Padding(0);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(89, 80);
-            this.button2.TabIndex = 2;
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Image = ((System.Drawing.Image)(resources.GetObject("button3.Image")));
-            this.button3.Location = new System.Drawing.Point(-2, 168);
-            this.button3.Margin = new System.Windows.Forms.Padding(0);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(89, 80);
-            this.button3.TabIndex = 2;
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.FlatAppearance.BorderSize = 0;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Image = ((System.Drawing.Image)(resources.GetObject("button4.Image")));
-            this.button4.Location = new System.Drawing.Point(-3, 253);
-            this.button4.Margin = new System.Windows.Forms.Padding(0);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(89, 80);
-            this.button4.TabIndex = 2;
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // button5
-            // 
-            this.button5.FlatAppearance.BorderSize = 0;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Image = ((System.Drawing.Image)(resources.GetObject("button5.Image")));
-            this.button5.Location = new System.Drawing.Point(-3, 337);
-            this.button5.Margin = new System.Windows.Forms.Padding(0);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(89, 80);
-            this.button5.TabIndex = 2;
-            this.button5.UseVisualStyleBackColor = true;
-            // 
-            // button6
-            // 
-            this.button6.FlatAppearance.BorderSize = 0;
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Image = ((System.Drawing.Image)(resources.GetObject("button6.Image")));
-            this.button6.Location = new System.Drawing.Point(-3, 426);
-            this.button6.Margin = new System.Windows.Forms.Padding(0);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(89, 80);
-            this.button6.TabIndex = 2;
-            this.button6.UseVisualStyleBackColor = true;
-            // 
             // Form_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -395,6 +401,7 @@
             this.Text = "Form1";
             this.panel_outline.ResumeLayout(false);
             this.panel_workspace.ResumeLayout(false);
+            this.panel_furniture_menu.ResumeLayout(false);
             this.panel_createroom_menu.ResumeLayout(false);
             this.panel_log.ResumeLayout(false);
             this.panel_log.PerformLayout();
@@ -403,7 +410,6 @@
             this.toolStrip1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.panel_furniture_menu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -433,12 +439,12 @@
         private System.Windows.Forms.Timer timer_menu_slide;
         private System.Windows.Forms.Button button_create_furniture;
         private System.Windows.Forms.Panel panel_furniture_menu;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button_fur_lamp;
+        private System.Windows.Forms.Button button_fur_washing;
+        private System.Windows.Forms.Button button_fur_toilet;
+        private System.Windows.Forms.Button button_fur_table;
+        private System.Windows.Forms.Button button_fur_bureau;
+        private System.Windows.Forms.Button button_fur_closet;
     }
 }
 

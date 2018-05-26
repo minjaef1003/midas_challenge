@@ -13,13 +13,15 @@ namespace midas_challenge
 {
     public partial class Form_Main : Form
     {
-        private Panel panel_canvas;
+        private DoubleBufferPannel panel_canvas;
         private int menu_width;
         //isCreateMenu : 0:선택x, 1:room, 2:furniture
         private int isCreateMenu = 0;
-        private bool isRect = false, isPolygon = false, isDraw = false;
-        private Point sp, ep; // start point, end point;
+        private bool isRect = false, isPolygon = false, isDraw = false, isLine = false;
+        private Point sp, ep, loc; // start point, end point;
         private Rectangle rect;
+        private int selectFurn = 0;
+        Image furnImage;
 
         public Form_Main()
         {
@@ -32,7 +34,7 @@ namespace midas_challenge
         }
         private void button_new_document_Click(object sender, EventArgs e)
         {
-            panel_canvas = new Panel();
+            panel_canvas = new DoubleBufferPannel();
             panel_canvas.ResumeLayout(false);
             panel_canvas.SuspendLayout();
             panel_canvas.BorderStyle = BorderStyle.FixedSingle;
@@ -55,36 +57,68 @@ namespace midas_challenge
                 Pen pen = new Pen(Color.Black, 3);
                 e.Graphics.DrawRectangle(pen, rect);
             }
-            else if (isPolygon)
+            else if (isPolygon && isLine)
             {
                 Pen pen = new Pen(Color.Black, 3);
                 e.Graphics.DrawLine(pen, sp, ep);
             }
+
+            if(selectFurn != 0)
+            {
+                e.Graphics.DrawImage(furnImage, loc.X-50, loc.Y-50);
+            }
+            /*
+            switch (selectFurn)
+            {
+                case 1:
+
+                case 2:
+                default:
+                    break;
+            }
+            */
         }
 
         private void panel_canvas_MouseDown(object sender, MouseEventArgs e)
         {
-            sp = e.Location;
+            if(isPolygon)
+            {
+                if (!isLine)
+                {
+                    sp = e.Location;
+                    ep = e.Location;
+                    isLine = true;
+                }
+                else
+                {
+                    sp = ep;
+                    ep = e.Location;
+                }
+            }
+            else
+            {
+                sp = e.Location;
+            }
+            
             isDraw = true;
         }
         private void panel_canvas_MouseMove(object sender, MouseEventArgs e)
         {
+            loc = e.Location;
             if (isDraw)
             {
                 if (isRect)
                 {
                     int width = e.X - sp.X;
                     int height = e.Y - sp.Y;
-                    rect = new Rectangle(sp.X, sp.Y, width, height);
-                    panel_canvas.Refresh();
-
+                    rect = new Rectangle(sp.X, sp.Y, width, height);                    
                 }
                 else if (isPolygon)
                 {
-                    ep = e.Location;
-                    panel_canvas.Refresh();
+                    //ep = e.Location;                    
                 }
             }
+            panel_canvas.Refresh();
         }
         private void panel_canvas_MouseUp(object sender, MouseEventArgs e)
         {
@@ -108,6 +142,7 @@ namespace midas_challenge
         {
             if (isCreateMenu == 2)
             {
+                selectFurn = 0;
                 isCreateMenu = 0;
                 panel_furniture_menu.Width = 0;
             }
@@ -146,6 +181,37 @@ namespace midas_challenge
         private void button_createroom_rect_Click(object sender, EventArgs e)
         {
             isRect = true; isPolygon = false;
+        }
+
+        private void button_fur_table_Click(object sender, EventArgs e)
+        {
+            furnImage = Properties.Resources.icons8_Table_100px;
+        }
+
+        private void button_fur_toilet_Click(object sender, EventArgs e)
+        {
+            furnImage = Properties.Resources.icons8_Toilet_Bowl_96px;
+        }
+
+        private void button_fur_bureau_Click(object sender, EventArgs e)
+        {
+            furnImage = Properties.Resources.icons8_Bureau_100px;
+        }
+
+        private void button_fur_washing_Click(object sender, EventArgs e)
+        {
+            furnImage = Properties.Resources.icons8_Washing_Machine_100px_1;
+        }
+
+        private void button_fur_lamp_Click(object sender, EventArgs e)
+        {
+            furnImage = Properties.Resources.icons8_Lamp_100px;
+        }
+
+        private void button_fur_closet_Click(object sender, EventArgs e)
+        {
+            selectFurn = 1;
+            furnImage = Properties.Resources.icons8_Closet_100px;
         }
     }
 }
