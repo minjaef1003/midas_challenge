@@ -6,7 +6,6 @@ using namespace std;
 
 class Vertex;
 class Line;
-class Openings;
 class Window;
 class Door;
 class Wall;
@@ -32,54 +31,48 @@ public:
 //Line
 class Line
 {
-private:
+protected:
 	Vertex * start;
 	Vertex * end;
 public:
 	Line();
+	Line(Line*);
 	Line(Vertex*, Vertex*);
 	void moveStart(Vertex*);
 	void moveEnd(Vertex*);
-};
-
-//Openings
-class Openings
-{
-private:
-	Line * line;
-	int length;
-public:
-	Openings();
-	Openings(Line*, int);
-	void moveOpening(Line*);
-	void setLength(int);
+	void setLine(Line*);
 };
 
 //Window
-class Window : Openings
+class Window : public Line
 {
 private:
-
+	Wall * parent;
 public:
 	Window();
+	Window(Wall*, Line*);
+	void moveLine(Line*);
+	void moveParent(Wall*, Line*);
 };
 
 //Door
-class Door : Openings
+class Door : public Line
 {
 private:
-
+	Wall * parent;
 public:
 	Door();
+	Door(Wall*, Line*);
+	void moveLine(Line*);
+	void moveParent(Wall*, Line*);
 };
 
 //Wall
-class Wall
+class Wall : public Line
 {
 private:
-	Line * line;
-	vector<Openings*> windows;
-	vector<Openings*> doors;
+	vector<Window*> windows;
+	vector<Door*> doors;
 public:
 	Wall();
 	void addDoor(Door*);
@@ -89,12 +82,14 @@ public:
 //Polygon
 class Polygon
 {
-private:
+protected:
 	vector<Line*> vecLine;
 public:
 	Polygon();
 	void addLine(Line*);
-	void addVecLine(vector<Line*>&);
+	void addVecLine(vector<Line*>);
+	vector<Line*> printVecLine();
+
 };
 
 //Room
@@ -104,12 +99,12 @@ private:
 	
 public:
 	Room();
-	Room(vector<Line*>&);
+	Room(vector<Wall*>&);
 	bool checkClosure();
 };
 
 //Furniture
-class Furniture : Polygon
+class Furniture : public Polygon
 {
 private:
 
