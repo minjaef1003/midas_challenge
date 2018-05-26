@@ -4,29 +4,46 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using midas_challenge.Geometry;
 
 namespace midas_challenge
 {
+    using Coordinate = KeyValuePair<int, int>;
+
     class IndoorSpace
     {
         [DllImport("Core_CPP.dll", CallingConvention = System.Runtime.InteropServices.CallingConvention.Cdecl)]
-        extern public static IntPtr craeteRoom(int[] coords, IntPtr[] roomList, int n, bool snapmode = true);
+        extern public static IntPtr craeteRoom(int[] coords, int n1, IntPtr[] roomList, int n2);
 
         [DllImport("Core_CPP.dll", CallingConvention = System.Runtime.InteropServices.CallingConvention.Cdecl)]
-        extern public static IntPtr updateRoom(IntPtr room, int[] coords, IntPtr[] roomList, int n, bool snapmode = true);
+        extern public static IntPtr updateRoom(IntPtr room, int[] coords, IntPtr[] roomList, int n);
 
         private Dictionary<int, IntPtr> rooms;
-        private Dictionary<int, RoomCoordinate> room_coords;
 
         public int CreateRoom(int room_id, RoomCoordinate coords)
         {
+            int[] coords_arr = new int[coords.Coords.Count * 2];
+            for (int i = 0; i < coords.Coords.Count; i++)
+            {
+                coords_arr[i] = coords.Coords[i].Key;
+                coords_arr[i + 1] = coords.Coords[i].Value;
+            }
 
+            IntPtr[] room_list = rooms.Values.ToArray();
+
+            IntPtr new_room = craeteRoom(coords_arr, coords.Coords.Count, room_list, rooms.Count);
+            rooms.Add(room_id, new_room);
             return 0;
         }
 
         public int UpdateRoom(int room_id, RoomCoordinate coords)
         {
 
+            return 0;
+        }
+
+        public int moveRoom()
+        {
             return 0;
         }
 
@@ -44,43 +61,35 @@ namespace midas_challenge
 
     class RoomCoordinate
     {
-        public const double SNAPPING_THRES = 1.0;
+        private IndoorSpace isp;
+        RoomCoordinate(IndoorSpace _isp)
+        {
+            isp = _isp;
+        }
 
-        private List<KeyValuePair<int, int>> coords;
+        private List<Coordinate> coords = new List<Coordinate>();
 
-        public List<KeyValuePair<int, int>> Coords { get => coords; set => coords = value; }
+        public List<Coordinate> Coords { get => coords; set => coords = value; }
 
         // 0 : open, 1 : close
-        public int PushCoord(ref KeyValuePair<int, int> new_coord)
+        public int PushCoord(ref Coordinate new_coord)
         {
-            List<KeyValuePair<int, int>> newcoordList = coords;
-
-            if (coords.Count > 1 && IsClosed(new_coord))
+            snap(ref new_coord);
+            if (Coords.Count > 1)
             {
                 // TODO : is Simple Polygon?
                 return 1;
                 
             }
-            coords.Add(new_coord);
+            Coords.Add(new_coord);
             return 0;
         }
 
-        /**
-         * Check first and last vertices
-         * */
-        public bool IsClosed(KeyValuePair<int, int> new_coord)
+        private void snap(ref Coordinate new_coord)
         {
-            KeyValuePair<int, int> firstVertex = coords[0];
-            double dist = EuclideanDist(new_coord, firstVertex);
-            if (dist < SNAPPING_THRES)
-                return true;
-            return false;
+            
         }
 
-        public static double EuclideanDist(KeyValuePair<int, int> coord1, KeyValuePair<int, int> coord2)
-        {
-            return Math.Sqrt(Math.Pow((double)(coord1.Key - coord2.Key), 2.0) + Math.Pow((double)(coord2.Value - coord1.Value), 2.0));
-        }
     }
 
 }
