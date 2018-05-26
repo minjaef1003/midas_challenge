@@ -17,28 +17,38 @@ namespace midas_challenge
         
 
         private Dictionary<int, IntPtr> rooms;
-        public int createRoom(int room_id, KeyValuePair<int, int> coords)
+        public int createRoom(int room_id, RoomCoordinate coords)
         {
 
             return 0;
         }
 
-        public int updateRoom(int room_id, KeyValuePair<int, int> coords)
+        public int updateRoom(int room_id, RoomCoordinate coords)
         {
 
             return 0;
         }
 
-        public int removeRoom(int room_id, KeyValuePair<int, int> coords)
+        public int removeRoom(int room_id, RoomCoordinate coords)
         {
             return 0;
         }
 
-        public List<KeyValuePair<int, List<int>>> readRoomList()
+        public List<KeyValuePair<int, RoomCoordinate>> readRoomList()
         {
             return null;
         }
 
+    }
+
+    class RoomCoordinate
+    {
+        private List<KeyValuePair<int, int>> coords;
+
+        public void pushCoord(KeyValuePair<int, int> coord)
+        {
+
+        }
     }
 
 }
