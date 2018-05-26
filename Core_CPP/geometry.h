@@ -75,8 +75,13 @@ private:
 	vector<Door*> doors;
 public:
 	Wall();
+	Wall(Line*);
+	Wall(Line*, vector<Window*>);
+	Wall(Line*, vector<Door*>);
+
 	void addDoor(Door*);
 	void addWindow(Window*);
+	bool isEmptyDoor();
 };
 
 //Polygon
@@ -88,8 +93,7 @@ public:
 	Polygon();
 	void addLine(Line*);
 	void addVecLine(vector<Line*>);
-	vector<Line*> printVecLine();
-
+	vector<Line*> getVecLine();
 };
 
 //Room

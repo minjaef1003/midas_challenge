@@ -107,6 +107,27 @@ Wall::Wall()
 {
 }
 
+Wall::Wall(Line * _line)
+{
+	setLine(_line);
+}
+
+Wall::Wall(Line * _line, vector<Window*> _windows)
+{
+	setLine(_line);
+	for (Window* window : _windows) {
+		windows.push_back(window);
+	}
+}
+
+Wall::Wall(Line * _line, vector<Door*> _doors)
+{
+	setLine(_line);
+	for (Door* door : _doors) {
+		doors.push_back(door);
+	}
+}
+
 void Wall::addDoor(Door * _door)
 {
 	doors.push_back(_door);
@@ -115,6 +136,13 @@ void Wall::addDoor(Door * _door)
 void Wall::addWindow(Window * _window)
 {
 	windows.push_back(_window);
+}
+
+bool Wall::isEmptyDoor()
+{
+	bool isEmpty = false;
+	if (doors.empty()) isEmpty = true;
+	return isEmpty;
 }
 
 //Polygon
@@ -131,6 +159,11 @@ void Polygon::addVecLine(vector<Line*> _vecLine)
 	vecLine = _vecLine;
 }
 
+vector<Line*> Polygon::getVecLine()
+{
+	return vecLine;
+}
+
 //Room
 Room::Room()
 {
@@ -138,15 +171,22 @@ Room::Room()
 
 Room::Room(vector<Wall*>& _vecLine)
 {
-	for (Wall* wl : _vecLine) {
-		vecLine.push_back((Line*)wl);
+	for (Wall* wall : _vecLine) {
+		vecLine.push_back((Line*)wall);
 	}
 }
 
 bool Room::checkClosure()
 {
+	bool closure = true;
+	for (Line* wall : vecLine) {
+		if (!(((Wall*)wall)->isEmptyDoor())) {
+			closure = false;
+			break;
+		}
+	}
 
-	return false;
+	return closure;
 }
 
 //Furniture
