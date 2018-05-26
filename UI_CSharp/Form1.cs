@@ -11,16 +11,17 @@ using System.Windows.Forms;
 
 namespace midas_challenge
 {
-    using Coordinate = KeyValuePair<int, int>;
     public partial class Form_Main : Form
     {
+        public static KeyValuePair<int, int> history;
+        public static int count = 0;
         private List<Rectangle> rectList;
         private DoubleBufferPannel panel_canvas;
         private int menu_width, width, height;
         //isCreateMenu : 1:room 2:furniture
         private int isCreateMenu = 0;
         private bool isRect = false, isPolygon = false,
-            isDraw = false, isLine = false, isFurn = false,
+            isDraw = false, isLine = false,
             isWindow = false, isDoor = false;
         private Point sp, ep, loc; // start point, end point;
         private Rectangle rect;
@@ -36,6 +37,7 @@ namespace midas_challenge
             InitializeComponent();
             InitImgFurnitureDic();
             InitFurnitureRoom();
+            history = new KeyValuePair<int, int>();
             menu_width = panel_createroom_menu.Width;
             panel_createroom_menu.Width = 0;
             panel_furniture_menu.Width = 0;
@@ -86,9 +88,10 @@ namespace midas_challenge
                         RoomMaker.rooms[i].walls[j].EndPoint
                     };
                     
+                    /*
                     pointList[cnt++] = p[0];                    
                     pointList[cnt++] = p[1];
-                    if (cnt == RoomMaker.rooms[i].walls.Count && size % 2 == 0)
+                    if (cnt == RoomMaker.rooms[i].walls.Count )
                     {
                         HatchStyle h = (HatchStyle)3;
                         HatchBrush brush = new HatchBrush(h, Color.SkyBlue, Color.White);
@@ -96,7 +99,7 @@ namespace midas_challenge
                        
                     }
                     if (cnt >= size - 1) cnt = 0;
-                    
+                    */
                     e.Graphics.DrawPolygon(pen, p);                  
                 }              
             }
@@ -151,6 +154,8 @@ namespace midas_challenge
             if(isDoor)
             {
                 door = RoomMaker.PushDoor(new Point(e.X, e.Y), true);
+                isRect = false;
+                isPolygon = false;
 
             }
             if(isWindow)
@@ -280,6 +285,7 @@ namespace midas_challenge
             if (isDoor) isDoor = false;
             else isDoor = true;
         }
+
         private void button_create_window_Click(object sender, EventArgs e)
         {
             if (isWindow) isWindow = false;
@@ -350,6 +356,17 @@ namespace midas_challenge
         {
             Image img = Properties.Resources.icons8_Closet_100px;
             select_furniture(img, "Closet");
+        }
+
+        private void button_undo_Click(object sender, EventArgs e)
+        {
+            if(Form_Main.count > 0)
+            {
+                int size = RoomMaker.rooms.Count;
+                RoomMaker.rooms.RemoveAt(size-1);
+                MessageBox.Show(RoomMaker.rooms.Count.ToString());
+                panel_canvas.Refresh();
+            }
         }
     }
 }

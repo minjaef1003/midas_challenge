@@ -34,26 +34,11 @@
             this.panel_workspace = new System.Windows.Forms.Panel();
             this.panel_createroom_menu = new System.Windows.Forms.Panel();
             this.panel_furniture_menu = new System.Windows.Forms.Panel();
-            this.button_fur_lamp = new System.Windows.Forms.Button();
-            this.button_fur_washing = new System.Windows.Forms.Button();
-            this.button_fur_toilet = new System.Windows.Forms.Button();
-            this.button_fur_table = new System.Windows.Forms.Button();
-            this.button_fur_bureau = new System.Windows.Forms.Button();
-            this.button_fur_closet = new System.Windows.Forms.Button();
-            this.button_createroom_rect = new System.Windows.Forms.Button();
-            this.button_createroom_line = new System.Windows.Forms.Button();
             this.panel_log = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.panel_menu = new System.Windows.Forms.Panel();
-            this.button_create_window = new System.Windows.Forms.Button();
-            this.button_create_door = new System.Windows.Forms.Button();
-            this.button_create_furniture = new System.Windows.Forms.Button();
-            this.button_create_room = new System.Windows.Forms.Button();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.button_new_document = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.파일ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.새문서ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -64,6 +49,22 @@
             this.기본바닥ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.타일바닥ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.button_fur_lamp = new System.Windows.Forms.Button();
+            this.button_fur_washing = new System.Windows.Forms.Button();
+            this.button_fur_toilet = new System.Windows.Forms.Button();
+            this.button_fur_table = new System.Windows.Forms.Button();
+            this.button_fur_bureau = new System.Windows.Forms.Button();
+            this.button_fur_closet = new System.Windows.Forms.Button();
+            this.button_new_document = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
+            this.button_createroom_rect = new System.Windows.Forms.Button();
+            this.button_createroom_line = new System.Windows.Forms.Button();
+            this.button_create_window = new System.Windows.Forms.Button();
+            this.button_create_door = new System.Windows.Forms.Button();
+            this.button_create_furniture = new System.Windows.Forms.Button();
+            this.button_create_room = new System.Windows.Forms.Button();
+            this.button_undo = new System.Windows.Forms.Button();
             this.panel_outline.SuspendLayout();
             this.panel_workspace.SuspendLayout();
             this.panel_createroom_menu.SuspendLayout();
@@ -122,6 +123,141 @@
             this.panel_furniture_menu.Name = "panel_furniture_menu";
             this.panel_furniture_menu.Size = new System.Drawing.Size(89, 543);
             this.panel_furniture_menu.TabIndex = 1;
+            // 
+            // panel_log
+            // 
+            this.panel_log.BackColor = System.Drawing.Color.White;
+            this.panel_log.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel_log.Controls.Add(this.label1);
+            this.panel_log.Controls.Add(this.richTextBox1);
+            this.panel_log.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel_log.Location = new System.Drawing.Point(166, 543);
+            this.panel_log.Name = "panel_log";
+            this.panel_log.Size = new System.Drawing.Size(1103, 174);
+            this.panel_log.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(5, 2);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 21);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "log";
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.BackColor = System.Drawing.Color.White;
+            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.richTextBox1.Location = new System.Drawing.Point(0, 27);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.ReadOnly = true;
+            this.richTextBox1.Size = new System.Drawing.Size(1101, 145);
+            this.richTextBox1.TabIndex = 0;
+            this.richTextBox1.Text = "";
+            // 
+            // panel_menu
+            // 
+            this.panel_menu.BackColor = System.Drawing.Color.White;
+            this.panel_menu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel_menu.Controls.Add(this.button_undo);
+            this.panel_menu.Controls.Add(this.button_create_window);
+            this.panel_menu.Controls.Add(this.button_create_door);
+            this.panel_menu.Controls.Add(this.button_create_furniture);
+            this.panel_menu.Controls.Add(this.button_create_room);
+            this.panel_menu.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel_menu.Location = new System.Drawing.Point(0, 0);
+            this.panel_menu.Name = "panel_menu";
+            this.panel_menu.Size = new System.Drawing.Size(166, 717);
+            this.panel_menu.TabIndex = 0;
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.button_new_document,
+            this.toolStripButton2,
+            this.toolStripButton3});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 28);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(1271, 27);
+            this.toolStrip1.TabIndex = 1;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.파일ToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1271, 28);
+            this.menuStrip1.TabIndex = 2;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // 파일ToolStripMenuItem
+            // 
+            this.파일ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.새문서ToolStripMenuItem,
+            this.저장ToolStripMenuItem,
+            this.불러오기ToolStripMenuItem});
+            this.파일ToolStripMenuItem.Name = "파일ToolStripMenuItem";
+            this.파일ToolStripMenuItem.Size = new System.Drawing.Size(51, 24);
+            this.파일ToolStripMenuItem.Text = "파일";
+            // 
+            // 새문서ToolStripMenuItem
+            // 
+            this.새문서ToolStripMenuItem.Name = "새문서ToolStripMenuItem";
+            this.새문서ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
+            this.새문서ToolStripMenuItem.Text = "새문서";
+            this.새문서ToolStripMenuItem.Click += new System.EventHandler(this.button_new_document_Click);
+            // 
+            // 저장ToolStripMenuItem
+            // 
+            this.저장ToolStripMenuItem.Name = "저장ToolStripMenuItem";
+            this.저장ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
+            this.저장ToolStripMenuItem.Text = "저장";
+            this.저장ToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
+            // 
+            // 불러오기ToolStripMenuItem
+            // 
+            this.불러오기ToolStripMenuItem.Name = "불러오기ToolStripMenuItem";
+            this.불러오기ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
+            this.불러오기ToolStripMenuItem.Text = "불러오기";
+            this.불러오기ToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
+            // 
+            // timer_menu_slide
+            // 
+            this.timer_menu_slide.Interval = 5;
+            this.timer_menu_slide.Tick += new System.EventHandler(this.timer_menu_slide_Tick);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.기본바닥ToolStripMenuItem,
+            this.타일바닥ToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(144, 52);
+            // 
+            // 기본바닥ToolStripMenuItem
+            // 
+            this.기본바닥ToolStripMenuItem.Name = "기본바닥ToolStripMenuItem";
+            this.기본바닥ToolStripMenuItem.Size = new System.Drawing.Size(143, 24);
+            this.기본바닥ToolStripMenuItem.Text = "기본 바닥";
+            // 
+            // 타일바닥ToolStripMenuItem
+            // 
+            this.타일바닥ToolStripMenuItem.Name = "타일바닥ToolStripMenuItem";
+            this.타일바닥ToolStripMenuItem.Size = new System.Drawing.Size(143, 24);
+            this.타일바닥ToolStripMenuItem.Text = "타일바닥";
+            // 
+            // contextMenuStrip2
+            // 
+            this.contextMenuStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip2.Name = "contextMenuStrip2";
+            this.contextMenuStrip2.Size = new System.Drawing.Size(61, 4);
             // 
             // button_fur_lamp
             // 
@@ -201,6 +337,36 @@
             this.button_fur_closet.UseVisualStyleBackColor = true;
             this.button_fur_closet.Click += new System.EventHandler(this.button_fur_closet_Click);
             // 
+            // button_new_document
+            // 
+            this.button_new_document.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.button_new_document.Image = ((System.Drawing.Image)(resources.GetObject("button_new_document.Image")));
+            this.button_new_document.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.button_new_document.Name = "button_new_document";
+            this.button_new_document.Size = new System.Drawing.Size(24, 24);
+            this.button_new_document.Text = "button_new_document";
+            this.button_new_document.Click += new System.EventHandler(this.button_new_document_Click);
+            // 
+            // toolStripButton2
+            // 
+            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
+            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton2.Name = "toolStripButton2";
+            this.toolStripButton2.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButton2.Text = "toolStripButton2";
+            this.toolStripButton2.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
+            // 
+            // toolStripButton3
+            // 
+            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
+            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton3.Name = "toolStripButton3";
+            this.toolStripButton3.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButton3.Text = "toolStripButton3";
+            this.toolStripButton3.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
+            // 
             // button_createroom_rect
             // 
             this.button_createroom_rect.FlatAppearance.BorderSize = 0;
@@ -232,53 +398,6 @@
             this.button_createroom_line.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.button_createroom_line.UseVisualStyleBackColor = true;
             this.button_createroom_line.Click += new System.EventHandler(this.button_createroom_line_Click);
-            // 
-            // panel_log
-            // 
-            this.panel_log.BackColor = System.Drawing.Color.White;
-            this.panel_log.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel_log.Controls.Add(this.label1);
-            this.panel_log.Controls.Add(this.richTextBox1);
-            this.panel_log.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_log.Location = new System.Drawing.Point(166, 543);
-            this.panel_log.Name = "panel_log";
-            this.panel_log.Size = new System.Drawing.Size(1103, 174);
-            this.panel_log.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(5, 2);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 21);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "log";
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.BackColor = System.Drawing.Color.White;
-            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.richTextBox1.Location = new System.Drawing.Point(0, 27);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(1101, 145);
-            this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "";
-            // 
-            // panel_menu
-            // 
-            this.panel_menu.BackColor = System.Drawing.Color.White;
-            this.panel_menu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel_menu.Controls.Add(this.button_create_window);
-            this.panel_menu.Controls.Add(this.button_create_door);
-            this.panel_menu.Controls.Add(this.button_create_furniture);
-            this.panel_menu.Controls.Add(this.button_create_room);
-            this.panel_menu.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel_menu.Location = new System.Drawing.Point(0, 0);
-            this.panel_menu.Name = "panel_menu";
-            this.panel_menu.Size = new System.Drawing.Size(166, 717);
-            this.panel_menu.TabIndex = 0;
             // 
             // button_create_window
             // 
@@ -348,122 +467,15 @@
             this.button_create_room.UseVisualStyleBackColor = true;
             this.button_create_room.Click += new System.EventHandler(this.button_create_room_Click);
             // 
-            // toolStrip1
+            // button_undo
             // 
-            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.button_new_document,
-            this.toolStripButton2,
-            this.toolStripButton3});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 28);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1271, 27);
-            this.toolStrip1.TabIndex = 1;
-            this.toolStrip1.Text = "toolStrip1";
-            // 
-            // button_new_document
-            // 
-            this.button_new_document.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.button_new_document.Image = ((System.Drawing.Image)(resources.GetObject("button_new_document.Image")));
-            this.button_new_document.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.button_new_document.Name = "button_new_document";
-            this.button_new_document.Size = new System.Drawing.Size(24, 24);
-            this.button_new_document.Text = "button_new_document";
-            this.button_new_document.Click += new System.EventHandler(this.button_new_document_Click);
-            // 
-            // toolStripButton2
-            // 
-            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButton2.Text = "toolStripButton2";
-            this.toolStripButton2.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
-            // 
-            // toolStripButton3
-            // 
-            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
-            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButton3.Text = "toolStripButton3";
-            this.toolStripButton3.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.파일ToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1271, 28);
-            this.menuStrip1.TabIndex = 2;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // 파일ToolStripMenuItem
-            // 
-            this.파일ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.새문서ToolStripMenuItem,
-            this.저장ToolStripMenuItem,
-            this.불러오기ToolStripMenuItem});
-            this.파일ToolStripMenuItem.Name = "파일ToolStripMenuItem";
-            this.파일ToolStripMenuItem.Size = new System.Drawing.Size(51, 24);
-            this.파일ToolStripMenuItem.Text = "파일";
-            // 
-            // 새문서ToolStripMenuItem
-            // 
-            this.새문서ToolStripMenuItem.Name = "새문서ToolStripMenuItem";
-            this.새문서ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
-            this.새문서ToolStripMenuItem.Text = "새문서";
-            this.새문서ToolStripMenuItem.Click += new System.EventHandler(this.button_new_document_Click);
-            // 
-            // 저장ToolStripMenuItem
-            // 
-            this.저장ToolStripMenuItem.Name = "저장ToolStripMenuItem";
-            this.저장ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
-            this.저장ToolStripMenuItem.Text = "저장";
-            this.저장ToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
-            // 
-            // 불러오기ToolStripMenuItem
-            // 
-            this.불러오기ToolStripMenuItem.Name = "불러오기ToolStripMenuItem";
-            this.불러오기ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
-            this.불러오기ToolStripMenuItem.Text = "불러오기";
-            this.불러오기ToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
-            // 
-            // timer_menu_slide
-            // 
-            this.timer_menu_slide.Interval = 5;
-            this.timer_menu_slide.Tick += new System.EventHandler(this.timer_menu_slide_Tick);
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.기본바닥ToolStripMenuItem,
-            this.타일바닥ToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(144, 52);
-            // 
-            // 기본바닥ToolStripMenuItem
-            // 
-            this.기본바닥ToolStripMenuItem.Name = "기본바닥ToolStripMenuItem";
-            this.기본바닥ToolStripMenuItem.Size = new System.Drawing.Size(143, 24);
-            this.기본바닥ToolStripMenuItem.Text = "기본 바닥";
-            // 
-            // 타일바닥ToolStripMenuItem
-            // 
-            this.타일바닥ToolStripMenuItem.Name = "타일바닥ToolStripMenuItem";
-            this.타일바닥ToolStripMenuItem.Size = new System.Drawing.Size(143, 24);
-            this.타일바닥ToolStripMenuItem.Text = "타일바닥";
-            // 
-            // contextMenuStrip2
-            // 
-            this.contextMenuStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(61, 4);
+            this.button_undo.Location = new System.Drawing.Point(50, 438);
+            this.button_undo.Name = "button_undo";
+            this.button_undo.Size = new System.Drawing.Size(75, 23);
+            this.button_undo.TabIndex = 1;
+            this.button_undo.Text = "undo";
+            this.button_undo.UseVisualStyleBackColor = true;
+            this.button_undo.Click += new System.EventHandler(this.button_undo_Click);
             // 
             // Form_Main
             // 
@@ -533,6 +545,7 @@
         private System.Windows.Forms.ToolStripMenuItem 기본바닥ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 타일바닥ToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
+        private System.Windows.Forms.Button button_undo;
     }
 }
 
