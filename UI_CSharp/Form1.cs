@@ -217,6 +217,7 @@ namespace midas_challenge
                 list.Add(new Point(rect.X, rect.Y));
 
                 RoomMaker.PushRectangle(list);
+
             }            
             isDraw = false;
         }
