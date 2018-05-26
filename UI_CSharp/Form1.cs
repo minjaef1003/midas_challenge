@@ -37,7 +37,7 @@ namespace midas_challenge
         Room selected_room = null;
         bool isMove = false;
         Point moveStartPoint, moveEndPoint;
-        bool isMovingDraw = true;
+        bool isMovingDraw = false;
 
         public Form_Main()
         {
@@ -164,6 +164,7 @@ namespace midas_challenge
             {
                 Pen pen1 = new Pen(Color.Blue, 9);
                 if (selected_room == null) return;
+                if (isMovingDraw) return;
                 for (int j = 0; j < selected_room.walls.Count; j++)
                 {
                     Point[] p =
@@ -278,12 +279,12 @@ namespace midas_challenge
                     //ep = e.Location;                    
                 }
             }
-            if (isCreateMenu == 3 && isMove)
+            if (isCreateMenu == 3 && isMovingDraw)
             {
                 if (selected_room != null)
                 {
                     List<int> list = selected_room.getRectangle();
-                    rect = new Rectangle(list[0], list[1], list[2], list[3]);
+                    rect = new Rectangle(e.X - (moveStartPoint.X-list[0]), e.Y - (moveStartPoint.Y - list[1]), list[2], list[3]);
                 }
             }
             panel_canvas.Refresh();
