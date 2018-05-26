@@ -85,7 +85,8 @@ namespace midas_challenge
                 {
 
                 }
-
+                rooms.Add(curr_room);
+                curr_room = new Room();
                 return 1;
             }
 
