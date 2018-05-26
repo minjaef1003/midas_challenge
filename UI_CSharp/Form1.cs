@@ -179,46 +179,50 @@ namespace midas_challenge
             isRect = true; isPolygon = false;
         }
 
+        private void select_furniture(Image img)
+        {
+            selectFurn = 1;
+            FurnitureCreate fc = new FurnitureCreate();
+            if (fc.ShowDialog() == DialogResult.Cancel)
+            {
+                Furniture f = new Furniture(img, fc.name, new Rectangle(0, 0, fc.width, fc.height));
+                RoomMaker.PushFurniture(f);
+            }
+        }
         private void button_fur_table_Click(object sender, EventArgs e)
         {
             Image img = Properties.Resources.icons8_Table_100px;
-            string name = "";
-            int width = 0, height = 0;
-            FurnitureCreate fc = new FurnitureCreate();
-            if(fc.ShowDialog() == DialogResult.Cancel)
-            {
-                name = fc.name;
-                width = fc.width;
-                height = fc.height;
-            }
-
-            Furniture f = new Furniture(img, name, new Rectangle(0,0,width,height));
+            select_furniture(img);
         }
 
         private void button_fur_toilet_Click(object sender, EventArgs e)
         {
-            furnImage = Properties.Resources.icons8_Toilet_Bowl_96px;
+            Image img = Properties.Resources.icons8_Toilet_Bowl_96px;
+            select_furniture(img);
         }
 
         private void button_fur_bureau_Click(object sender, EventArgs e)
         {
-            furnImage = Properties.Resources.icons8_Bureau_100px;
+            Image img = Properties.Resources.icons8_Bureau_100px;
+            select_furniture(img);
         }
 
         private void button_fur_washing_Click(object sender, EventArgs e)
         {
-            furnImage = Properties.Resources.icons8_Washing_Machine_100px_1;
+            Image img = Properties.Resources.icons8_Washing_Machine_100px_1;
+            select_furniture(img);
         }
 
         private void button_fur_lamp_Click(object sender, EventArgs e)
         {
-            furnImage = Properties.Resources.icons8_Lamp_100px;
+            Image img = Properties.Resources.icons8_Lamp_100px;
+            select_furniture(img);
         }
 
         private void button_fur_closet_Click(object sender, EventArgs e)
         {
-            selectFurn = 1;
-            furnImage = Properties.Resources.icons8_Closet_100px;
+            Image img = Properties.Resources.icons8_Closet_100px;
+            select_furniture(img);
         }
     }
 }
