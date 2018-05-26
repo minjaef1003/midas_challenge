@@ -9,17 +9,17 @@ using System.Threading.Tasks;
 namespace midas_challenge
 {
     using Coordinate = KeyValuePair<int, int>;
-
+    using Line = KeyValuePair<KeyValuePair<int, int>, KeyValuePair<int, int>>;
     public class Wall
     {
-        public List<Coordinate> coords;
+        public Line line; // start and end
     }
 
     public struct Room
     {
         public List<Wall> walls;
-        public List<KeyValuePair<Coordinate, Coordinate>> doors;
-        public List<KeyValuePair<Coordinate, Coordinate>> windonws;
+        public List<Line> doors;
+        public List<Line> windonws;
     }
 
     public struct Furniture
@@ -59,6 +59,16 @@ namespace midas_challenge
             
 
             return 0;
+        }
+
+        private static bool isSimple(Room curr_room)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static bool Intersect(List<Room> rooms, Room curr_room)
+        {
+            throw new NotImplementedException();
         }
 
         static public int PushFurniture(Furniture ft)
