@@ -11,6 +11,7 @@ using System.Windows.Forms;
 
 namespace midas_challenge
 {
+    using Coordinate = KeyValuePair<int, int>;
     public partial class Form_Main : Form
     {
         private List<Rectangle> rectList;
@@ -60,7 +61,20 @@ namespace midas_challenge
             Pen pen = new Pen(Color.Black, 3);
             for (int i=0; i<RoomMaker.rooms.Count(); i++)
             {
-                e.Graphics.DrawRectangle(pen, rectList[i]);
+                for(int j=0; j<RoomMaker.rooms[i].walls.Count; j++)
+                {
+                    Point sp = new Point(RoomMaker.rooms[i].walls[j].Line.Key.Key, RoomMaker.rooms[i].walls[j].Line.Key.Value);
+                    Point ep = new Point(RoomMaker.rooms[i].walls[j].Line.Value.Key, RoomMaker.rooms[i].walls[j].Line.Value.Value);
+                    e.Graphics.DrawLine(pen, sp, ep);
+                }              
+            }
+            for(int i=0; i<RoomMaker.furnitures.Count(); i++)
+            {
+                e.Graphics.DrawImage(RoomMaker.furnitures[i].img, RoomMaker.furnitures[i].imgSize.X-50,
+                    RoomMaker.furnitures[i].imgSize.Y-50);
+                e.Graphics.DrawString(RoomMaker.furnitures[i].name.Text, Font, Brushes.Black, 
+                    RoomMaker.furnitures[i].imgSize.X-20, RoomMaker.furnitures[i].imgSize.Y +
+                    RoomMaker.furnitures[i].imgSize.Height + 5);
             }
             if (isRect)
             {                
@@ -83,7 +97,7 @@ namespace midas_challenge
             if(RoomMaker.PushFurniture(f) == 1)
                 selectFurn = 0;
             
-           
+                  
             if (isPolygon)
             {
                 if (!isLine)
