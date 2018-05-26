@@ -241,8 +241,11 @@ namespace midas_challenge
             curr_room.makeClose();
             if (snapmode) DoSnapCurrentRoom();
 
-            rooms.Add(curr_room);
-            curr_room = new Room();
+            if (!Intersect(rooms, curr_room))
+            {
+                rooms.Add(curr_room);
+            }
+                curr_room = new Room();
             return 1;
         }
 
@@ -348,10 +351,64 @@ namespace midas_challenge
             return true;
         }
 
+        private static int CCW(Line line, Point point)
+        {
+            int x1 = line.StartPoint.X, y1 = line.StartPoint.Y;
+            int x2 = line.EndPoint.X, y2 = line.EndPoint.Y;
+
+            int temp = x1 * y2 + x2 * point.Y + point.X * y1;
+            temp = temp - y1 * x2 - y2 * point.X - point.Y * x1;
+
+            if (temp > 0)
+                return 1;
+            else if (temp < 0)
+                return -1;
+            else
+                return 0;
+        }
+        
+
         private static bool Intersect(List<Room> rooms, Room curr_room)
         {
-            Debug.Print("Intersect TODO");
-            return false;
+            //  public List<Wall> walls;
+            foreach (Wall curWall in curr_room.walls)
+            {
+                foreach (Room room in rooms) 
+                {
+                    foreach (Wall wall in room.walls)
+                    {
+                        if(Computation.DoIntersect_easy(wall, curWall))
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+
+            int ccw, pre = -2;
+            foreach (Room room in rooms) 
+            {
+                int i;
+                pre = -2;
+                for (i = 0; i < curr_room.walls.Count(); i++)
+                {
+                    ccw = CCW(curr_room.walls[i], room.walls[0].StartPoint);
+                    if(pre != -2)
+                    {
+                        if(ccw != pre)
+                        {
+                            break;
+                        }
+                    }
+                    pre = ccw;
+                }
+                if(i == curr_room.walls.Count())
+                {
+                    return true;
+                }
+            }
+
+                return false;
         }
 
         static public int PushFurniture(Furniture ft)
