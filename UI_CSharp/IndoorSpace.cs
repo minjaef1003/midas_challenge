@@ -17,19 +17,19 @@ namespace midas_challenge
         
 
         private Dictionary<int, IntPtr> rooms;
-        public int createRoom(int room_id, List<int> coords)
+        public int createRoom(int room_id, KeyValuePair<int, int> coords)
         {
 
             return 0;
         }
 
-        public int updateRoom(int room_id, List<int> coords)
+        public int updateRoom(int room_id, KeyValuePair<int, int> coords)
         {
 
             return 0;
         }
 
-        public int removeRoom(int room_id, List<int> coords)
+        public int removeRoom(int room_id, KeyValuePair<int, int> coords)
         {
             return 0;
         }
