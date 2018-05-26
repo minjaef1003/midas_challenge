@@ -14,8 +14,9 @@ namespace midas_challenge
 
         [DllImport("Core_CPP.dll", CallingConvention = System.Runtime.InteropServices.CallingConvention.Cdecl)]
         extern public static IntPtr updateRoom(IntPtr room, int[] coords, IntPtr[] roomList, int n, bool snapmode = true);
-        
+
         private Dictionary<int, IntPtr> rooms;
+        private Dictionary<int, RoomCoordinate> room_coords;
 
         public int CreateRoom(int room_id, RoomCoordinate coords)
         {
@@ -50,13 +51,15 @@ namespace midas_challenge
         public List<KeyValuePair<int, int>> Coords { get => coords; set => coords = value; }
 
         // 0 : open, 1 : close
-        public int PushCoord(KeyValuePair<int, int> new_coord)
+        public int PushCoord(ref KeyValuePair<int, int> new_coord)
         {
-            if (coords.Count > 1 && IsDone(new_coord))
+            List<KeyValuePair<int, int>> newcoordList = coords;
+
+            if (coords.Count > 1 && IsClosed(new_coord))
             {
                 // TODO : is Simple Polygon?
-
                 return 1;
+                
             }
             coords.Add(new_coord);
             return 0;
@@ -65,7 +68,7 @@ namespace midas_challenge
         /**
          * Check first and last vertices
          * */
-        public bool IsDone(KeyValuePair<int, int> new_coord)
+        public bool IsClosed(KeyValuePair<int, int> new_coord)
         {
             KeyValuePair<int, int> firstVertex = coords[0];
             double dist = EuclideanDist(new_coord, firstVertex);
