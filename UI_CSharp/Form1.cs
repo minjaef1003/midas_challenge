@@ -13,7 +13,6 @@ namespace midas_challenge
 {
     public partial class Form_Main : Form
     {
-        public static KeyValuePair<int, int> history;
         public static int count = 0;
         private List<Rectangle> rectList;
         private DoubleBufferPannel panel_canvas;
@@ -31,13 +30,11 @@ namespace midas_challenge
         Point[] pointList;
         Door door = null;
         int cnt = 0;
-
         public Form_Main()
         {
             InitializeComponent();
             InitImgFurnitureDic();
             InitFurnitureRoom();
-            history = new KeyValuePair<int, int>();
             menu_width = panel_createroom_menu.Width;
             panel_createroom_menu.Width = 0;
             panel_furniture_menu.Width = 0;
@@ -67,7 +64,7 @@ namespace midas_challenge
             panel_workspace.Refresh();
         }
         private void panel_canvas_Paint(object sender, PaintEventArgs e)
-        {
+        {            
             e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
 
             Pen pen = new Pen(Color.Black, 3);
@@ -76,7 +73,7 @@ namespace midas_challenge
                 e.Graphics.DrawLine(pen, RoomMaker.curr_room.walls[i].StartPoint, RoomMaker.curr_room.walls[i].EndPoint);
             }
             cnt = 0;
-            for (int i=0; i<RoomMaker.rooms.Count; i++)
+            for (int i=0; i< Form_Main.count; i++)
             {
                 int size = RoomMaker.rooms[i].walls.Count;
                 pointList = new Point[size];
@@ -87,8 +84,7 @@ namespace midas_challenge
                         RoomMaker.rooms[i].walls[j].StartPoint,
                         RoomMaker.rooms[i].walls[j].EndPoint
                     };
-                    
-                    /*
+                                      
                     pointList[cnt++] = p[0];                    
                     pointList[cnt++] = p[1];
                     if (cnt == RoomMaker.rooms[i].walls.Count )
@@ -96,10 +92,9 @@ namespace midas_challenge
                         HatchStyle h = (HatchStyle)3;
                         HatchBrush brush = new HatchBrush(h, Color.SkyBlue, Color.White);
                         e.Graphics.FillPolygon(brush, pointList);
-                       
+                        cnt = 0;
                     }
-                    if (cnt >= size - 1) cnt = 0;
-                    */
+                    
                     e.Graphics.DrawPolygon(pen, p);                  
                 }              
             }
@@ -222,7 +217,8 @@ namespace midas_challenge
                 list.Add(new Point(rect.X, rect.Y));
 
                 RoomMaker.PushRectangle(list);
-            }            
+                isRect = false;
+            } 
             isDraw = false;
         }
         private void button_create_room_Click(object sender, EventArgs e)
@@ -300,6 +296,8 @@ namespace midas_challenge
             RoomMaker.rooms = readDate.Item1;
             RoomMaker.furnitures = readDate.Item2;
         }
+
+
         private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             
@@ -362,9 +360,16 @@ namespace midas_challenge
         {
             if(Form_Main.count > 0)
             {
-                int size = RoomMaker.rooms.Count;
-                RoomMaker.rooms.RemoveAt(size-1);
-                MessageBox.Show(RoomMaker.rooms.Count.ToString());
+                Form_Main.count--;                
+                panel_canvas.Refresh();
+            }
+        }
+
+        private void button_redo_Click(object sender, EventArgs e)
+        {
+            if(Form_Main.count < RoomMaker.rooms.Count)
+            {
+                Form_Main.count++;
                 panel_canvas.Refresh();
             }
         }
