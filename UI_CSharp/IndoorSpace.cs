@@ -14,9 +14,10 @@ namespace midas_challenge
 
         [DllImport("Core_CPP.dll", CallingConvention = System.Runtime.InteropServices.CallingConvention.Cdecl)]
         extern public static IntPtr updateRoom(IntPtr room, int[] coords, IntPtr[] roomList, int n, bool snapmode = true);
-        
 
         private Dictionary<int, IntPtr> rooms;
+        private Dictionary<int, RoomCoordinate> room_coords;
+
         public int CreateRoom(int room_id, RoomCoordinate coords)
         {
 
@@ -43,23 +44,42 @@ namespace midas_challenge
 
     class RoomCoordinate
     {
+        public const double SNAPPING_THRES = 1.0;
+
         private List<KeyValuePair<int, int>> coords;
 
         public List<KeyValuePair<int, int>> Coords { get => coords; set => coords = value; }
 
         // 0 : open, 1 : close
-        public int PushCoord(KeyValuePair<int, int> coord)
+        public int PushCoord(ref KeyValuePair<int, int> new_coord)
         {
-            if (IsDone())
-            {
+            List<KeyValuePair<int, int>> newcoordList = coords;
 
+            if (coords.Count > 1 && IsClosed(new_coord))
+            {
+                // TODO : is Simple Polygon?
+                return 1;
+                
             }
+            coords.Add(new_coord);
             return 0;
         }
 
-        public bool IsDone()
+        /**
+         * Check first and last vertices
+         * */
+        public bool IsClosed(KeyValuePair<int, int> new_coord)
         {
+            KeyValuePair<int, int> firstVertex = coords[0];
+            double dist = EuclideanDist(new_coord, firstVertex);
+            if (dist < SNAPPING_THRES)
+                return true;
             return false;
+        }
+
+        public static double EuclideanDist(KeyValuePair<int, int> coord1, KeyValuePair<int, int> coord2)
+        {
+            return Math.Sqrt(Math.Pow((double)(coord1.Key - coord2.Key), 2.0) + Math.Pow((double)(coord2.Value - coord1.Value), 2.0));
         }
     }
 
