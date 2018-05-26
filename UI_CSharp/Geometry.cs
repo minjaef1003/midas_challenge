@@ -357,7 +357,9 @@ namespace midas_challenge
                 }
                 rooms.Add(curr_room);
                 curr_room = new Room();
-                Form_Main.count = rooms.Count;
+                Form_Main.history.Add(1);
+                Form_Main.count++;
+               
                 return 1;
             }
 
@@ -387,7 +389,8 @@ namespace midas_challenge
                 rooms.Add(curr_room);
             }
             curr_room = new Room();
-            Form_Main.count = rooms.Count;
+            Form_Main.count++;
+            Form_Main.history.Add(1);
             return 1;
         }
 
@@ -632,6 +635,8 @@ namespace midas_challenge
             }
 
             furnitures.Add(ft);
+            Form_Main.history.Add(2);
+            Form_Main.count++;
             return 0;
         }
 
@@ -662,6 +667,51 @@ namespace midas_challenge
             foreach (Room room in rooms)
             {
                 if (CheckOverlap(room, ft)) return true;
+            }
+           
+            if (CheckOverlap(furnitures, ft)) return true;
+          
+            return false;
+
+        }
+
+        private static bool CheckOverlap(List<Furniture> furnitures, Furniture ft)
+        {
+            int minx = ft.imgSize.X;
+            int miny = ft.imgSize.Y;
+            int maxx = ft.imgSize.X + ft.imgSize.Width;
+            int maxy = ft.imgSize.Y + ft.imgSize.Height;
+            List<Line> ft_lines = new List<Line>
+            {
+                new Line(new Point(minx, miny), new Point(minx, maxy)),
+                new Line(new Point(minx, maxy), new Point(maxx, maxy)),
+                new Line(new Point(maxx, maxy), new Point(maxx, miny)),
+                new Line(new Point(maxx, miny), new Point(minx, miny))
+            };
+
+            foreach (Furniture furniture in furnitures)
+            {
+                int fminx = furniture.imgSize.X;
+                int fminy = furniture.imgSize.Y;
+                int fmaxx = furniture.imgSize.X + furniture.imgSize.Width;
+                int fmaxy = furniture.imgSize.Y + furniture.imgSize.Height;
+                List<Line> furniture_lines = new List<Line>
+                {
+                    new Line(new Point(fminx, fminy), new Point(fminx, fmaxy)),
+                    new Line(new Point(fminx, fmaxy), new Point(fmaxx, fmaxy)),
+                    new Line(new Point(fmaxx, fmaxy), new Point(fmaxx, fminy)),
+                    new Line(new Point(fmaxx, fminy), new Point(fminx, fminy))
+                 };
+                foreach (Line furniture_line in furniture_lines) {
+                    foreach (Line ft_line in ft_lines)
+                    {
+
+                        if (Computation.DoIntersect_easy(furniture_line, ft_line))
+                        {
+                            return true;
+                        }
+                    }
+                }
             }
             return false;
         }
