@@ -28,10 +28,6 @@ namespace midas_challenge
             AddImg("Lamp", Properties.Resources.icons8_Lamp_100px);
             AddImg("Closet", Properties.Resources.icons8_Closet_100px);
         }
-        public static Image GetImage(string type)
-        {
-            return imgDic[type];
-        }
 
         public static Tuple<List<Room>, List<Furniture>> Read()
         {
@@ -84,7 +80,7 @@ namespace midas_challenge
                 {
                     string[] str = line.Split(' ', ',');
 
-                    furnitures[i] = new Furniture(GetImage(str[2]), str[1], new Rectangle(Int32.Parse(str[3]), Int32.Parse(str[4]), Int32.Parse(str[5]), Int32.Parse(str[6])), str[2]);
+                    furnitures[i] = new Furniture(imgDic[str[2]], str[1], new Rectangle(Int32.Parse(str[3]), Int32.Parse(str[4]), Int32.Parse(str[5]), Int32.Parse(str[6])), str[2]);
                 }
             }
 
