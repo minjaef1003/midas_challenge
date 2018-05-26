@@ -181,7 +181,14 @@ namespace midas_challenge
 
         private void button_fur_table_Click(object sender, EventArgs e)
         {
-            furnImage = Properties.Resources.icons8_Table_100px;
+            Image img = Properties.Resources.icons8_Table_100px;
+            FurnitureCreate fc = new FurnitureCreate();
+            if(fc.ShowDialog() == DialogResult.Cancel)
+            {
+                string name = fc.name;
+                int width = fc.width;
+                int height = fc.height;
+            }
         }
 
         private void button_fur_toilet_Click(object sender, EventArgs e)
