@@ -23,7 +23,7 @@ namespace midas_challenge
         private Point sp, ep, loc; // start point, end point;
         private Rectangle rect;
         private int selectFurn = 0;
-        Image furnImage;
+        Furniture f;
 
         public Form_Main()
         {
@@ -32,6 +32,9 @@ namespace midas_challenge
             panel_createroom_menu.Width = 0;
             panel_furniture_menu.Width = 0;
             rectList = new List<Rectangle>();
+            RoomMaker.curr_room = new Room();
+            RoomMaker.rooms = new List<Room>();
+            RoomMaker.furnitures = new List<Furniture>();            
         }
         private void button_new_document_Click(object sender, EventArgs e)
         {
@@ -70,13 +73,18 @@ namespace midas_challenge
 
             if(selectFurn != 0)
             {
-                e.Graphics.DrawImage(furnImage, loc.X-50, loc.Y-50);
+                e.Graphics.DrawImage(f.img, loc.X-50, loc.Y-50);
             }
         }
 
         private void panel_canvas_MouseDown(object sender, MouseEventArgs e)
         {
-            if(isPolygon)
+            f.imgSize.X = e.X; f.imgSize.Y = e.Y;
+            if(RoomMaker.PushFurniture(f) == 1)
+                selectFurn = 0;
+            
+           
+            if (isPolygon)
             {
                 if (!isLine)
                 {
@@ -117,7 +125,18 @@ namespace midas_challenge
         }
         private void panel_canvas_MouseUp(object sender, MouseEventArgs e)
         {
-            rectList.Add(rect);
+            if(isRect)
+            {
+                KeyValuePair<int, int> p = new KeyValuePair<int, int>(rect.X, rect.Y);
+                RoomMaker.PushVertex(p);
+                p = new KeyValuePair<int, int>(rect.X + rect.Width, rect.Y);
+                RoomMaker.PushVertex(p);
+                p = new KeyValuePair<int, int>(rect.X + rect.Width, rect.Y + rect.Height);
+                RoomMaker.PushVertex(p);
+                p = new KeyValuePair<int, int>(rect.X, rect.Y + rect.Height);
+                RoomMaker.PushVertex(p);
+            }
+            
             isDraw = false;
         }
         private void button_create_room_Click(object sender, EventArgs e)
@@ -185,8 +204,7 @@ namespace midas_challenge
             FurnitureCreate fc = new FurnitureCreate();
             if (fc.ShowDialog() == DialogResult.Cancel)
             {
-                Furniture f = new Furniture(img, fc.name, new Rectangle(0, 0, fc.width, fc.height));
-                RoomMaker.PushFurniture(f);
+                f = new Furniture(img, fc.name, new Rectangle(0, 0, fc.width, fc.height));                
             }
         }
         private void button_fur_table_Click(object sender, EventArgs e)

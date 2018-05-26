@@ -25,6 +25,7 @@ namespace midas_challenge
             width = int.Parse(textbox_width.Text);
             height = int.Parse(textbox_height.Text);
             name = textbox_name.Text;
+            this.Close();
         }
     }
 }
