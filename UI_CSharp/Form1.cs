@@ -140,7 +140,6 @@ namespace midas_challenge
                 MessageBox.Show(e.X.ToString() + "," + e.Y.ToString());
                 Door door = RoomMaker.PushDoor(new Point(e.X, e.Y), true);
                 MessageBox.Show(door.StartPoint.ToString() + "," + door.EndPoint.ToString());
-
             }
             if(isWindow)
             {
