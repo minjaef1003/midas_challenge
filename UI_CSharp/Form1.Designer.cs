@@ -33,6 +33,17 @@
             this.panel_outline = new System.Windows.Forms.Panel();
             this.panel_workspace = new System.Windows.Forms.Panel();
             this.panel_createroom_menu = new System.Windows.Forms.Panel();
+            this.button_createroom_rect = new System.Windows.Forms.Button();
+            this.button_createroom_line = new System.Windows.Forms.Button();
+            this.panel_log = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.panel_menu = new System.Windows.Forms.Panel();
+            this.button_undo = new System.Windows.Forms.Button();
+            this.button_create_window = new System.Windows.Forms.Button();
+            this.button_create_door = new System.Windows.Forms.Button();
+            this.button_create_furniture = new System.Windows.Forms.Button();
+            this.button_create_room = new System.Windows.Forms.Button();
             this.panel_furniture_menu = new System.Windows.Forms.Panel();
             this.button_fur_lamp = new System.Windows.Forms.Button();
             this.button_fur_washing = new System.Windows.Forms.Button();
@@ -40,16 +51,6 @@
             this.button_fur_table = new System.Windows.Forms.Button();
             this.button_fur_bureau = new System.Windows.Forms.Button();
             this.button_fur_closet = new System.Windows.Forms.Button();
-            this.button_createroom_rect = new System.Windows.Forms.Button();
-            this.button_createroom_line = new System.Windows.Forms.Button();
-            this.panel_log = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.panel_menu = new System.Windows.Forms.Panel();
-            this.button_create_window = new System.Windows.Forms.Button();
-            this.button_create_door = new System.Windows.Forms.Button();
-            this.button_create_furniture = new System.Windows.Forms.Button();
-            this.button_create_room = new System.Windows.Forms.Button();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.button_new_document = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
@@ -64,12 +65,13 @@
             this.기본바닥ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.타일바닥ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.button_redo = new System.Windows.Forms.Button();
             this.panel_outline.SuspendLayout();
             this.panel_workspace.SuspendLayout();
             this.panel_createroom_menu.SuspendLayout();
-            this.panel_furniture_menu.SuspendLayout();
             this.panel_log.SuspendLayout();
             this.panel_menu.SuspendLayout();
+            this.panel_furniture_menu.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -107,6 +109,165 @@
             this.panel_createroom_menu.Name = "panel_createroom_menu";
             this.panel_createroom_menu.Size = new System.Drawing.Size(89, 168);
             this.panel_createroom_menu.TabIndex = 0;
+            // 
+            // button_createroom_rect
+            // 
+            this.button_createroom_rect.FlatAppearance.BorderSize = 0;
+            this.button_createroom_rect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_createroom_rect.Image = ((System.Drawing.Image)(resources.GetObject("button_createroom_rect.Image")));
+            this.button_createroom_rect.Location = new System.Drawing.Point(0, 81);
+            this.button_createroom_rect.Margin = new System.Windows.Forms.Padding(0);
+            this.button_createroom_rect.Name = "button_createroom_rect";
+            this.button_createroom_rect.Size = new System.Drawing.Size(89, 80);
+            this.button_createroom_rect.TabIndex = 0;
+            this.button_createroom_rect.Text = "Rectangle";
+            this.button_createroom_rect.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.button_createroom_rect.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.button_createroom_rect.UseVisualStyleBackColor = true;
+            this.button_createroom_rect.Click += new System.EventHandler(this.button_createroom_rect_Click);
+            // 
+            // button_createroom_line
+            // 
+            this.button_createroom_line.FlatAppearance.BorderSize = 0;
+            this.button_createroom_line.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_createroom_line.Image = ((System.Drawing.Image)(resources.GetObject("button_createroom_line.Image")));
+            this.button_createroom_line.Location = new System.Drawing.Point(-1, 1);
+            this.button_createroom_line.Margin = new System.Windows.Forms.Padding(0);
+            this.button_createroom_line.Name = "button_createroom_line";
+            this.button_createroom_line.Size = new System.Drawing.Size(90, 80);
+            this.button_createroom_line.TabIndex = 0;
+            this.button_createroom_line.Text = "Polygon";
+            this.button_createroom_line.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.button_createroom_line.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.button_createroom_line.UseVisualStyleBackColor = true;
+            this.button_createroom_line.Click += new System.EventHandler(this.button_createroom_line_Click);
+            // 
+            // panel_log
+            // 
+            this.panel_log.BackColor = System.Drawing.Color.White;
+            this.panel_log.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel_log.Controls.Add(this.label1);
+            this.panel_log.Controls.Add(this.richTextBox1);
+            this.panel_log.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel_log.Location = new System.Drawing.Point(166, 543);
+            this.panel_log.Name = "panel_log";
+            this.panel_log.Size = new System.Drawing.Size(1103, 174);
+            this.panel_log.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(5, 2);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 21);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "log";
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.BackColor = System.Drawing.Color.White;
+            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.richTextBox1.Location = new System.Drawing.Point(0, 27);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.ReadOnly = true;
+            this.richTextBox1.Size = new System.Drawing.Size(1101, 145);
+            this.richTextBox1.TabIndex = 0;
+            this.richTextBox1.Text = "";
+            // 
+            // panel_menu
+            // 
+            this.panel_menu.BackColor = System.Drawing.Color.White;
+            this.panel_menu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel_menu.Controls.Add(this.button_redo);
+            this.panel_menu.Controls.Add(this.button_undo);
+            this.panel_menu.Controls.Add(this.button_create_window);
+            this.panel_menu.Controls.Add(this.button_create_door);
+            this.panel_menu.Controls.Add(this.button_create_furniture);
+            this.panel_menu.Controls.Add(this.button_create_room);
+            this.panel_menu.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel_menu.Location = new System.Drawing.Point(0, 0);
+            this.panel_menu.Name = "panel_menu";
+            this.panel_menu.Size = new System.Drawing.Size(166, 717);
+            this.panel_menu.TabIndex = 0;
+            // 
+            // button_undo
+            // 
+            this.button_undo.Location = new System.Drawing.Point(50, 438);
+            this.button_undo.Name = "button_undo";
+            this.button_undo.Size = new System.Drawing.Size(75, 23);
+            this.button_undo.TabIndex = 1;
+            this.button_undo.Text = "undo";
+            this.button_undo.UseVisualStyleBackColor = true;
+            this.button_undo.Click += new System.EventHandler(this.button_undo_Click);
+            // 
+            // button_create_window
+            // 
+            this.button_create_window.FlatAppearance.BorderSize = 0;
+            this.button_create_window.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_create_window.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_create_window.Image = ((System.Drawing.Image)(resources.GetObject("button_create_window.Image")));
+            this.button_create_window.Location = new System.Drawing.Point(1, 308);
+            this.button_create_window.Margin = new System.Windows.Forms.Padding(0);
+            this.button_create_window.Name = "button_create_window";
+            this.button_create_window.Size = new System.Drawing.Size(164, 101);
+            this.button_create_window.TabIndex = 0;
+            this.button_create_window.Text = "Create Window";
+            this.button_create_window.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.button_create_window.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.button_create_window.UseVisualStyleBackColor = true;
+            this.button_create_window.Click += new System.EventHandler(this.button_create_window_Click);
+            // 
+            // button_create_door
+            // 
+            this.button_create_door.FlatAppearance.BorderSize = 0;
+            this.button_create_door.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_create_door.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_create_door.Image = ((System.Drawing.Image)(resources.GetObject("button_create_door.Image")));
+            this.button_create_door.Location = new System.Drawing.Point(1, 207);
+            this.button_create_door.Margin = new System.Windows.Forms.Padding(0);
+            this.button_create_door.Name = "button_create_door";
+            this.button_create_door.Size = new System.Drawing.Size(164, 101);
+            this.button_create_door.TabIndex = 0;
+            this.button_create_door.Text = "Create Door";
+            this.button_create_door.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.button_create_door.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.button_create_door.UseVisualStyleBackColor = true;
+            this.button_create_door.Click += new System.EventHandler(this.button_create_door_Click);
+            // 
+            // button_create_furniture
+            // 
+            this.button_create_furniture.FlatAppearance.BorderSize = 0;
+            this.button_create_furniture.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_create_furniture.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_create_furniture.Image = ((System.Drawing.Image)(resources.GetObject("button_create_furniture.Image")));
+            this.button_create_furniture.Location = new System.Drawing.Point(0, 106);
+            this.button_create_furniture.Margin = new System.Windows.Forms.Padding(0);
+            this.button_create_furniture.Name = "button_create_furniture";
+            this.button_create_furniture.Size = new System.Drawing.Size(164, 101);
+            this.button_create_furniture.TabIndex = 0;
+            this.button_create_furniture.Text = "Create Furniture";
+            this.button_create_furniture.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.button_create_furniture.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.button_create_furniture.UseVisualStyleBackColor = true;
+            this.button_create_furniture.Click += new System.EventHandler(this.button_create_furniture_Click);
+            // 
+            // button_create_room
+            // 
+            this.button_create_room.FlatAppearance.BorderSize = 0;
+            this.button_create_room.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_create_room.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_create_room.Image = ((System.Drawing.Image)(resources.GetObject("button_create_room.Image")));
+            this.button_create_room.Location = new System.Drawing.Point(0, 0);
+            this.button_create_room.Margin = new System.Windows.Forms.Padding(0);
+            this.button_create_room.Name = "button_create_room";
+            this.button_create_room.Size = new System.Drawing.Size(164, 101);
+            this.button_create_room.TabIndex = 0;
+            this.button_create_room.Text = "Create Room";
+            this.button_create_room.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.button_create_room.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.button_create_room.UseVisualStyleBackColor = true;
+            this.button_create_room.Click += new System.EventHandler(this.button_create_room_Click);
             // 
             // panel_furniture_menu
             // 
@@ -200,153 +361,6 @@
             this.button_fur_closet.TabIndex = 2;
             this.button_fur_closet.UseVisualStyleBackColor = true;
             this.button_fur_closet.Click += new System.EventHandler(this.button_fur_closet_Click);
-            // 
-            // button_createroom_rect
-            // 
-            this.button_createroom_rect.FlatAppearance.BorderSize = 0;
-            this.button_createroom_rect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button_createroom_rect.Image = ((System.Drawing.Image)(resources.GetObject("button_createroom_rect.Image")));
-            this.button_createroom_rect.Location = new System.Drawing.Point(0, 81);
-            this.button_createroom_rect.Margin = new System.Windows.Forms.Padding(0);
-            this.button_createroom_rect.Name = "button_createroom_rect";
-            this.button_createroom_rect.Size = new System.Drawing.Size(89, 80);
-            this.button_createroom_rect.TabIndex = 0;
-            this.button_createroom_rect.Text = "Rectangle";
-            this.button_createroom_rect.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button_createroom_rect.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button_createroom_rect.UseVisualStyleBackColor = true;
-            this.button_createroom_rect.Click += new System.EventHandler(this.button_createroom_rect_Click);
-            // 
-            // button_createroom_line
-            // 
-            this.button_createroom_line.FlatAppearance.BorderSize = 0;
-            this.button_createroom_line.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button_createroom_line.Image = ((System.Drawing.Image)(resources.GetObject("button_createroom_line.Image")));
-            this.button_createroom_line.Location = new System.Drawing.Point(-1, 1);
-            this.button_createroom_line.Margin = new System.Windows.Forms.Padding(0);
-            this.button_createroom_line.Name = "button_createroom_line";
-            this.button_createroom_line.Size = new System.Drawing.Size(90, 80);
-            this.button_createroom_line.TabIndex = 0;
-            this.button_createroom_line.Text = "Polygon";
-            this.button_createroom_line.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button_createroom_line.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button_createroom_line.UseVisualStyleBackColor = true;
-            this.button_createroom_line.Click += new System.EventHandler(this.button_createroom_line_Click);
-            // 
-            // panel_log
-            // 
-            this.panel_log.BackColor = System.Drawing.Color.White;
-            this.panel_log.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel_log.Controls.Add(this.label1);
-            this.panel_log.Controls.Add(this.richTextBox1);
-            this.panel_log.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_log.Location = new System.Drawing.Point(166, 543);
-            this.panel_log.Name = "panel_log";
-            this.panel_log.Size = new System.Drawing.Size(1103, 174);
-            this.panel_log.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(5, 2);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 21);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "log";
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.BackColor = System.Drawing.Color.White;
-            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.richTextBox1.Location = new System.Drawing.Point(0, 27);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(1101, 145);
-            this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "";
-            // 
-            // panel_menu
-            // 
-            this.panel_menu.BackColor = System.Drawing.Color.White;
-            this.panel_menu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel_menu.Controls.Add(this.button_create_window);
-            this.panel_menu.Controls.Add(this.button_create_door);
-            this.panel_menu.Controls.Add(this.button_create_furniture);
-            this.panel_menu.Controls.Add(this.button_create_room);
-            this.panel_menu.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel_menu.Location = new System.Drawing.Point(0, 0);
-            this.panel_menu.Name = "panel_menu";
-            this.panel_menu.Size = new System.Drawing.Size(166, 717);
-            this.panel_menu.TabIndex = 0;
-            // 
-            // button_create_window
-            // 
-            this.button_create_window.FlatAppearance.BorderSize = 0;
-            this.button_create_window.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button_create_window.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_create_window.Image = ((System.Drawing.Image)(resources.GetObject("button_create_window.Image")));
-            this.button_create_window.Location = new System.Drawing.Point(1, 308);
-            this.button_create_window.Margin = new System.Windows.Forms.Padding(0);
-            this.button_create_window.Name = "button_create_window";
-            this.button_create_window.Size = new System.Drawing.Size(164, 101);
-            this.button_create_window.TabIndex = 0;
-            this.button_create_window.Text = "Create Window";
-            this.button_create_window.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button_create_window.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button_create_window.UseVisualStyleBackColor = true;
-            this.button_create_window.Click += new System.EventHandler(this.button_create_window_Click);
-            // 
-            // button_create_door
-            // 
-            this.button_create_door.FlatAppearance.BorderSize = 0;
-            this.button_create_door.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button_create_door.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_create_door.Image = ((System.Drawing.Image)(resources.GetObject("button_create_door.Image")));
-            this.button_create_door.Location = new System.Drawing.Point(1, 207);
-            this.button_create_door.Margin = new System.Windows.Forms.Padding(0);
-            this.button_create_door.Name = "button_create_door";
-            this.button_create_door.Size = new System.Drawing.Size(164, 101);
-            this.button_create_door.TabIndex = 0;
-            this.button_create_door.Text = "Create Door";
-            this.button_create_door.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button_create_door.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button_create_door.UseVisualStyleBackColor = true;
-            this.button_create_door.Click += new System.EventHandler(this.button_create_door_Click);
-            // 
-            // button_create_furniture
-            // 
-            this.button_create_furniture.FlatAppearance.BorderSize = 0;
-            this.button_create_furniture.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button_create_furniture.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_create_furniture.Image = ((System.Drawing.Image)(resources.GetObject("button_create_furniture.Image")));
-            this.button_create_furniture.Location = new System.Drawing.Point(0, 106);
-            this.button_create_furniture.Margin = new System.Windows.Forms.Padding(0);
-            this.button_create_furniture.Name = "button_create_furniture";
-            this.button_create_furniture.Size = new System.Drawing.Size(164, 101);
-            this.button_create_furniture.TabIndex = 0;
-            this.button_create_furniture.Text = "Create Furniture";
-            this.button_create_furniture.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button_create_furniture.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button_create_furniture.UseVisualStyleBackColor = true;
-            this.button_create_furniture.Click += new System.EventHandler(this.button_create_furniture_Click);
-            // 
-            // button_create_room
-            // 
-            this.button_create_room.FlatAppearance.BorderSize = 0;
-            this.button_create_room.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button_create_room.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_create_room.Image = ((System.Drawing.Image)(resources.GetObject("button_create_room.Image")));
-            this.button_create_room.Location = new System.Drawing.Point(0, 0);
-            this.button_create_room.Margin = new System.Windows.Forms.Padding(0);
-            this.button_create_room.Name = "button_create_room";
-            this.button_create_room.Size = new System.Drawing.Size(164, 101);
-            this.button_create_room.TabIndex = 0;
-            this.button_create_room.Text = "Create Room";
-            this.button_create_room.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button_create_room.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button_create_room.UseVisualStyleBackColor = true;
-            this.button_create_room.Click += new System.EventHandler(this.button_create_room_Click);
             // 
             // toolStrip1
             // 
@@ -465,6 +479,16 @@
             this.contextMenuStrip2.Name = "contextMenuStrip2";
             this.contextMenuStrip2.Size = new System.Drawing.Size(61, 4);
             // 
+            // button_redo
+            // 
+            this.button_redo.Location = new System.Drawing.Point(50, 467);
+            this.button_redo.Name = "button_redo";
+            this.button_redo.Size = new System.Drawing.Size(75, 23);
+            this.button_redo.TabIndex = 1;
+            this.button_redo.Text = "redo";
+            this.button_redo.UseVisualStyleBackColor = true;
+            this.button_redo.Click += new System.EventHandler(this.button_redo_Click);
+            // 
             // Form_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -483,10 +507,10 @@
             this.panel_outline.ResumeLayout(false);
             this.panel_workspace.ResumeLayout(false);
             this.panel_createroom_menu.ResumeLayout(false);
-            this.panel_furniture_menu.ResumeLayout(false);
             this.panel_log.ResumeLayout(false);
             this.panel_log.PerformLayout();
             this.panel_menu.ResumeLayout(false);
+            this.panel_furniture_menu.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
@@ -533,6 +557,8 @@
         private System.Windows.Forms.ToolStripMenuItem 기본바닥ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 타일바닥ToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
+        private System.Windows.Forms.Button button_undo;
+        private System.Windows.Forms.Button button_redo;
     }
 }
 

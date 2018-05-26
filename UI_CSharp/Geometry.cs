@@ -249,6 +249,7 @@ namespace midas_challenge
                 SnapRectangleRoom(curr_room);
                 rooms.Add(curr_room);
                 curr_room = new Room();
+                Form_Main.count = rooms.Count;
                 return 1;
             }
 
@@ -277,11 +278,16 @@ namespace midas_challenge
             curr_room.makeClose();
             if (snapmode) SnapRectangleRoom(curr_room);
 
+
+            rooms.Add(curr_room);
+            curr_room = new Room();
+
             if (!Intersect(rooms, curr_room))
             {
                 rooms.Add(curr_room);
             }
-                curr_room = new Room();
+            curr_room = new Room();
+            Form_Main.count = rooms.Count;
             return 1;
         }
 
