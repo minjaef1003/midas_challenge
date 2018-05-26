@@ -175,5 +175,8 @@
   <ItemGroup>
     <None Include="bin\Debug\res\door.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\icons8_Instagram_16px.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
