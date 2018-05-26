@@ -146,21 +146,13 @@ namespace midas_challenge
         {
             if(isRect)
             {
-                Point p = new Point(rect.X, rect.Y);
-                RoomMaker.PushVertex(p);
-                p = new Point(rect.X + rect.Width, rect.Y);
-                RoomMaker.PushVertex(p);
-                p = new Point(rect.X + rect.Width, rect.Y + rect.Height);
-                RoomMaker.PushVertex(p);
-                p = new Point(rect.X, rect.Y + rect.Height);
-                RoomMaker.PushVertex(p);
-                p = new Point(rect.X, rect.Y);
-                if(RoomMaker.PushVertex(p) == 1)
-                {
-
-                }
-            }
-            
+                List<Point> list = new List<Point>();
+                list.Add(new Point(rect.X + rect.Width, rect.Y));
+                list.Add(new Point(rect.X + rect.Width, rect.Y + rect.Height));
+                list.Add(new Point(rect.X, rect.Y + rect.Height));
+                list.Add(new Point(rect.X, rect.Y));
+                
+            }            
             isDraw = false;
         }
         private void button_create_room_Click(object sender, EventArgs e)
