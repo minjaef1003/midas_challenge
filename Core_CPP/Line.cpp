@@ -11,11 +11,6 @@ Line::Line(Vertex* _start, Vertex* _end)
 }
 
 
-Line::~Line()
-{
-}
-
-
 void Line::moveStart(Vertex* _start) {
 	start->setVertex(_start);
 }
@@ -23,7 +18,3 @@ void Line::moveEnd(Vertex* _end) {
 	end->setVertex(_end);
 }
 
-void Line::addOpenings(Openings * _opening)
-{
-	openings.push_back(_opening);
-}

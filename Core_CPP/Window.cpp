@@ -2,11 +2,11 @@
 
 
 
-Object::Object()
+Window::Window()
 {
 }
 
 
-Object::~Object()
+Window::~Window()
 {
 }

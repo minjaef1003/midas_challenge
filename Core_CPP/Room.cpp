@@ -10,3 +10,8 @@ Room::Room()
 Room::~Room()
 {
 }
+
+bool Room::checkClosure()
+{
+	return false;
+}

@@ -7,9 +7,12 @@ using namespace std;
 class Vertex;
 class Line;
 class Openings;
+class Window;
+class Door;
+class Wall;
 class Polygon;
 class Room;
-class Object;
+class Furniture;
 
 //Vertex
 class Vertex
@@ -20,7 +23,6 @@ private:
 public:
 	Vertex();
 	Vertex(double, double);
-	~Vertex();
 	void setVertex(Vertex*);
 	void moveX(double);
 	void moveY(double);
@@ -36,35 +38,56 @@ private:
 public:
 	Line();
 	Line(Vertex*, Vertex*);
-	~Line();
 	void moveStart(Vertex*);
 	void moveEnd(Vertex*);
-	void addOpenings(Openings*);
-};
-
-//Wall
-class Wall
-{
-private:
-	vector<Openings*> openings;
-public:
-	Wall();
-	~Wall();
 };
 
 //Openings
 class Openings
 {
 private:
-	
+	Line * line;
+	double length;
 public:
 	Openings();
-	~Openings();
+	Openings(Line*, double);
+	void moveOpening(Line*);
+	void setLength(double);
 };
 
 //Window
+class Window : Openings
+{
+private:
+
+public:
+	Window();
+	~Window();
+};
 
 //Door
+class Door : Openings
+{
+private:
+
+public:
+	Door();
+	~Door();
+};
+
+//Wall
+class Wall
+{
+private:
+	Line * line;
+	vector<Openings*> windows;
+	vector<Openings*> doors;
+public:
+	Wall();
+	~Wall();
+	void addDoor(Door*);
+	void addWindow(Window*);
+};
 
 //Polygon
 class Polygon
@@ -80,19 +103,20 @@ public:
 class Room : public Polygon
 {
 private:
+	
 public:
 	Room();
 	~Room();
+	bool checkClosure();
 };
 
-//object
-class Object : public Polygon
+//Furniture
+class Furniture : Polygon
 {
 private:
-	string imageAddress;
-	string lable;
+
 public:
-	Object();
-	~Object();
+	Furniture();
+	~Furniture();
 };
 
