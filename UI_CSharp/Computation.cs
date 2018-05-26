@@ -90,5 +90,45 @@ namespace midas_challenge
             return Math.Sqrt(Math.Pow((double)(coord1.X - coord2.X), 2.0) + Math.Pow((double)(coord2.Y - coord1.Y), 2.0));
         }
 
+        internal static double EuclideanDist(Wall wall, Point center, out Point closest)
+        {
+            Point pt = center;
+            Point p1 = wall.StartPoint;
+            Point p2 = wall.EndPoint;
+            double dx = (double)(p2.X - p1.X);
+            double dy = (double)(p2.Y - p1.Y);
+            // Calculate the t that minimizes the distance.
+            double t = ((pt.X - p1.X) * dx + (pt.Y - p1.Y) * dy) / (dx * dx + dy * dy);
+
+            // See if this represents one of the segment's
+            // end points or a point in the middle.
+            if (t < 0)
+            {
+                closest = new Point(p1.X, p1.Y);
+                dx = pt.X - p1.X;
+                dy = pt.Y - p1.Y;
+            }
+            else if (t > 1)
+            {
+                closest = new Point(p2.X, p2.Y);
+                dx = pt.X - p2.X;
+                dy = pt.Y - p2.Y;
+            }
+            else
+            {
+                closest = new Point((int)Math.Round((double)p1.X + t * dx), (int)Math.Round((double)p1.Y + t * dy));
+                double closest_X = p1.X + t * dx;
+                double closest_Y = p1.Y + t * dy;
+                dx = pt.X - closest_X;
+                dy = pt.Y - closest_Y;
+            }
+
+            return Math.Sqrt(dx * dx + dy * dy);
+        }
+
+        public static bool IsPointInLine(Point pt, Line wall)
+        {
+            return (pt.X <= wall.EndPoint.X && pt.X >= wall.StartPoint.X) && (pt.Y <= wall.EndPoint.Y && pt.Y >= wall.StartPoint.Y);
+        }
     }
 }

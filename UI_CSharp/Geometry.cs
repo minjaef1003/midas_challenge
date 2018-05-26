@@ -18,6 +18,7 @@ namespace midas_challenge
         public Point StartPoint { get => startPoint; set => startPoint = value; }
         public Point EndPoint { get => endPoint; set => endPoint = value; }
 
+        public double slope = -1.0;
         public Line()
         {
 
@@ -39,6 +40,89 @@ namespace midas_challenge
             startPoint = sp;
             endPoint = ep;
         }
+
+        public Point getPointFromPoint(Point point, double dist)
+        {
+            double slope = getSlope();
+            if (Math.Abs(slope) > 10000)
+            {
+                if (slope > 0)
+                {
+                    Point pt = new Point(point.X, point.Y + (int)dist);
+                    return pt;
+                }
+                else
+                {
+                    Point pt = new Point(point.X, point.Y - (int)dist);
+                    return pt;
+                }
+            }
+            double a = Math.Sqrt((dist * dist) / ((slope * slope) + 1));
+            double b = a * slope;
+            Point result_pt;
+            double direction = dist > 0 ? 1.0 : -1.0 ;
+
+            a *= direction;
+            b *= direction;
+
+            if (slope < 0)
+            {
+                if (EndPoint.Y > StartPoint.Y)
+                {
+                    result_pt = new Point((int)(point.X - a), (int)(point.Y - b));
+                }
+                else
+                {
+                    result_pt = new Point((int)(point.X + a), (int)(point.Y + b));
+                }
+            }
+            else
+            {
+                if (EndPoint.Y > StartPoint.Y)
+                {
+                    result_pt = new Point((int)(point.X + a), (int)(point.Y + b));
+                }
+                else
+                {
+                    result_pt = new Point((int)(point.X - a), (int)(point.Y - b));
+                }
+            }
+            return result_pt;
+        }
+
+        private double getSlope()
+        {
+            if (slope < 0.0)
+            {
+                if (endPoint.X - StartPoint.X == 0)
+                {
+                    if (endPoint.Y > startPoint.Y)
+                        slope = RoomMaker.MAX_SLOPE;
+                    else
+                        slope = -RoomMaker.MAX_SLOPE;
+                }
+                else
+                    slope = (double) (endPoint.Y - startPoint.Y) / (double)(endPoint.X - StartPoint.X);
+            }
+            return slope;
+        }
+    }
+
+    public class Door : Line
+    {
+        public Door()
+        {
+
+        }
+        public Door(Point sp, Point ep)
+        {
+            startPoint = sp;
+            endPoint = ep;
+        }
+        public List<int> parent_room_id;
+        public double length;
+        public bool isDoor;
+
     }
 
     public class Room
@@ -46,13 +130,16 @@ namespace midas_challenge
         public bool IsStart;
         public Point startPoint;
         public List<Wall> walls;
-        public List<Line> doors;
-        public List<Line> windows;
+        public List<Door> doors;
+        public List<Door> windows;
+        public string type = "Not_defined";
+        public int id;
         public Room(){
             walls = new List<Wall>();
-            doors = new List<Line>();
-            windows = new List<Line>();
+            doors = new List<Door>();
+            windows = new List<Door>();
             IsStart = false;
+            id = RoomMaker.room_id++;
         }
 
         public List<Point> getAllCoordinate() {
@@ -111,6 +198,10 @@ namespace midas_challenge
         static public List<Furniture> furnitures;
 
         public const double SNAPPING_TRHES = 5.0;
+        public const double DOOR_LENGTH_DEFAULT = 20.0;
+        public const double MAX_SLOPE = 100000.0;
+
+        static public int room_id = 0;
 
         static public int PushVertex(Point coord, bool snapmode = false)
         {
@@ -147,16 +238,100 @@ namespace midas_challenge
             curr_room.pushVertex(coords[2]);
             curr_room.pushVertex(coords[3]);
             curr_room.makeClose();
-            // if (snapmode) DoSnapCurrentRoom();
+            if (snapmode) DoSnapCurrentRoom();
 
             rooms.Add(curr_room);
             curr_room = new Room();
             return 1;
         }
 
+        static public Door PushDoor(Point center, bool IsDoor = true)
+        {
+            if (rooms.Count == 0) return null;
+            double dist = -1.0;
+            Point closest;
+            Tuple<int, int> appropriate_wall = FindWallfromDoorCenter(center, out dist, out closest);
+
+            if (dist > SNAPPING_TRHES)
+            {
+                return null;
+            }
+
+            Door new_door = new Door();
+            new_door.isDoor = IsDoor;
+            new_door.parent_room_id.Add(rooms[appropriate_wall.Item1].id);
+            Wall wall = rooms[appropriate_wall.Item1].walls[appropriate_wall.Item2];
+
+            if (Computation.EuclideanDist(wall.StartPoint, wall.EndPoint) < DOOR_LENGTH_DEFAULT)
+            {
+                new_door.StartPoint = wall.StartPoint;
+                new_door.EndPoint = wall.EndPoint;
+                new_door.length = Computation.EuclideanDist(wall.StartPoint, wall.EndPoint);
+            }
+            else if (closest.X == wall.StartPoint.X && closest.Y == wall.StartPoint.Y)
+            {
+                new_door.StartPoint = wall.StartPoint;
+                new_door.EndPoint = wall.getPointFromPoint(wall.StartPoint, DOOR_LENGTH_DEFAULT);
+                new_door.length = DOOR_LENGTH_DEFAULT;
+            }
+            else if (closest.X == wall.EndPoint.X && closest.Y == wall.EndPoint.Y)
+            {
+                new_door.StartPoint = wall.EndPoint;
+                new_door.EndPoint = wall.getPointFromPoint(wall.EndPoint, -DOOR_LENGTH_DEFAULT);
+                new_door.length = DOOR_LENGTH_DEFAULT;
+            }
+            else
+            {
+                new_door.StartPoint = wall.getPointFromPoint(closest, -DOOR_LENGTH_DEFAULT);
+                new_door.EndPoint = wall.getPointFromPoint(closest, DOOR_LENGTH_DEFAULT);
+                if (!Computation.IsPointInLine(new_door.StartPoint, wall))
+                {
+                    new_door.StartPoint = wall.StartPoint;
+                }
+                if (!Computation.IsPointInLine(new_door.EndPoint, wall))
+                {
+                    new_door.EndPoint = wall.EndPoint;
+                }
+                    
+                new_door.length = Computation.EuclideanDist(new_door.StartPoint, new_door.EndPoint); ;
+            }
+            if (IsDoor)
+                rooms[appropriate_wall.Item1].doors.Add(new_door);
+            else
+                rooms[appropriate_wall.Item1].windows.Add(new_door);
+
+            return new_door;
+        }
+        
+        private static Tuple<int, int> FindWallfromDoorCenter(Point center, out double globalMinDist, out Point closest)
+        {
+            globalMinDist = 10000.0;
+            Tuple<int, int> globalMin = new Tuple<int, int>(-1, -1);
+            closest = new Point();
+            for (int i = 0; i < rooms.Count; i++)
+            {
+                //Tuple<Room, int> localMin = new Tuple<Room, int>(rooms[i], 0);
+                // double localMinDist = 10000.0;
+                for (int j = 0; j < rooms[i].walls.Count; j++)
+                {
+                    Wall wall = rooms[i].walls[j];
+                    double dist = Computation.EuclideanDist(wall, center, out closest);
+                    if (dist < globalMinDist)
+                    {
+                        globalMin = new Tuple<int, int>(i,j);
+                        globalMinDist = dist;
+                    }
+                }
+                    
+            }
+
+            return globalMin;
+        }
+        
         private static void DoSnapCurrentRoom()
         {
-            throw new NotImplementedException();
+            Debug.Print("Intersect TODO");
+            return;
         }
 
         private static bool IsSimplePolygon(Room curr_room)
