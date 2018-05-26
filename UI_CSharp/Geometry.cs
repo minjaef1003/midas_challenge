@@ -434,6 +434,7 @@ namespace midas_challenge
                 if (room.doors.Count <= 0)
                     return false;
             }
+            if (hasIntersect()) return false;
             return true;
         }
 
@@ -560,6 +561,24 @@ namespace midas_challenge
             else
                 return 0;
         }
+
+        public static bool hasIntersect()
+        {
+            for (int i = 0; i < rooms.Count -1; i++)
+            {
+                for (int j = i; j < rooms.Count; j++)
+                {
+                    List<Room> rm1 = new List<Room> { rooms[i] };
+                    Room rm2 = rooms[j];
+                    if (Intersect(rm1, rm2))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
         private static bool IntersectWall(List<Room> rooms, Room curr_room)
         {
             foreach (Wall curWall in curr_room.walls)

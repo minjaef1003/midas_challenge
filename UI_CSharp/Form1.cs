@@ -470,6 +470,11 @@ namespace midas_challenge
         {
             if (isCreateMenu == 3)
             {
+                if (RoomMaker.hasIntersect())
+                {
+                    MessageBox.Show("Intersection이 존재합니다.");
+                    return;
+                }
                 button_editmode.BackColor = Color.AliceBlue;
                 Cursor.Current = Cursors.Default;
                 selected_room = null;
