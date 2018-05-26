@@ -63,9 +63,9 @@
     </Compile>
     <Compile Include="Geometry.cs" />
     <None Include="test.cs" />
-    <None Include="IOSystem.cs">
+    <Compile Include="IOSystem.cs">
       <SubType>Form</SubType>
-    </None>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -147,6 +147,30 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\Debug\res\icons8_Washing_Machine_100px_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\icons8_None_800px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\icons8_Door_40px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\icons8_Open_Window_40px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\icons8_Rectangular_32px_4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\icons8_Polygon_32px_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\icons8_Closet_40px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\icons8_Floor_Plan_40px_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\icons8_Bed_100px.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
