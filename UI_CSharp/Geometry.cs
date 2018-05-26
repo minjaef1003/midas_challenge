@@ -24,15 +24,15 @@ namespace midas_challenge
 
     public struct Furniture
     {
-        public Coordinate lowerLeft;
-        public Coordinate upperRight;
+        public Coordinate upperLeft;
+        public Coordinate lowerRight;
         public Image img;
         public Label name;
         public Rectangle rectangle;
         public Furniture(Coordinate ll, Coordinate ur, Image _img, Label _name, Rectangle rect)
         {
-            lowerLeft = ll;
-            upperRight = ur;
+            upperLeft = ll;
+            lowerRight = ur;
             img = _img;
             name = _name;
             rectangle = rect;
@@ -41,16 +41,16 @@ namespace midas_challenge
 
     public class RoomMaker
     {
-        public Room curr_room;
+        static public Room curr_room;
         static public List<Room> rooms;
         static public List<Furniture> furnitures;
 
-        static public int PushVertex(Coordinate cd, bool snapmode = false)
+        static public int PushVertex(Coordinate coord, bool snapmode = false)
         {
-            if (IsClose(room, coord))
+            if (IsClosed(curr_room, coord))
             {
 
-
+                return 1;
             }
 
             if (snapmode) DoSnap(ref coord);
@@ -74,7 +74,7 @@ namespace midas_challenge
             throw new NotImplementedException();
         }
 
-        private static bool IsClose(Room room, Coordinate coord)
+        private static bool IsClosed(Room room, Coordinate coord)
         {
             return false;
         }
