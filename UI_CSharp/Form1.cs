@@ -70,10 +70,6 @@ namespace midas_challenge
             e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
 
             Pen pen = new Pen(Color.Black, 3);
-            for (int i = 0; i < RoomMaker.curr_room.walls.Count; i++)
-            {
-                e.Graphics.DrawLine(pen, RoomMaker.curr_room.walls[i].StartPoint, RoomMaker.curr_room.walls[i].EndPoint);
-            }
             
             for (int i = 0; i < Form_Main.count; i++)
             {
@@ -85,6 +81,7 @@ namespace midas_challenge
                     plist.Add(RoomMaker.rooms[i].walls[j].StartPoint);
                     plist.Add(RoomMaker.rooms[i].walls[j].EndPoint);                                    
                 }
+
                 Point[] p = new Point[plist.Count];
                 for(int j=0; j<plist.Count; j++)                
                     p[j] = plist[j];
@@ -93,6 +90,10 @@ namespace midas_challenge
                 HatchBrush hatch = new HatchBrush(h, Color.SkyBlue, Color.White);
                 e.Graphics.FillPolygon(hatch, p);
                 e.Graphics.DrawPolygon(pen, p);
+            }
+            for (int i = 0; i < RoomMaker.curr_room.walls.Count; i++)
+            {
+                e.Graphics.DrawLine(pen, RoomMaker.curr_room.walls[i].StartPoint, RoomMaker.curr_room.walls[i].EndPoint);
             }
             for (int i = 0; i < RoomMaker.furnitures.Count; i++)
             {
@@ -345,6 +346,11 @@ namespace midas_challenge
 
         private void button_save_image_Click(object sender, EventArgs e)
         {
+            if (panel_canvas == null)
+            {
+                button_new_document_Click(sender, e);
+            }
+
             Bitmap bmp = new Bitmap(panel_canvas.Width, panel_canvas.Height);
             panel_canvas.DrawToBitmap(bmp, new Rectangle(0, 0, panel_canvas.Width, panel_canvas.Height));
             saveFileDialog1.Filter = "png files (*.png)|*.png|jpeg files (*.jpeg)|*.jpeg";
@@ -356,6 +362,7 @@ namespace midas_challenge
                 if (idx == 1) bmp.Save(saveFileDialog1.FileName, ImageFormat.Png);
                 else bmp.Save(saveFileDialog1.FileName, ImageFormat.Jpeg);
             }
+            button_new_document_Click(sender, e);
         }
 
         private void button_editmode_Click(object sender, EventArgs e)
