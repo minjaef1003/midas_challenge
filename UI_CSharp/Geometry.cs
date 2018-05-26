@@ -147,11 +147,16 @@ namespace midas_challenge
             curr_room.pushVertex(coords[2]);
             curr_room.pushVertex(coords[3]);
             curr_room.makeClose();
-            if (snapmode) DoSnapCurrentRoom();
+            // if (snapmode) DoSnapCurrentRoom();
 
             rooms.Add(curr_room);
             curr_room = new Room();
             return 1;
+        }
+
+        private static void DoSnapCurrentRoom()
+        {
+            throw new NotImplementedException();
         }
 
         private static bool IsSimplePolygon(Room curr_room)
