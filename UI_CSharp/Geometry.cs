@@ -39,7 +39,7 @@ namespace midas_challenge
 
         public static bool isClose(Room room, Coordinate coord)
         {
-            return 0;
+            return false;
         }
     }
 
@@ -49,6 +49,7 @@ namespace midas_challenge
         public Coordinate upperRight;
         public Image img;
         public Label name;
+        public Rectangle rectangle;
     }
 
     public class RoomMaker
@@ -59,7 +60,7 @@ namespace midas_challenge
 
         public int pushVertex(Coordinate cd, bool snapmode = false)
         {
-             return RoomManager.pushVertex(curr_room, cd, snapmode);
+            return RoomManager.pushVertex(curr_room, ref cd, snapmode);
         }
 
         public void writeFile()
