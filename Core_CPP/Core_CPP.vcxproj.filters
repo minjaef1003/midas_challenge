@@ -18,9 +18,15 @@
     <ClInclude Include="geometry.h">
       <Filter>소스 파일</Filter>
     </ClInclude>
+    <ClInclude Include="csharp_connector.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="geometry.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="csharp_connector.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
