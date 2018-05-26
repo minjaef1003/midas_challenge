@@ -27,6 +27,8 @@ namespace midas_challenge
         private int selectFurn = 0;
         Furniture f;
         Image imgDoor, imgWindow;
+        Point[] pointList = new Point[4];
+        int cnt = 0;
 
         public Form_Main()
         {
@@ -35,12 +37,12 @@ namespace midas_challenge
             panel_createroom_menu.Width = 0;
             panel_furniture_menu.Width = 0;
             rectList = new List<Rectangle>();
+            
             RoomMaker.curr_room = new Room();
             RoomMaker.rooms = new List<Room>();
             RoomMaker.furnitures = new List<Furniture>();
             imgDoor = Image.FromFile("res/icons8_Door_40px.png");
             imgWindow = Image.FromFile("res/icons8_Open_Window_40px.png");
-
         }
         private void button_new_document_Click(object sender, EventArgs e)
         {
@@ -51,7 +53,7 @@ namespace midas_challenge
             panel_canvas.Dock = DockStyle.Fill;
             panel_canvas.Name = "panel_canvas";
             panel_canvas.Size = new Size(876, 555);
-            panel_canvas.BackColor = Color.White;
+            panel_canvas.BackColor = Color.FromArgb(255, 255, 255, 253);
             panel_canvas.Paint += new PaintEventHandler(this.panel_canvas_Paint);
             panel_canvas.MouseDown += new MouseEventHandler(this.panel_canvas_MouseDown);
             panel_canvas.MouseMove += new MouseEventHandler(this.panel_canvas_MouseMove);
@@ -68,16 +70,20 @@ namespace midas_challenge
             {
                 for(int j=0; j<RoomMaker.rooms[i].walls.Count; j++)
                 {
-                    HatchStyle h = (HatchStyle)3;
-                    HatchBrush brush = new HatchBrush(h, Color.Brown, Color.White);
-                    //Point sp = RoomMaker.rooms[i].walls[j].StartPoint;
-                    //Point ep = RoomMaker.rooms[i].walls[j].EndPoint;
                     Point[] p =
                     {
                         RoomMaker.rooms[i].walls[j].StartPoint,
                         RoomMaker.rooms[i].walls[j].EndPoint
                     };
-                    //e.Graphics.DrawLine(pen, sp, ep);
+                    pointList[cnt++] = p[0];
+                    pointList[cnt++] = p[1];
+                    if (cnt == RoomMaker.rooms[i].walls.Count)
+                    {
+                        HatchStyle h = (HatchStyle)3;
+                        HatchBrush brush = new HatchBrush(h, Color.SkyBlue, Color.White);
+                        e.Graphics.FillPolygon(brush, pointList);
+                        cnt = 0;
+                    }
                     
                     e.Graphics.DrawPolygon(pen, p);
                 }              
@@ -86,8 +92,7 @@ namespace midas_challenge
             {
                 var furn = RoomMaker.furnitures[i];
                 e.Graphics.DrawImage(furn.img, furn.imgSize.X,
-                    furn.imgSize.Y,
-                    furn.imgSize.Width, furn.imgSize.Height);
+                    furn.imgSize.Y, furn.imgSize.Width, furn.imgSize.Height);
 
                 e.Graphics.DrawString(furn.name.Text, Font, Brushes.Black, 
                     (furn.imgSize.Width + (2*furn.imgSize.X))/2-15 , 
@@ -151,7 +156,10 @@ namespace midas_challenge
             {
                 sp = e.Location;
             }
-            
+
+            if (e.Button == MouseButtons.Right)
+                contextMenuStrip1.Show(new Point(MousePosition.X, MousePosition.Y));
+
             isDraw = true;
         }
         private void panel_canvas_MouseMove(object sender, MouseEventArgs e)

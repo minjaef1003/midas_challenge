@@ -46,6 +46,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.panel_menu = new System.Windows.Forms.Panel();
+            this.button_create_window = new System.Windows.Forms.Button();
+            this.button_create_door = new System.Windows.Forms.Button();
             this.button_create_furniture = new System.Windows.Forms.Button();
             this.button_create_room = new System.Windows.Forms.Button();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -58,8 +60,10 @@
             this.저장ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.불러오기ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timer_menu_slide = new System.Windows.Forms.Timer(this.components);
-            this.button_create_door = new System.Windows.Forms.Button();
-            this.button_create_window = new System.Windows.Forms.Button();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.기본바닥ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.타일바닥ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.panel_outline.SuspendLayout();
             this.panel_workspace.SuspendLayout();
             this.panel_furniture_menu.SuspendLayout();
@@ -68,6 +72,7 @@
             this.panel_menu.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel_outline
@@ -271,6 +276,40 @@
             this.panel_menu.Size = new System.Drawing.Size(166, 717);
             this.panel_menu.TabIndex = 0;
             // 
+            // button_create_window
+            // 
+            this.button_create_window.FlatAppearance.BorderSize = 0;
+            this.button_create_window.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_create_window.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_create_window.Image = ((System.Drawing.Image)(resources.GetObject("button_create_window.Image")));
+            this.button_create_window.Location = new System.Drawing.Point(1, 308);
+            this.button_create_window.Margin = new System.Windows.Forms.Padding(0);
+            this.button_create_window.Name = "button_create_window";
+            this.button_create_window.Size = new System.Drawing.Size(164, 101);
+            this.button_create_window.TabIndex = 0;
+            this.button_create_window.Text = "Create Window";
+            this.button_create_window.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.button_create_window.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.button_create_window.UseVisualStyleBackColor = true;
+            this.button_create_window.Click += new System.EventHandler(this.button_create_window_Click);
+            // 
+            // button_create_door
+            // 
+            this.button_create_door.FlatAppearance.BorderSize = 0;
+            this.button_create_door.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_create_door.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_create_door.Image = ((System.Drawing.Image)(resources.GetObject("button_create_door.Image")));
+            this.button_create_door.Location = new System.Drawing.Point(1, 207);
+            this.button_create_door.Margin = new System.Windows.Forms.Padding(0);
+            this.button_create_door.Name = "button_create_door";
+            this.button_create_door.Size = new System.Drawing.Size(164, 101);
+            this.button_create_door.TabIndex = 0;
+            this.button_create_door.Text = "Create Door";
+            this.button_create_door.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.button_create_door.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.button_create_door.UseVisualStyleBackColor = true;
+            this.button_create_door.Click += new System.EventHandler(this.button_create_door_Click);
+            // 
             // button_create_furniture
             // 
             this.button_create_furniture.FlatAppearance.BorderSize = 0;
@@ -370,20 +409,20 @@
             // 새문서ToolStripMenuItem
             // 
             this.새문서ToolStripMenuItem.Name = "새문서ToolStripMenuItem";
-            this.새문서ToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.새문서ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
             this.새문서ToolStripMenuItem.Text = "새문서";
             // 
             // 저장ToolStripMenuItem
             // 
             this.저장ToolStripMenuItem.Name = "저장ToolStripMenuItem";
-            this.저장ToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.저장ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
             this.저장ToolStripMenuItem.Text = "저장";
             this.저장ToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
             // 
             // 불러오기ToolStripMenuItem
             // 
             this.불러오기ToolStripMenuItem.Name = "불러오기ToolStripMenuItem";
-            this.불러오기ToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.불러오기ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
             this.불러오기ToolStripMenuItem.Text = "불러오기";
             this.불러오기ToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
             // 
@@ -392,39 +431,32 @@
             this.timer_menu_slide.Interval = 5;
             this.timer_menu_slide.Tick += new System.EventHandler(this.timer_menu_slide_Tick);
             // 
-            // button_create_door
+            // contextMenuStrip1
             // 
-            this.button_create_door.FlatAppearance.BorderSize = 0;
-            this.button_create_door.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button_create_door.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_create_door.Image = ((System.Drawing.Image)(resources.GetObject("button_create_door.Image")));
-            this.button_create_door.Location = new System.Drawing.Point(1, 207);
-            this.button_create_door.Margin = new System.Windows.Forms.Padding(0);
-            this.button_create_door.Name = "button_create_door";
-            this.button_create_door.Size = new System.Drawing.Size(164, 101);
-            this.button_create_door.TabIndex = 0;
-            this.button_create_door.Text = "Create Door";
-            this.button_create_door.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button_create_door.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button_create_door.UseVisualStyleBackColor = true;
-            this.button_create_door.Click += new System.EventHandler(this.button_create_door_Click);
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.기본바닥ToolStripMenuItem,
+            this.타일바닥ToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(144, 52);
             // 
-            // button_create_window
+            // 기본바닥ToolStripMenuItem
             // 
-            this.button_create_window.FlatAppearance.BorderSize = 0;
-            this.button_create_window.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button_create_window.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_create_window.Image = ((System.Drawing.Image)(resources.GetObject("button_create_window.Image")));
-            this.button_create_window.Location = new System.Drawing.Point(1, 308);
-            this.button_create_window.Margin = new System.Windows.Forms.Padding(0);
-            this.button_create_window.Name = "button_create_window";
-            this.button_create_window.Size = new System.Drawing.Size(164, 101);
-            this.button_create_window.TabIndex = 0;
-            this.button_create_window.Text = "Create Window";
-            this.button_create_window.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button_create_window.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button_create_window.UseVisualStyleBackColor = true;
-            this.button_create_window.Click += new System.EventHandler(this.button_create_window_Click);
+            this.기본바닥ToolStripMenuItem.Name = "기본바닥ToolStripMenuItem";
+            this.기본바닥ToolStripMenuItem.Size = new System.Drawing.Size(143, 24);
+            this.기본바닥ToolStripMenuItem.Text = "기본 바닥";
+            // 
+            // 타일바닥ToolStripMenuItem
+            // 
+            this.타일바닥ToolStripMenuItem.Name = "타일바닥ToolStripMenuItem";
+            this.타일바닥ToolStripMenuItem.Size = new System.Drawing.Size(143, 24);
+            this.타일바닥ToolStripMenuItem.Text = "타일바닥";
+            // 
+            // contextMenuStrip2
+            // 
+            this.contextMenuStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip2.Name = "contextMenuStrip2";
+            this.contextMenuStrip2.Size = new System.Drawing.Size(211, 32);
             // 
             // Form_Main
             // 
@@ -451,6 +483,7 @@
             this.toolStrip1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -488,6 +521,10 @@
         private System.Windows.Forms.Button button_fur_closet;
         private System.Windows.Forms.Button button_create_window;
         private System.Windows.Forms.Button button_create_door;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem 기본바닥ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 타일바닥ToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
     }
 }
 
