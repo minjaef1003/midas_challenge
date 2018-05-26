@@ -32,9 +32,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Main));
             this.panel_outline = new System.Windows.Forms.Panel();
             this.panel_workspace = new System.Windows.Forms.Panel();
-            this.panel_createroom_menu = new System.Windows.Forms.Panel();
-            this.button_createroom_rect = new System.Windows.Forms.Button();
-            this.button_createroom_line = new System.Windows.Forms.Button();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.label_status = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel_menu = new System.Windows.Forms.Panel();
             this.button_redo = new System.Windows.Forms.Button();
             this.button_undo = new System.Windows.Forms.Button();
@@ -42,6 +41,9 @@
             this.button_create_door = new System.Windows.Forms.Button();
             this.button_create_furniture = new System.Windows.Forms.Button();
             this.button_create_room = new System.Windows.Forms.Button();
+            this.panel_createroom_menu = new System.Windows.Forms.Panel();
+            this.button_createroom_rect = new System.Windows.Forms.Button();
+            this.button_createroom_line = new System.Windows.Forms.Button();
             this.panel_furniture_menu = new System.Windows.Forms.Panel();
             this.button_fur_lamp = new System.Windows.Forms.Button();
             this.button_fur_washing = new System.Windows.Forms.Button();
@@ -63,17 +65,18 @@
             this.기본바닥ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.타일바닥ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.label_status = new System.Windows.Forms.ToolStripStatusLabel();
+            this.button_save_image = new System.Windows.Forms.ToolStripButton();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.panel_outline.SuspendLayout();
             this.panel_workspace.SuspendLayout();
-            this.panel_createroom_menu.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.panel_menu.SuspendLayout();
+            this.panel_createroom_menu.SuspendLayout();
             this.panel_furniture_menu.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel_outline
@@ -98,48 +101,22 @@
             this.panel_workspace.Size = new System.Drawing.Size(1269, 717);
             this.panel_workspace.TabIndex = 2;
             // 
-            // panel_createroom_menu
+            // statusStrip1
             // 
-            this.panel_createroom_menu.BackColor = System.Drawing.Color.White;
-            this.panel_createroom_menu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel_createroom_menu.Controls.Add(this.button_createroom_rect);
-            this.panel_createroom_menu.Controls.Add(this.button_createroom_line);
-            this.panel_createroom_menu.Location = new System.Drawing.Point(171, 4);
-            this.panel_createroom_menu.Name = "panel_createroom_menu";
-            this.panel_createroom_menu.Size = new System.Drawing.Size(89, 168);
-            this.panel_createroom_menu.TabIndex = 0;
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.label_status});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 692);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(1269, 25);
+            this.statusStrip1.TabIndex = 1;
+            this.statusStrip1.Text = "statusStrip1";
             // 
-            // button_createroom_rect
+            // label_status
             // 
-            this.button_createroom_rect.FlatAppearance.BorderSize = 0;
-            this.button_createroom_rect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button_createroom_rect.Image = ((System.Drawing.Image)(resources.GetObject("button_createroom_rect.Image")));
-            this.button_createroom_rect.Location = new System.Drawing.Point(0, 81);
-            this.button_createroom_rect.Margin = new System.Windows.Forms.Padding(0);
-            this.button_createroom_rect.Name = "button_createroom_rect";
-            this.button_createroom_rect.Size = new System.Drawing.Size(89, 80);
-            this.button_createroom_rect.TabIndex = 0;
-            this.button_createroom_rect.Text = "Rectangle";
-            this.button_createroom_rect.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button_createroom_rect.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button_createroom_rect.UseVisualStyleBackColor = true;
-            this.button_createroom_rect.Click += new System.EventHandler(this.button_createroom_rect_Click);
-            // 
-            // button_createroom_line
-            // 
-            this.button_createroom_line.FlatAppearance.BorderSize = 0;
-            this.button_createroom_line.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button_createroom_line.Image = ((System.Drawing.Image)(resources.GetObject("button_createroom_line.Image")));
-            this.button_createroom_line.Location = new System.Drawing.Point(-1, 1);
-            this.button_createroom_line.Margin = new System.Windows.Forms.Padding(0);
-            this.button_createroom_line.Name = "button_createroom_line";
-            this.button_createroom_line.Size = new System.Drawing.Size(90, 80);
-            this.button_createroom_line.TabIndex = 0;
-            this.button_createroom_line.Text = "Polygon";
-            this.button_createroom_line.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button_createroom_line.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button_createroom_line.UseVisualStyleBackColor = true;
-            this.button_createroom_line.Click += new System.EventHandler(this.button_createroom_line_Click);
+            this.label_status.Name = "label_status";
+            this.label_status.Size = new System.Drawing.Size(104, 20);
+            this.label_status.Text = "프로그램 시작";
             // 
             // panel_menu
             // 
@@ -244,6 +221,49 @@
             this.button_create_room.UseVisualStyleBackColor = true;
             this.button_create_room.Click += new System.EventHandler(this.button_create_room_Click);
             // 
+            // panel_createroom_menu
+            // 
+            this.panel_createroom_menu.BackColor = System.Drawing.Color.White;
+            this.panel_createroom_menu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel_createroom_menu.Controls.Add(this.button_createroom_rect);
+            this.panel_createroom_menu.Controls.Add(this.button_createroom_line);
+            this.panel_createroom_menu.Location = new System.Drawing.Point(171, 4);
+            this.panel_createroom_menu.Name = "panel_createroom_menu";
+            this.panel_createroom_menu.Size = new System.Drawing.Size(89, 168);
+            this.panel_createroom_menu.TabIndex = 0;
+            // 
+            // button_createroom_rect
+            // 
+            this.button_createroom_rect.FlatAppearance.BorderSize = 0;
+            this.button_createroom_rect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_createroom_rect.Image = ((System.Drawing.Image)(resources.GetObject("button_createroom_rect.Image")));
+            this.button_createroom_rect.Location = new System.Drawing.Point(0, 81);
+            this.button_createroom_rect.Margin = new System.Windows.Forms.Padding(0);
+            this.button_createroom_rect.Name = "button_createroom_rect";
+            this.button_createroom_rect.Size = new System.Drawing.Size(89, 80);
+            this.button_createroom_rect.TabIndex = 0;
+            this.button_createroom_rect.Text = "Rectangle";
+            this.button_createroom_rect.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.button_createroom_rect.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.button_createroom_rect.UseVisualStyleBackColor = true;
+            this.button_createroom_rect.Click += new System.EventHandler(this.button_createroom_rect_Click);
+            // 
+            // button_createroom_line
+            // 
+            this.button_createroom_line.FlatAppearance.BorderSize = 0;
+            this.button_createroom_line.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_createroom_line.Image = ((System.Drawing.Image)(resources.GetObject("button_createroom_line.Image")));
+            this.button_createroom_line.Location = new System.Drawing.Point(-1, 1);
+            this.button_createroom_line.Margin = new System.Windows.Forms.Padding(0);
+            this.button_createroom_line.Name = "button_createroom_line";
+            this.button_createroom_line.Size = new System.Drawing.Size(90, 80);
+            this.button_createroom_line.TabIndex = 0;
+            this.button_createroom_line.Text = "Polygon";
+            this.button_createroom_line.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.button_createroom_line.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.button_createroom_line.UseVisualStyleBackColor = true;
+            this.button_createroom_line.Click += new System.EventHandler(this.button_createroom_line_Click);
+            // 
             // panel_furniture_menu
             // 
             this.panel_furniture_menu.BackColor = System.Drawing.Color.White;
@@ -343,7 +363,8 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.button_new_document,
             this.toolStripButton2,
-            this.toolStripButton3});
+            this.toolStripButton3,
+            this.button_save_image});
             this.toolStrip1.Location = new System.Drawing.Point(0, 28);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1271, 27);
@@ -454,22 +475,19 @@
             this.contextMenuStrip2.Name = "contextMenuStrip2";
             this.contextMenuStrip2.Size = new System.Drawing.Size(61, 4);
             // 
-            // statusStrip1
+            // button_save_image
             // 
-            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.label_status});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 692);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1269, 25);
-            this.statusStrip1.TabIndex = 1;
-            this.statusStrip1.Text = "statusStrip1";
+            this.button_save_image.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.button_save_image.Image = ((System.Drawing.Image)(resources.GetObject("button_save_image.Image")));
+            this.button_save_image.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.button_save_image.Name = "button_save_image";
+            this.button_save_image.Size = new System.Drawing.Size(24, 24);
+            this.button_save_image.Text = "toolStripButton1";
+            this.button_save_image.Click += new System.EventHandler(this.button_save_image_Click);
             // 
-            // label_status
+            // openFileDialog1
             // 
-            this.label_status.Name = "label_status";
-            this.label_status.Size = new System.Drawing.Size(104, 20);
-            this.label_status.Text = "프로그램 시작";
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // Form_Main
             // 
@@ -489,16 +507,16 @@
             this.panel_outline.ResumeLayout(false);
             this.panel_workspace.ResumeLayout(false);
             this.panel_workspace.PerformLayout();
-            this.panel_createroom_menu.ResumeLayout(false);
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.panel_menu.ResumeLayout(false);
+            this.panel_createroom_menu.ResumeLayout(false);
             this.panel_furniture_menu.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -541,6 +559,9 @@
         private System.Windows.Forms.Button button_redo;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel label_status;
+        private System.Windows.Forms.ToolStripButton button_save_image;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
 
