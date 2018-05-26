@@ -375,6 +375,7 @@
             this.toolStripButton2.Name = "toolStripButton2";
             this.toolStripButton2.Size = new System.Drawing.Size(24, 24);
             this.toolStripButton2.Text = "toolStripButton2";
+            this.toolStripButton2.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
             // 
             // toolStripButton3
             // 
@@ -384,6 +385,7 @@
             this.toolStripButton3.Name = "toolStripButton3";
             this.toolStripButton3.Size = new System.Drawing.Size(24, 24);
             this.toolStripButton3.Text = "toolStripButton3";
+            this.toolStripButton3.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
             // 
             // menuStrip1
             // 
@@ -409,20 +411,21 @@
             // 새문서ToolStripMenuItem
             // 
             this.새문서ToolStripMenuItem.Name = "새문서ToolStripMenuItem";
-            this.새문서ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
-            this.새문서ToolStripMenuItem.Text = "새문서";
+            this.새문서ToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.새문서ToolStripMenuItem.Text = "ㅁㅁ";
+            this.새문서ToolStripMenuItem.Click += new System.EventHandler(this.button_new_document_Click);
             // 
             // 저장ToolStripMenuItem
             // 
             this.저장ToolStripMenuItem.Name = "저장ToolStripMenuItem";
-            this.저장ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
+            this.저장ToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.저장ToolStripMenuItem.Text = "저장";
             this.저장ToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
             // 
             // 불러오기ToolStripMenuItem
             // 
             this.불러오기ToolStripMenuItem.Name = "불러오기ToolStripMenuItem";
-            this.불러오기ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
+            this.불러오기ToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.불러오기ToolStripMenuItem.Text = "불러오기";
             this.불러오기ToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
             // 
@@ -456,7 +459,7 @@
             // 
             this.contextMenuStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(211, 32);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(61, 4);
             // 
             // Form_Main
             // 

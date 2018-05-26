@@ -148,5 +148,8 @@
   <ItemGroup>
     <None Include="bin\Debug\res\icons8_Washing_Machine_100px_1.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\icons8_None_800px.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
