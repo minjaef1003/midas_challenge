@@ -12,7 +12,7 @@ namespace midas_challenge
 
     public class Wall
     {
-        private List<Coordinate> coords;
+        public List<Coordinate> coords;
     }
 
     public struct Room
@@ -24,16 +24,23 @@ namespace midas_challenge
 
     public class RoomManager
     {
-        public static int pushVertex(Room room, Coordinate coord, bool snapmode)
+        public static int pushVertex(Room room, ref Coordinate coord, bool snapmode)
         {
             if (isClose(room, coord))
             {
 
+
             }
+
+            //snapmode(coord);
+
             return 0;
         }
 
-        public 
+        public static bool isClose(Room room, Coordinate coord)
+        {
+            return 0;
+        }
     }
 
     public class Furniture
@@ -46,9 +53,9 @@ namespace midas_challenge
 
     public class RoomMaker
     {
-        private RoomManager room_manager;
-        private Room curr_room;
-        private List<Room> rooms;
+        public RoomManager room_manager;
+        public Room curr_room;
+        public List<Room> rooms;
 
         public int pushVertex(Coordinate cd, bool snapmode = false)
         {
