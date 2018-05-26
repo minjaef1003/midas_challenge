@@ -34,6 +34,7 @@ namespace midas_challenge
         {
             InitializeComponent();
             InitImgFurnitureDic();
+            InitFurnitureRoom();
             menu_width = panel_createroom_menu.Width;
             panel_createroom_menu.Width = 0;
             panel_furniture_menu.Width = 0;
