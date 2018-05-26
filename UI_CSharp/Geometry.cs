@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace midas_challenge
 {
@@ -25,13 +26,15 @@ namespace midas_challenge
     public struct Furniture
     {
         public Image img;
-        public Label name;
-        public Rectangle rectangle;
-        public Furniture(Image _img, Label _name, Rectangle rect)
+        public System.Windows.Forms.Label name;
+        public Rectangle imgSize;
+        public Furniture(Image _img, string _name, Rectangle rect)
         {
             img = _img;
-            name = _name;
-            rectangle = rect;
+            name = new System.Windows.Forms.Label();
+            name.Text = _name;
+            imgSize = new Rectangle();
+            imgSize = rect;
         }
     }
 
