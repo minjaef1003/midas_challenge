@@ -11,16 +11,16 @@ using System.Windows.Forms;
 
 namespace midas_challenge
 {
-    using Coordinate = KeyValuePair<int, int>;
     public partial class Form_Main : Form
     {
+        public static int count = 0;
         private List<Rectangle> rectList;
         private DoubleBufferPannel panel_canvas;
         private int menu_width, width, height;
         //isCreateMenu : 1:room 2:furniture
         private int isCreateMenu = 0;
         private bool isRect = false, isPolygon = false,
-            isDraw = false, isLine = false, isFurn = false,
+            isDraw = false, isLine = false,
             isWindow = false, isDoor = false;
         private Point sp, ep, loc; // start point, end point;
         private Rectangle rect;
@@ -30,7 +30,6 @@ namespace midas_challenge
         Point[] pointList;
         Door door = null;
         int cnt = 0;
-
         public Form_Main()
         {
             InitializeComponent();
@@ -65,7 +64,7 @@ namespace midas_challenge
             panel_workspace.Refresh();
         }
         private void panel_canvas_Paint(object sender, PaintEventArgs e)
-        {
+        {            
             e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
 
             Pen pen = new Pen(Color.Black, 3);
@@ -74,7 +73,7 @@ namespace midas_challenge
                 e.Graphics.DrawLine(pen, RoomMaker.curr_room.walls[i].StartPoint, RoomMaker.curr_room.walls[i].EndPoint);
             }
             cnt = 0;
-            for (int i=0; i<RoomMaker.rooms.Count; i++)
+            for (int i=0; i< Form_Main.count; i++)
             {
                 int size = RoomMaker.rooms[i].walls.Count;
                 pointList = new Point[size];
@@ -85,17 +84,16 @@ namespace midas_challenge
                         RoomMaker.rooms[i].walls[j].StartPoint,
                         RoomMaker.rooms[i].walls[j].EndPoint
                     };
-                    
+                                      
                     pointList[cnt++] = p[0];                    
                     pointList[cnt++] = p[1];
-                    if (cnt == RoomMaker.rooms[i].walls.Count && size % 2 == 0)
+                    if (cnt == RoomMaker.rooms[i].walls.Count )
                     {
                         HatchStyle h = (HatchStyle)3;
                         HatchBrush brush = new HatchBrush(h, Color.SkyBlue, Color.White);
                         e.Graphics.FillPolygon(brush, pointList);
-                       
+                        cnt = 0;
                     }
-                    if (cnt >= size - 1) cnt = 0;
                     
                     e.Graphics.DrawPolygon(pen, p);                  
                 }              
@@ -154,6 +152,8 @@ namespace midas_challenge
             if(isDoor)
             {
                 door = RoomMaker.PushDoor(new Point(e.X, e.Y), true);
+                isRect = false;
+                isPolygon = false;
 
             }
             if(isWindow)
@@ -220,7 +220,9 @@ namespace midas_challenge
                 list.Add(new Point(rect.X, rect.Y));
 
                 RoomMaker.PushRectangle(list);
-            }            
+
+                isRect = false;
+            } 
             isDraw = false;
         }
         private void button_create_room_Click(object sender, EventArgs e)
@@ -283,6 +285,7 @@ namespace midas_challenge
             if (isDoor) isDoor = false;
             else isDoor = true;
         }
+
         private void button_create_window_Click(object sender, EventArgs e)
         {
             if (isWindow) isWindow = false;
@@ -297,6 +300,8 @@ namespace midas_challenge
             RoomMaker.rooms = readDate.Item1;
             RoomMaker.furnitures = readDate.Item2;
         }
+
+
         private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             
@@ -353,6 +358,24 @@ namespace midas_challenge
         {
             Image img = Properties.Resources.icons8_Closet_100px;
             select_furniture(img, "Closet");
+        }
+
+        private void button_undo_Click(object sender, EventArgs e)
+        {
+            if(Form_Main.count > 0)
+            {
+                Form_Main.count--;                
+                panel_canvas.Refresh();
+            }
+        }
+
+        private void button_redo_Click(object sender, EventArgs e)
+        {
+            if(Form_Main.count < RoomMaker.rooms.Count)
+            {
+                Form_Main.count++;
+                panel_canvas.Refresh();
+            }
         }
     }
 }
