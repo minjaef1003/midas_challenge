@@ -27,7 +27,8 @@ namespace midas_challenge
         private int selectFurn = 0;
         Furniture f;
         Image imgDoor, imgWindow;
-        Point[] pointList = new Point[4];
+        Point[] pointList;
+        Door door = null;
         int cnt = 0;
 
         public Form_Main()
@@ -72,26 +73,31 @@ namespace midas_challenge
             {
                 e.Graphics.DrawLine(pen, RoomMaker.curr_room.walls[i].StartPoint, RoomMaker.curr_room.walls[i].EndPoint);
             }
+            cnt = 0;
             for (int i=0; i<RoomMaker.rooms.Count; i++)
             {
+                int size = RoomMaker.rooms[i].walls.Count;
+                pointList = new Point[size];
                 for(int j=0; j<RoomMaker.rooms[i].walls.Count; j++)
-                {
+                {                    
                     Point[] p =
                     {
                         RoomMaker.rooms[i].walls[j].StartPoint,
                         RoomMaker.rooms[i].walls[j].EndPoint
                     };
-                    pointList[cnt++] = p[0];
+                    
+                    pointList[cnt++] = p[0];                    
                     pointList[cnt++] = p[1];
-                    if (cnt == RoomMaker.rooms[i].walls.Count)
+                    if (cnt == RoomMaker.rooms[i].walls.Count && size % 2 == 0)
                     {
                         HatchStyle h = (HatchStyle)3;
                         HatchBrush brush = new HatchBrush(h, Color.SkyBlue, Color.White);
                         e.Graphics.FillPolygon(brush, pointList);
-                        cnt = 0;
+                       
                     }
+                    if (cnt >= size - 1) cnt = 0;
                     
-                    e.Graphics.DrawPolygon(pen, p);
+                    e.Graphics.DrawPolygon(pen, p);                  
                 }              
             }
             for(int i=0; i<RoomMaker.furnitures.Count; i++)
@@ -125,6 +131,13 @@ namespace midas_challenge
             {
                 e.Graphics.DrawImage(imgWindow, loc.X, loc.Y);
             }
+
+            if(door != null)
+            {
+                Image img = Properties.Resources.door;
+                //int x = door.StartPoint.X - img.Width;
+                e.Graphics.DrawImage(Properties.Resources.door, door.StartPoint);
+            }
         }
 
         private void panel_canvas_MouseDown(object sender, MouseEventArgs e)
@@ -137,9 +150,7 @@ namespace midas_challenge
             }
             if(isDoor)
             {
-                MessageBox.Show(e.X.ToString() + "," + e.Y.ToString());
-                Door door = RoomMaker.PushDoor(new Point(e.X, e.Y), true);
-                MessageBox.Show(door.StartPoint.ToString() + "," + door.EndPoint.ToString());
+                door = RoomMaker.PushDoor(new Point(e.X, e.Y), true);
 
             }
             if(isWindow)
@@ -294,7 +305,7 @@ namespace midas_challenge
             isRect = true; isPolygon = false;
         }
 
-        private void select_furniture(Image img)
+        private void select_furniture(Image img, string type)
         {
             selectFurn = 1;
             FurnitureCreate fc = new FurnitureCreate();
@@ -302,43 +313,43 @@ namespace midas_challenge
             {
                 width = fc.width;
                 height = fc.height;
-                f = new Furniture(img, fc.name, new Rectangle(0, 0, fc.width, fc.height));                
+                f = new Furniture(img, fc.name, new Rectangle(0, 0, fc.width, fc.height), type);                
             }
         }
         private void button_fur_table_Click(object sender, EventArgs e)
         {
             Image img = Properties.Resources.icons8_Table_100px;
-            select_furniture(img);
+            select_furniture(img, "Table");
         }
 
         private void button_fur_toilet_Click(object sender, EventArgs e)
         {
             Image img = Properties.Resources.icons8_Toilet_Bowl_96px;
-            select_furniture(img);
+            select_furniture(img, "Toilet_Bowl");
         }
 
         private void button_fur_bureau_Click(object sender, EventArgs e)
         {
             Image img = Properties.Resources.icons8_Bureau_100px;
-            select_furniture(img);
+            select_furniture(img, "Bureau");
         }
 
         private void button_fur_washing_Click(object sender, EventArgs e)
         {
             Image img = Properties.Resources.icons8_Washing_Machine_100px_1;
-            select_furniture(img);
+            select_furniture(img, "Washing_Machine");
         }
 
         private void button_fur_lamp_Click(object sender, EventArgs e)
         {
             Image img = Properties.Resources.icons8_Lamp_100px;
-            select_furniture(img);
+            select_furniture(img, "Lamp");
         }
 
         private void button_fur_closet_Click(object sender, EventArgs e)
         {
             Image img = Properties.Resources.icons8_Closet_100px;
-            select_furniture(img);
+            select_furniture(img, "Closet");
         }
     }
 }

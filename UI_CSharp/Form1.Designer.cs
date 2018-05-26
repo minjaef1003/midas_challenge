@@ -118,7 +118,7 @@
             this.panel_furniture_menu.Controls.Add(this.button_fur_table);
             this.panel_furniture_menu.Controls.Add(this.button_fur_bureau);
             this.panel_furniture_menu.Controls.Add(this.button_fur_closet);
-            this.panel_furniture_menu.Location = new System.Drawing.Point(169, 66);
+            this.panel_furniture_menu.Location = new System.Drawing.Point(168, 69);
             this.panel_furniture_menu.Name = "panel_furniture_menu";
             this.panel_furniture_menu.Size = new System.Drawing.Size(89, 543);
             this.panel_furniture_menu.TabIndex = 1;
