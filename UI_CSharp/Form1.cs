@@ -108,7 +108,7 @@ namespace midas_challenge
             }
             else if (isPolygon && isLine)
             {             
-                e.Graphics.DrawLine(pen, sp, ep);
+                e.Graphics.DrawLine(pen, sp, loc);
             }
 
             if(selectFurn != 0)
@@ -153,9 +153,13 @@ namespace midas_challenge
                 }
                 else
                 {
-                    sp = ep;
                     ep = e.Location;
-                    RoomMaker.PushVertex(ep);
+                    if(RoomMaker.PushVertex(ep) == 1)
+                    {
+                        isPolygon = false;
+                        isLine = false;
+                    }
+                    sp = ep;
                 }
             }
             else
