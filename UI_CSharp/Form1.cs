@@ -457,6 +457,20 @@ namespace midas_challenge
             }
         }
 
+        private void button_openplan_Click(object sender, EventArgs e)
+        {
+            string openFileName = "";
+            DialogResult result = openFileDialog1.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                openFileName = openFileDialog1.FileName;
+            }
+            else if (result == DialogResult.Cancel) return;
+
+            panel_canvas.BackgroundImage = Image.FromFile(openFileName);
+            panel_canvas.BackgroundImageLayout = ImageLayout.Zoom;
+        }
+
         private void EditModeMovingRoomToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (selected_room != null)
