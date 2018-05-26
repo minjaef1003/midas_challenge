@@ -29,9 +29,7 @@ namespace midas_challenge
         private Rectangle rect;
         private int selectFurn = 0;
         Furniture f;
-        Image imgDoor, imgWindow;
-        Point[] pointList;
-        int cnt = 0;
+        Image imgDoor, imgWindow;                
 
         // Edit mode
         Room selected_room = null;
@@ -128,6 +126,14 @@ namespace midas_challenge
                     var doors = RoomMaker.rooms[i].doors;
                     pen1.Color = Color.Black;
                     e.Graphics.DrawLine(pen1, doors[j].StartPoint, doors[j].EndPoint);
+                    if(doors[j].StartPoint.X == doors[j].EndPoint.X)
+                    {
+                        e.Graphics.DrawLine(new Pen(Color.Black, 3), doors[j].EndPoint.X,doors[j].EndPoint.Y, doors[j].EndPoint.X - 20, doors[j].EndPoint.Y + 40);
+                    }
+                    else if((doors[j].StartPoint.Y == doors[j].EndPoint.Y))
+                    {
+                        e.Graphics.DrawLine(new Pen(Color.Black, 3), doors[j].StartPoint.X, doors[j].StartPoint.Y, doors[j].StartPoint.X + 20, doors[j].StartPoint.Y + 40);
+                    }
 
                 }
                 for (int j = 0; j < RoomMaker.rooms[i].windows.Count; j++)
