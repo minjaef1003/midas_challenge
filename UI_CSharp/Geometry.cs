@@ -119,11 +119,11 @@ namespace midas_challenge
 
             if (curr_room.walls.Count > 2 && IsClosed(curr_room, coord))
             {
+                curr_room.makeClose();
                 if (isSimple(curr_room))
                 {
 
                 }
-                curr_room.makeClose();
                 rooms.Add(curr_room);
                 curr_room = new Room();
                 return 1;
@@ -138,7 +138,13 @@ namespace midas_challenge
 
         private static bool isSimple(Room curr_room)
         {
-            Console.Write("TODO");
+            for (int i = 0; i < curr_room.walls.Count - 1; i++)
+            {
+                for (int j = i; j < curr_room.walls.Count; j++)
+                {
+                    
+                }
+            }
             return true;
         }
 
@@ -202,7 +208,7 @@ namespace midas_challenge
             {
                 foreach (Line ft_line in ft_lines)
                 {
-                    if (Computation.DoIntersect(wall, ft_line))
+                    if (Computation.DoIntersect_strict(wall, ft_line))
                     {
                         return true;
                     }
@@ -218,23 +224,4 @@ namespace midas_challenge
         }
     }
 
-    public class Computation
-    {
-        public static bool DoIntersect(Line line1, Line line2)
-        {
-            return CrossProduct(line1.StartPoint, line1.EndPoint, line2.StartPoint) !=
-                   CrossProduct(line1.StartPoint, line1.EndPoint, line2.EndPoint) ||
-                   CrossProduct(line2.StartPoint, line2.EndPoint, line1.StartPoint) !=
-                   CrossProduct(line2.StartPoint, line2.EndPoint, line1.EndPoint);
-        }
-        public static double CrossProduct(Point p1, Point p2, Point p3)
-        {
-            return (double)(p2.X - p1.X) * (double)(p3.Y - p1.Y) - (double)(p3.X - p1.X) * (double)(p2.Y - p1.Y);
-        }
-        public static double EuclideanDist(Point coord1, Point coord2)
-        {
-            return Math.Sqrt(Math.Pow((double)(coord1.X - coord2.X), 2.0) + Math.Pow((double)(coord2.Y - coord1.Y), 2.0));
-        }
-      
-    }
 }
