@@ -71,11 +71,13 @@ namespace midas_challenge
 
         private static bool isSimple(Room curr_room)
         {
+            Console.Write("TODO");
             throw new NotImplementedException();
         }
 
         private static bool Intersect(List<Room> rooms, Room curr_room)
         {
+            Console.Write("TODO");
             throw new NotImplementedException();
         }
 
@@ -92,17 +94,50 @@ namespace midas_challenge
 
         private static void DoSnap(ref Coordinate coord)
         {
+            Console.Write("TODO");
             throw new NotImplementedException();
         }
 
         private static bool IsClosed(Room room, Coordinate coord)
         {
+            Console.Write("TODO");
             return false;
         }
 
         private static bool CheckOverlap(Furniture ft)
         {
-            //TODO
+            foreach (Room room in rooms)
+            {
+                if (CheckOverlap(room, ft)) return true;
+            }
+            return false;
+        }
+
+        private static bool CheckOverlap(Room room, Furniture ft)
+        {
+            int minx = ft.imgSize.X;
+            int miny = ft.imgSize.Y;
+            int maxx = ft.imgSize.X + ft.imgSize.Width;
+            int maxy = ft.imgSize.Y + ft.imgSize.Height;
+            List<Line> ft_lines = new List<Line>
+            {
+                new Line(new Coordinate(minx, miny), new Coordinate(minx, maxy)),
+                new Line(new Coordinate(minx, maxy), new Coordinate(maxx, maxy)),
+                new Line(new Coordinate(maxx, maxy), new Coordinate(maxx, miny)),
+                new Line(new Coordinate(maxx, miny), new Coordinate(minx, miny))
+            };
+               
+            foreach (Wall wall in room.walls)
+            {
+                foreach (Line ft_line in ft_lines)
+                {
+                    if (Computation.DoIntersect(wall.Line, ft_line))
+                    {
+                        return true;
+                    }
+                }
+                
+            }
             return false;
         }
 
