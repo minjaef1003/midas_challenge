@@ -90,7 +90,6 @@
             // 
             // panel_workspace
             // 
-            this.panel_workspace.Controls.Add(this.panel_furniture_menu);
             this.panel_workspace.Controls.Add(this.panel_createroom_menu);
             this.panel_workspace.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel_workspace.Location = new System.Drawing.Point(166, 0);
@@ -108,7 +107,7 @@
             this.panel_furniture_menu.Controls.Add(this.button_fur_table);
             this.panel_furniture_menu.Controls.Add(this.button_fur_bureau);
             this.panel_furniture_menu.Controls.Add(this.button_fur_closet);
-            this.panel_furniture_menu.Location = new System.Drawing.Point(1, 0);
+            this.panel_furniture_menu.Location = new System.Drawing.Point(-1, -1);
             this.panel_furniture_menu.Name = "panel_furniture_menu";
             this.panel_furniture_menu.Size = new System.Drawing.Size(89, 543);
             this.panel_furniture_menu.TabIndex = 1;
@@ -195,6 +194,7 @@
             // 
             this.panel_createroom_menu.BackColor = System.Drawing.Color.White;
             this.panel_createroom_menu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel_createroom_menu.Controls.Add(this.panel_furniture_menu);
             this.panel_createroom_menu.Controls.Add(this.button_createroom_rect);
             this.panel_createroom_menu.Controls.Add(this.button_createroom_line);
             this.panel_createroom_menu.Dock = System.Windows.Forms.DockStyle.Left;
@@ -213,6 +213,9 @@
             this.button_createroom_rect.Name = "button_createroom_rect";
             this.button_createroom_rect.Size = new System.Drawing.Size(89, 80);
             this.button_createroom_rect.TabIndex = 0;
+            this.button_createroom_rect.Text = "Rectangle";
+            this.button_createroom_rect.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.button_createroom_rect.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.button_createroom_rect.UseVisualStyleBackColor = true;
             this.button_createroom_rect.Click += new System.EventHandler(this.button_createroom_rect_Click);
             // 
@@ -226,6 +229,9 @@
             this.button_createroom_line.Name = "button_createroom_line";
             this.button_createroom_line.Size = new System.Drawing.Size(90, 80);
             this.button_createroom_line.TabIndex = 0;
+            this.button_createroom_line.Text = "Polygon";
+            this.button_createroom_line.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.button_createroom_line.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.button_createroom_line.UseVisualStyleBackColor = true;
             this.button_createroom_line.Click += new System.EventHandler(this.button_createroom_line_Click);
             // 
@@ -411,21 +417,21 @@
             // 새문서ToolStripMenuItem
             // 
             this.새문서ToolStripMenuItem.Name = "새문서ToolStripMenuItem";
-            this.새문서ToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.새문서ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
             this.새문서ToolStripMenuItem.Text = "새문서";
             this.새문서ToolStripMenuItem.Click += new System.EventHandler(this.button_new_document_Click);
             // 
             // 저장ToolStripMenuItem
             // 
             this.저장ToolStripMenuItem.Name = "저장ToolStripMenuItem";
-            this.저장ToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.저장ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
             this.저장ToolStripMenuItem.Text = "저장";
             this.저장ToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
             // 
             // 불러오기ToolStripMenuItem
             // 
             this.불러오기ToolStripMenuItem.Name = "불러오기ToolStripMenuItem";
-            this.불러오기ToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.불러오기ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
             this.불러오기ToolStripMenuItem.Text = "불러오기";
             this.불러오기ToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
             // 

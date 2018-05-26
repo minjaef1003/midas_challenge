@@ -67,6 +67,10 @@ namespace midas_challenge
             e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
 
             Pen pen = new Pen(Color.Black, 3);
+            for(int i=0; i< RoomMaker.curr_room.walls.Count; i++)
+            {
+                e.Graphics.DrawLine(pen, RoomMaker.curr_room.walls[i].StartPoint, RoomMaker.curr_room.walls[i].EndPoint);
+            }
             for (int i=0; i<RoomMaker.rooms.Count; i++)
             {
                 for(int j=0; j<RoomMaker.rooms[i].walls.Count; j++)
@@ -105,7 +109,7 @@ namespace midas_challenge
             }
             else if (isPolygon && isLine)
             {             
-                e.Graphics.DrawLine(pen, sp, ep);
+                e.Graphics.DrawLine(pen, sp, loc);
             }
 
             if(selectFurn != 0)
@@ -146,11 +150,17 @@ namespace midas_challenge
                     sp = e.Location;
                     ep = e.Location;
                     isLine = true;
+                    RoomMaker.PushVertex(sp);
                 }
                 else
                 {
-                    sp = ep;
                     ep = e.Location;
+                    if(RoomMaker.PushVertex(ep) == 1)
+                    {
+                        isPolygon = false;
+                        isLine = false;
+                    }
+                    sp = ep;
                 }
             }
             else

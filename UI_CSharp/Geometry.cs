@@ -110,7 +110,7 @@ namespace midas_challenge
         static public List<Room> rooms;
         static public List<Furniture> furnitures;
 
-        public const double SNAPPING_TRHES = 1.0;
+        public const double SNAPPING_TRHES = 5.0;
 
         static public int PushVertex(Point coord, bool snapmode = false)
         {
