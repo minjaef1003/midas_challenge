@@ -142,6 +142,7 @@ namespace midas_challenge
 
         private void panel_canvas_MouseDown(object sender, MouseEventArgs e)
         {
+
             if(selectFurn != 0)
             {
                 f.imgSize.X = e.X; f.imgSize.Y = e.Y;
