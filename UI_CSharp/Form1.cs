@@ -566,20 +566,20 @@ namespace midas_challenge
 
         private void button_undo_Click(object sender, EventArgs e)
         {
-            if (history.Count > 0)
+            if ( Form_Main.count > 0)
             {
-                
+                Form_Main.count--;
+                panel_canvas.Refresh();
             }
         }
 
         private void button_redo_Click(object sender, EventArgs e)
         {
-            if ( Form_Main.count <  history.Count )
+            if ( Form_Main.count <  RoomMaker.rooms.Count )
             {
-                
+                Form_Main.count++;
                 panel_canvas.Refresh();
             }
         }
     }
-
 }
