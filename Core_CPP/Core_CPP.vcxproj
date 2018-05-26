@@ -115,6 +115,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="geometry.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Line.cpp" />
+    <ClCompile Include="Object.cpp" />
+    <ClCompile Include="Openings.cpp" />
+    <ClCompile Include="Polygon.cpp" />
+    <ClCompile Include="Room.cpp" />
+    <ClCompile Include="Vertex.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
