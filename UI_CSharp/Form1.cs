@@ -189,6 +189,7 @@ namespace midas_challenge
                 int width = fc.width;
                 int height = fc.height;
             }
+            Furniture f = new Furniture();
         }
 
         private void button_fur_toilet_Click(object sender, EventArgs e)
