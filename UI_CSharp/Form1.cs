@@ -53,6 +53,7 @@ namespace midas_challenge
             RoomMaker.furnitures = new List<Furniture>();
             imgDoor = Image.FromFile("res/icons8_Door_40px.png");
             imgWindow = Image.FromFile("res/icons8_Open_Window_40px.png");
+            button_new_document_Click(null, null);
         }
         private void button_new_document_Click(object sender, EventArgs e)
         {
