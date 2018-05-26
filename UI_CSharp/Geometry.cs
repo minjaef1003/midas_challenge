@@ -20,6 +20,8 @@ namespace midas_challenge
 
     public class Room
     {
+        public bool IsStart;
+        public Coordinate startPoint;
         public List<Wall> walls;
         public List<Line> doors;
         public List<Line> windows;
@@ -27,6 +29,22 @@ namespace midas_challenge
             walls = new List<Wall>();
             doors = new List<Line>();
             windows = new List<Line>();
+            IsStart = false;
+        }
+
+        public void pushVertex(Coordinate coord)
+        {
+            if (!IsStart)
+            {
+                IsStart = true;
+                startPoint = coord;
+            }
+            else
+            {
+                Wall wall = new Wall();
+                wall.Line = new Line(startPoint, coord);
+                walls.Add(wall);
+            }
         }
     }
 
@@ -67,12 +85,13 @@ namespace midas_challenge
                 {
 
                 }
-
+                rooms.Add(curr_room);
+                curr_room = new Room();
                 return 1;
             }
 
             if (snapmode) DoSnap(ref coord);
-            
+            curr_room.pushVertex(coord);
 
 
             return 0;
