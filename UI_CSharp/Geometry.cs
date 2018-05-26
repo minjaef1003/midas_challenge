@@ -17,6 +17,7 @@ namespace midas_challenge
     {
         public List<Wall> walls;
         public List<KeyValuePair<Coordinate, Coordinate>> doors;
+        public List<KeyValuePair<Coordinate, Coordinate>> windonws;
     }
 
     public class RoomManager
@@ -27,6 +28,12 @@ namespace midas_challenge
         {
             IOSystem.write(rooms);
         }
+    }
+
+    public class Furniture
+    {
+        private Coordinate lowerLeft;
+        private Coordinate upperRight;
     }
 
     public class RoomMaker
