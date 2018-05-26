@@ -140,6 +140,8 @@ namespace midas_challenge
                 {
                     var windows = RoomMaker.rooms[i].windows;
                     pen1.Color = Color.Red;
+                    pen1.StartCap = LineCap.DiamondAnchor;
+                    pen1.EndCap = LineCap.DiamondAnchor;
                     e.Graphics.DrawLine(pen1, windows[j].StartPoint, windows[j].EndPoint);
 
                 }
