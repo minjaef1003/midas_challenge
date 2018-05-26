@@ -70,10 +70,7 @@ namespace midas_challenge
             e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
 
             Pen pen = new Pen(Color.Black, 3);
-            for (int i = 0; i < RoomMaker.curr_room.walls.Count; i++)
-            {
-                e.Graphics.DrawLine(pen, RoomMaker.curr_room.walls[i].StartPoint, RoomMaker.curr_room.walls[i].EndPoint);
-            }
+          
             cnt = 0;
             for (int i = 0; i < Form_Main.count; i++)
             {
@@ -99,8 +96,10 @@ namespace midas_challenge
 
                     e.Graphics.DrawPolygon(pen, p);
                 }
-
-
+            }
+            for (int i = 0; i < RoomMaker.curr_room.walls.Count; i++)
+            {
+                e.Graphics.DrawLine(pen, RoomMaker.curr_room.walls[i].StartPoint, RoomMaker.curr_room.walls[i].EndPoint);
             }
             for (int i = 0; i < RoomMaker.furnitures.Count; i++)
             {
