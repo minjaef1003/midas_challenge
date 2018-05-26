@@ -112,12 +112,13 @@ namespace midas_challenge
     {
         public Door()
         {
-
+            parent_room_id = new List<int>();
         }
         public Door(Point sp, Point ep)
         {
             startPoint = sp;
             endPoint = ep;
+            parent_room_id = new List<int>();
         }
         public List<int> parent_room_id;
         public double length;
@@ -197,7 +198,7 @@ namespace midas_challenge
         static public List<Room> rooms;
         static public List<Furniture> furnitures;
 
-        public const double SNAPPING_TRHES = 5.0;
+        public const double SNAPPING_TRHES = 10.0;
         public const double DOOR_LENGTH_DEFAULT = 20.0;
         public const double MAX_SLOPE = 100000.0;
 
@@ -254,7 +255,7 @@ namespace midas_challenge
 
             if (dist > SNAPPING_TRHES)
             {
-                return null;
+               // return null;
             }
 
             Door new_door = new Door();
