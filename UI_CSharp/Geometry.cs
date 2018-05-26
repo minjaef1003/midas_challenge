@@ -24,30 +24,40 @@ namespace midas_challenge
 
     public class RoomManager
     {
-        private List<Room> rooms;
-
-        public void writeFile()
+        public static int pushVertex(Room room, Coordinate coord, bool snapmode)
         {
-            IOSystem.write(rooms);
+            if (isClose(room, coord))
+            {
+
+            }
+            return 0;
         }
+
+        public 
     }
 
     public class Furniture
     {
-        private Coordinate lowerLeft;
-        private Coordinate upperRight;
-        private Image img;
-        private Label name;
+        public Coordinate lowerLeft;
+        public Coordinate upperRight;
+        public Image img;
+        public Label name;
     }
 
     public class RoomMaker
     {
         private RoomManager room_manager;
         private Room curr_room;
-        public int pushVertex(Coordinate cd)
-        {
+        private List<Room> rooms;
 
-            return 0;
+        public int pushVertex(Coordinate cd, bool snapmode = false)
+        {
+             return RoomManager.pushVertex(curr_room, cd, snapmode);
+        }
+
+        public void writeFile()
+        {
+            Form_Main.write(rooms);
         }
     }
 }
