@@ -142,6 +142,9 @@ namespace midas_challenge
 
         private void panel_canvas_MouseDown(object sender, MouseEventArgs e)
         {
+            Room room = RoomMaker.CheckInnerPoint(new Point(e.X, e.Y));
+            
+
             if(selectFurn != 0)
             {
                 f.imgSize.X = e.X; f.imgSize.Y = e.Y;
