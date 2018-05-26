@@ -225,6 +225,7 @@
             // panel_createroom_menu
             // 
             this.panel_createroom_menu.BackColor = System.Drawing.Color.White;
+            this.panel_createroom_menu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel_createroom_menu.Controls.Add(this.button_createroom_rect);
             this.panel_createroom_menu.Controls.Add(this.button_createroom_line);
             this.panel_createroom_menu.Dock = System.Windows.Forms.DockStyle.Left;
