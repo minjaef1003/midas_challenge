@@ -38,11 +38,11 @@ namespace midas_challenge
                     }
                     else if (str[0].Equals("Door"))
                     {
-                        rooms[i].doors.Add(new Wall(new Point(Int32.Parse(str[1]), Int32.Parse(str[2])), new Point(Int32.Parse(str[3]), Int32.Parse(str[4]))));
+                        rooms[i].doors.Add(new Line(new Point(Int32.Parse(str[1]), Int32.Parse(str[2])), new Point(Int32.Parse(str[3]), Int32.Parse(str[4]))));
                     }
                     else if (str[0].Equals("Window"))
                     {
-                        rooms[i].windows.Add(new Wall(new Point(Int32.Parse(str[1]), Int32.Parse(str[2])), new Point(Int32.Parse(str[3]), Int32.Parse(str[4]))));
+                        rooms[i].windows.Add(new Line(new Point(Int32.Parse(str[1]), Int32.Parse(str[2])), new Point(Int32.Parse(str[3]), Int32.Parse(str[4]))));
                     }
                     else
                     {
@@ -63,16 +63,19 @@ namespace midas_challenge
                 {
                     string[] str = line.Split(' ', ',');
 
-                    furnitures[i].name = str[1];
-                    furnitures[i].type = str[2];
-
-                    str = "Funiture " + funiture.name.ToString() + " " + furnitures.type.ToSting() + " " + funiture.imgSize.X + " " + funiture.imgSize.Y + " " + funiture.imgSize.Width + " " + funiture.imgSize.Height;
+                    furnitures[i] = new Furniture(GetImage(str[2]), str[1], new Rectangle(Int32.Parse(str[3]), Int32.Parse(str[4]), Int32.Parse(str[5]), Int32.Parse(str[6])), str[2]);
                 }
             }
 
-            Tuple<List<Room>, List<Furniture>> result;
+            return new Tuple<List<Room>, List<Furniture>>(rooms, furnitures);
+        }
 
-            return result;
+        public static Image GetImage(string type)
+        {
+            Image img;
+
+
+            return img;
         }
         public static void Write(List<Room> rooms, List<Furniture> furnitures)
         {
@@ -102,11 +105,12 @@ namespace midas_challenge
                 sw.WriteLine("Room " + i.ToString() + "finish");
             }
             sw.WriteLine("Furniture count: " + furnitures.Count());
-            foreach (Furniture funiture in furnitures)
+            foreach (Furniture furniture in furnitures)
             {
-                str = "Funiture " + funiture.name.ToString() + " " + furnitures.type.ToSting() + " " + funiture.imgSize.X + " " + funiture.imgSize.Y + " " + funiture.imgSize.Width + " " + funiture.imgSize.Height;
+                str = "Funiture " + furniture.name.ToString() + " " + furniture.type + " " + furniture.imgSize.X + " " + furniture.imgSize.Y + " " + furniture.imgSize.Width + " " + furniture.imgSize.Height;
                 sw.WriteLine(str);
             }
+
             sw.Close();
         }
     }
