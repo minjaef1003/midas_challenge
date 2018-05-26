@@ -28,7 +28,7 @@ namespace midas_challenge
 
         public void writeFile()
         {
-            IOSystem.write(rooms);
+            //IOSystem.write(rooms);
         }
     }
 
