@@ -319,6 +319,7 @@ namespace midas_challenge
             readDate = Read(fileName);
             RoomMaker.rooms = readDate.Item1;
             RoomMaker.furnitures = readDate.Item2;
+            Form_Main.count = RoomMaker.rooms.Count;
         }
 
         private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
