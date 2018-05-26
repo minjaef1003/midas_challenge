@@ -95,11 +95,11 @@ namespace midas_challenge
                     }
                     else if (str[0].Equals("Door"))
                     {
-                        rooms[i].doors.Add(new Line(new Point(Int32.Parse(str[1]), Int32.Parse(str[2])), new Point(Int32.Parse(str[3]), Int32.Parse(str[4]))));
+                        rooms[i].doors.Add(new Door(new Point(Int32.Parse(str[1]), Int32.Parse(str[2])), new Point(Int32.Parse(str[3]), Int32.Parse(str[4]))));
                     }
                     else if (str[0].Equals("Window"))
                     {
-                        rooms[i].windows.Add(new Line(new Point(Int32.Parse(str[1]), Int32.Parse(str[2])), new Point(Int32.Parse(str[3]), Int32.Parse(str[4]))));
+                        rooms[i].windows.Add(new Door(new Point(Int32.Parse(str[1]), Int32.Parse(str[2])), new Point(Int32.Parse(str[3]), Int32.Parse(str[4]))));
                     }
                     else
                     {
