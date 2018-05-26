@@ -19,8 +19,8 @@ namespace midas_challenge
         private int menu_width;
         //isCreateMenu : 1:room 2:furniture
         private int isCreateMenu = 0;
-        private bool isRect = false, isPolygon = false, 
-            isDraw = false, isLine = false;
+        private bool isRect = false, isPolygon = false,
+            isDraw = false, isLine = false, isFurn = false;
         private Point sp, ep, loc; // start point, end point;
         private Rectangle rect;
         private int selectFurn = 0;
@@ -59,16 +59,16 @@ namespace midas_challenge
             e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
 
             Pen pen = new Pen(Color.Black, 3);
-            for (int i=0; i<RoomMaker.rooms.Count(); i++)
+            for (int i=0; i<RoomMaker.rooms.Count; i++)
             {
                 for(int j=0; j<RoomMaker.rooms[i].walls.Count; j++)
                 {
-                    Point sp = new Point(RoomMaker.rooms[i].walls[j].Line.Key.Key, RoomMaker.rooms[i].walls[j].Line.Key.Value);
-                    Point ep = new Point(RoomMaker.rooms[i].walls[j].Line.Value.Key, RoomMaker.rooms[i].walls[j].Line.Value.Value);
+                    Point sp = RoomMaker.rooms[i].walls[j].StartPoint;
+                    Point ep = RoomMaker.rooms[i].walls[j].EndPoint;
                     e.Graphics.DrawLine(pen, sp, ep);
                 }              
             }
-            for(int i=0; i<RoomMaker.furnitures.Count(); i++)
+            for(int i=0; i<RoomMaker.furnitures.Count; i++)
             {
                 e.Graphics.DrawImage(RoomMaker.furnitures[i].img, RoomMaker.furnitures[i].imgSize.X-50,
                     RoomMaker.furnitures[i].imgSize.Y-50);
@@ -93,11 +93,13 @@ namespace midas_challenge
 
         private void panel_canvas_MouseDown(object sender, MouseEventArgs e)
         {
-            f.imgSize.X = e.X; f.imgSize.Y = e.Y;
-            if(RoomMaker.PushFurniture(f) == 1)
-                selectFurn = 0;
-            
-                  
+            if(isFurn)
+            {
+                f.imgSize.X = e.X; f.imgSize.Y = e.Y;
+                if(RoomMaker.PushFurniture(f) == 1)
+                    selectFurn = 0;            
+            }
+                             
             if (isPolygon)
             {
                 if (!isLine)
@@ -141,15 +143,15 @@ namespace midas_challenge
         {
             if(isRect)
             {
-                KeyValuePair<int, int> p = new KeyValuePair<int, int>(rect.X, rect.Y);
+                Point p = new Point(rect.X, rect.Y);
                 RoomMaker.PushVertex(p);
-                p = new KeyValuePair<int, int>(rect.X + rect.Width, rect.Y);
+                p = new Point(rect.X + rect.Width, rect.Y);
                 RoomMaker.PushVertex(p);
-                p = new KeyValuePair<int, int>(rect.X + rect.Width, rect.Y + rect.Height);
+                p = new Point(rect.X + rect.Width, rect.Y + rect.Height);
                 RoomMaker.PushVertex(p);
-                p = new KeyValuePair<int, int>(rect.X, rect.Y + rect.Height);
+                p = new Point(rect.X, rect.Y + rect.Height);
                 RoomMaker.PushVertex(p);
-                p = new KeyValuePair<int, int>(rect.X, rect.Y);
+                p = new Point(rect.X, rect.Y);
                 if(RoomMaker.PushVertex(p) == 1)
                 {
 
