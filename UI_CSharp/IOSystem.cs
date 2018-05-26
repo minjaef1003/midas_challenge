@@ -40,25 +40,15 @@ namespace midas_challenge
         }
         public static void InitFurnitureRoom()
         {
-            List<string> rooms = new List<string> {"BedRoom"};
-            AddFurnitureRoom("Bed", rooms);
-
-            rooms = new List<string> { "BedRoom", "LivingRoom" };
-            AddFurnitureRoom("Table", rooms);
-            AddFurnitureRoom("Bureau", rooms);
-            AddFurnitureRoom("Closet", rooms);
-            AddFurnitureRoom("Wardrobe", rooms);
-
-            rooms = new List<string> { "BedRoom", "LivingRoom", "Terrace" };
-            AddFurnitureRoom("Lamp", rooms);
-
-            rooms = new List<string> { "BedRoom", "LivingRoom", "Terrace", "Toilet" };
-            AddFurnitureRoom("None", rooms);
-
-            rooms = new List<string>{"Toilet"};
-            AddFurnitureRoom("Toilet_Bowl",rooms);
-            rooms = new List<string> { "Toilet", "Terrace" };
-            AddFurnitureRoom("Washing_Machine", rooms);
+            AddFurnitureRoom("Bed", new List<string> { "BedRoom" });
+            AddFurnitureRoom("Table", new List<string> { "BedRoom", "LivingRoom" });
+            AddFurnitureRoom("Bureau", new List<string> { "BedRoom", "LivingRoom" });
+            AddFurnitureRoom("Closet", new List<string> { "BedRoom", "LivingRoom" });
+            AddFurnitureRoom("Wardrobe", new List<string> { "BedRoom", "LivingRoom" });
+            AddFurnitureRoom("Lamp", new List<string> { "BedRoom", "LivingRoom", "Terrace" });
+            AddFurnitureRoom("None", new List<string> { "BedRoom", "LivingRoom", "Terrace", "Toilet" });
+            AddFurnitureRoom("Toilet_Bowl", new List<string> { "Toilet" });
+            AddFurnitureRoom("Washing_Machine", new List<string> { "Toilet", "Terrace" });
         }
 
         public static Tuple<List<Room>, List<Furniture>> Read(string fileName)
@@ -89,11 +79,13 @@ namespace midas_challenge
                     }
                     else if (str[0].Equals("Door"))
                     {
-                        rooms[i].doors.Add(new Line(new Point(Int32.Parse(str[1]), Int32.Parse(str[2])), new Point(Int32.Parse(str[3]), Int32.Parse(str[4]))));
+                        rooms[i].doors.Add(new Door(new Point(Int32.Parse(str[1]), Int32.Parse(str[2])), new Point(Int32.Parse(str[3]), Int32.Parse(str[4]))));
+                        rooms[i].doors[rooms[i].doors.Count() - 1].isDoor = true;
                     }
                     else if (str[0].Equals("Window"))
                     {
-                        rooms[i].windows.Add(new Line(new Point(Int32.Parse(str[1]), Int32.Parse(str[2])), new Point(Int32.Parse(str[3]), Int32.Parse(str[4]))));
+                        rooms[i].windows.Add(new Door(new Point(Int32.Parse(str[1]), Int32.Parse(str[2])), new Point(Int32.Parse(str[3]), Int32.Parse(str[4]))));
+                        rooms[i].windows[rooms[i].windows.Count() - 1].isDoor = flase;
                     }
                     else
                     {
