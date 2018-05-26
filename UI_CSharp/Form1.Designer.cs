@@ -50,7 +50,6 @@
             this.저장ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.불러오기ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timer_menu_slide = new System.Windows.Forms.Timer(this.components);
-            this.button1 = new System.Windows.Forms.Button();
             this.panel_outline.SuspendLayout();
             this.panel_workspace.SuspendLayout();
             this.panel_createroom_menu.SuspendLayout();
@@ -157,7 +156,6 @@
             // 
             this.panel_menu.BackColor = System.Drawing.Color.White;
             this.panel_menu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel_menu.Controls.Add(this.button1);
             this.panel_menu.Controls.Add(this.button_create_room);
             this.panel_menu.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel_menu.Location = new System.Drawing.Point(0, 0);
@@ -267,23 +265,6 @@
             this.timer_menu_slide.Interval = 5;
             this.timer_menu_slide.Tick += new System.EventHandler(this.timer_menu_slide_Tick);
             // 
-            // button1
-            // 
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.Location = new System.Drawing.Point(-2, 101);
-            this.button1.Margin = new System.Windows.Forms.Padding(0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(164, 101);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Create furniture";
-            this.button1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button_create_room_Click);
-            // 
             // Form_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -334,7 +315,6 @@
         private System.Windows.Forms.Button button_createroom_rect;
         private System.Windows.Forms.Button button_createroom_line;
         private System.Windows.Forms.Timer timer_menu_slide;
-        private System.Windows.Forms.Button button1;
     }
 }
 

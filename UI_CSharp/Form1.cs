@@ -15,7 +15,9 @@ namespace midas_challenge
     {
         private Panel panel_canvas;
         private int menu_width;
-        private bool isCreateMenu = false, isRect = false, isPolygon = false, isDraw = false;
+        //isCreateMenu : 0:선택x, 1:room, 2:furniture
+        private int isCreateMenu = 0;
+        private bool isRect = false, isPolygon = false, isDraw = false;
         private Point sp, ep; // start point, end point;
         private Rectangle rect;
 
@@ -24,7 +26,8 @@ namespace midas_challenge
             InitializeComponent();
             menu_width = panel_createroom_menu.Width;
             panel_createroom_menu.Width = 0;
- 
+
+
         }
         private void button_new_document_Click(object sender, EventArgs e)
         {
@@ -41,17 +44,17 @@ namespace midas_challenge
             panel_canvas.MouseMove += new MouseEventHandler(this.panel_canvas_MouseMove);
             panel_canvas.MouseUp += new MouseEventHandler(this.panel_canvas_MouseUp);
             panel_workspace.Controls.Add(panel_canvas);
-            panel_workspace.Refresh();            
+            panel_workspace.Refresh();
         }
         private void panel_canvas_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
-            if(isRect)
+            if (isRect)
             {
                 Pen pen = new Pen(Color.Black, 3);
                 e.Graphics.DrawRectangle(pen, rect);
             }
-            else if(isPolygon)
+            else if (isPolygon)
             {
                 Pen pen = new Pen(Color.Black, 3);
                 e.Graphics.DrawLine(pen, sp, ep);
@@ -65,16 +68,16 @@ namespace midas_challenge
         }
         private void panel_canvas_MouseMove(object sender, MouseEventArgs e)
         {
-            if(isDraw)
+            if (isDraw)
             {
-                if(isRect)
+                if (isRect)
                 {
                     int width = e.X - sp.X;
                     int height = e.Y - sp.Y;
                     rect = new Rectangle(sp.X, sp.Y, width, height);
                     panel_canvas.Refresh();
                 }
-                else if(isPolygon)
+                else if (isPolygon)
                 {
                     ep = e.Location;
                     panel_canvas.Refresh();
@@ -86,48 +89,41 @@ namespace midas_challenge
             isDraw = false;
         }
         private void button_create_room_Click(object sender, EventArgs e)
-        {
-            isCreateMenu = false;
-            timer_menu_slide.Start();
-        }
-
-        private void timer_menu_slide_Tick(object sender, EventArgs e)
-        {
-            if(isCreateMenu == false)
+        {        
+            if(isCreateMenu == 1)
             {
-                if (panel_createroom_menu.Width <= menu_width)
-                {
-                    panel_createroom_menu.Width += 4;
-                }
-                else
-                {                  
-                    timer_menu_slide.Stop();
-                }
+                isCreateMenu = 0;
+                panel_createroom_menu.Width = 0;
             }
             else
             {
-                if(panel_createroom_menu.Width >= 0)
-                {
-                    panel_createroom_menu.Width -= 4;
-                }
-                else
-                {
-                    timer_menu_slide.Stop();
-                }
+                isCreateMenu = 1;
+                timer_menu_slide.Start();
             }
             
         }
 
+        private void timer_menu_slide_Tick(object sender, EventArgs e)
+        {
+            if (isCreateMenu == 1 && panel_createroom_menu.Width <= menu_width)
+            {
+                panel_createroom_menu.Width += 4;
+            }
+            else if (isCreateMenu == 1 && panel_createroom_menu.Width > menu_width)
+            {
+                timer_menu_slide.Stop();
+
+            }
+        }
+
         private void button_createroom_line_Click(object sender, EventArgs e)
         {
-            isCreateMenu = true; isPolygon = true; isRect = false;           
-            timer_menu_slide.Start();
+            isPolygon = true; isRect = false;
         }
 
         private void button_createroom_rect_Click(object sender, EventArgs e)
         {
-            isCreateMenu = true; isRect = true; isPolygon = false;
-            timer_menu_slide.Start();
+            isRect = true; isPolygon = false;
         }
     }
 }
