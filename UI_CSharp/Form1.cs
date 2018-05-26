@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,7 @@ namespace midas_challenge
         private Panel panel_canvas;
         private int menu_width;
         private bool isCreateMenu = false, isRect = false, isPolygon = false, isDraw = false;
-        private Point sp; // start point;
+        private Point sp, ep; // start point, end point;
         private Rectangle rect;
 
         public Form_Main()
@@ -44,10 +45,16 @@ namespace midas_challenge
         }
         private void panel_canvas_Paint(object sender, PaintEventArgs e)
         {
+            e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
             if(isRect)
             {
-                Pen pen = new Pen(Color.Black, 5);
+                Pen pen = new Pen(Color.Black, 3);
                 e.Graphics.DrawRectangle(pen, rect);
+            }
+            else if(isPolygon)
+            {
+                Pen pen = new Pen(Color.Black, 3);
+                e.Graphics.DrawLine(pen, sp, ep);
             }
         }
 
@@ -69,7 +76,8 @@ namespace midas_challenge
                 }
                 else if(isPolygon)
                 {
-                    
+                    ep = e.Location;
+                    panel_canvas.Refresh();
                 }
             }
         }
