@@ -38,5 +38,8 @@
     <ClCompile Include="Openings.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Wall.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

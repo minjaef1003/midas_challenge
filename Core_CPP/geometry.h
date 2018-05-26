@@ -4,6 +4,13 @@
 
 using namespace std;
 
+class Vertex;
+class Line;
+class Openings;
+class Polygon;
+class Room;
+class Object;
+
 //Vertex
 class Vertex
 {
@@ -26,15 +33,38 @@ class Line
 private:
 	Vertex * start;
 	Vertex * end;
-	vector<Openings*> openings;
 public:
 	Line();
 	Line(Vertex*, Vertex*);
 	~Line();
 	void moveStart(Vertex*);
 	void moveEnd(Vertex*);
-	
+	void addOpenings(Openings*);
 };
+
+//Wall
+class Wall
+{
+private:
+	vector<Openings*> openings;
+public:
+	Wall();
+	~Wall();
+};
+
+//Openings
+class Openings
+{
+private:
+	
+public:
+	Openings();
+	~Openings();
+};
+
+//Window
+
+//Door
 
 //Polygon
 class Polygon
@@ -65,14 +95,4 @@ public:
 	Object();
 	~Object();
 };
-
-class Openings
-{
-private:
-
-public:
-	Openings();
-	~Openings();
-};
-
 

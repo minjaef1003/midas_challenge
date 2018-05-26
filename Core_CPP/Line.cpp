@@ -22,3 +22,8 @@ void Line::moveStart(Vertex* _start) {
 void Line::moveEnd(Vertex* _end) {
 	end->setVertex(_end);
 }
+
+void Line::addOpenings(Openings * _opening)
+{
+	openings.push_back(_opening);
+}
