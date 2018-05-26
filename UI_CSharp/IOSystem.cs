@@ -113,7 +113,7 @@ namespace midas_challenge
                     str = "Window " + window.StartPoint.ToString() + " " + window.EndPoint.ToString();
                     sw.WriteLine(str);
                 }
-                sw.WriteLine("Room " + i.ToString() + "finish");
+                sw.WriteLine("Room " + i.ToString() + " finish");
             }
             sw.WriteLine("Furniture count: " + furnitures.Count());
             foreach (Furniture furniture in furnitures)
