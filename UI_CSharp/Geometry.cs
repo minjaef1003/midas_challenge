@@ -544,7 +544,6 @@ namespace midas_challenge
             }
             if (mw != -1 && mindist < SNAPPING_TRHES)
             {
-                mw = -1;
                 mindist = 1000.0;
                 room.MoveRoom(room.walls[mw].StartPoint, minPoint);
             }
