@@ -24,23 +24,38 @@ namespace midas_challenge
 
     public class RoomManager
     {
-        public static int pushVertex(Room room, ref Coordinate coord, bool snapmode)
+        public static int PushVertex(Room room, ref Coordinate coord, bool snapmode)
         {
-            if (isClose(room, coord))
+
+            if (IsClose(room, coord))
             {
 
+
             }
+
+            if (snapmode) DoSnap(ref coord, );
+
             return 0;
         }
 
-        public static bool isClose(Room room, Coordinate coord)
+        private static void DoSnap(ref Coordinate coord)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static bool IsClose(Room room, Coordinate coord)
         {
             return false;
         }
 
+        public static bool CheckOverlap(Furniture ft, List<Room> rooms)
+        {
+            //TODO
+            return false;
+        }
     }
 
-    public class Furniture
+    public struct Furniture
     {
         public Coordinate lowerLeft;
         public Coordinate upperRight;
@@ -51,18 +66,30 @@ namespace midas_challenge
 
     public class RoomMaker
     {
-        public RoomManager room_manager;
         public Room curr_room;
-        public List<Room> rooms;
+        static public List<Room> rooms;
+        static public List<Furniture> furnitures;
 
-        public int pushVertex(Coordinate cd, bool snapmode = false)
+        static public int PushVertex(Coordinate cd, bool snapmode = false)
         {
-            return RoomManager.pushVertex(curr_room, ref cd, snapmode);
+            return 0;
         }
 
-        public void writeFile()
+        static public int PushFurniture(Furniture ft)
         {
-            Form_Main.write(rooms);
+            /*
+            if (RoomManager.CheckOverlap(ft, rooms))
+            {
+                return 1;
+            }
+            */
+            furnitures.Add(ft);
+            return 0;
+        }
+
+        public void WriteFile()
+        {
+           // Form_Main.Write(rooms);
         }
     }
 }
