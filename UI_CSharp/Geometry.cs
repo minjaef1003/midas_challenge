@@ -46,8 +46,11 @@ namespace midas_challenge
         static public List<Room> rooms;
         static public List<Furniture> furnitures;
 
+        public const double SNAPPING_TRHES = 1.0;
+
         static public int PushVertex(Coordinate coord, bool snapmode = false)
         {
+            
             if (Intersect(rooms, curr_room))
             {
 
@@ -66,19 +69,20 @@ namespace midas_challenge
             if (snapmode) DoSnap(ref coord);
             
 
+
             return 0;
         }
 
         private static bool isSimple(Room curr_room)
         {
             Console.Write("TODO");
-            throw new NotImplementedException();
+            return true;
         }
 
         private static bool Intersect(List<Room> rooms, Room curr_room)
         {
             Console.Write("TODO");
-            throw new NotImplementedException();
+            return false;
         }
 
         static public int PushFurniture(Furniture ft)
@@ -95,12 +99,16 @@ namespace midas_challenge
         private static void DoSnap(ref Coordinate coord)
         {
             Console.Write("TODO");
-            throw new NotImplementedException();
+            return;
         }
 
         private static bool IsClosed(Room room, Coordinate coord)
         {
-            Console.Write("TODO");
+            Coordinate firstCoord = room.walls[0].Line.Key;
+            if (Computation.EuclideanDist(firstCoord, coord) < SNAPPING_TRHES)
+            {
+                return true;
+            }
             return false;
         }
 
@@ -159,6 +167,10 @@ namespace midas_challenge
         public static double CrossProduct(Coordinate p1, Coordinate p2, Coordinate p3)
         {
             return (double)(p2.Key - p1.Key) * (double)(p3.Value - p1.Value) - (double)(p3.Key - p1.Key) * (double)(p2.Value - p1.Value);
+        }
+        public static double EuclideanDist(KeyValuePair<int, int> coord1, KeyValuePair<int, int> coord2)
+        {
+            return Math.Sqrt(Math.Pow((double)(coord1.Key - coord2.Key), 2.0) + Math.Pow((double)(coord2.Value - coord1.Value), 2.0));
         }
 
     }
