@@ -305,7 +305,7 @@ namespace midas_challenge
             isRect = true; isPolygon = false;
         }
 
-        private void select_furniture(Image img)
+        private void select_furniture(Image img, string type)
         {
             selectFurn = 1;
             FurnitureCreate fc = new FurnitureCreate();
@@ -313,43 +313,43 @@ namespace midas_challenge
             {
                 width = fc.width;
                 height = fc.height;
-                f = new Furniture(img, fc.name, new Rectangle(0, 0, fc.width, fc.height));                
+                f = new Furniture(img, fc.name, new Rectangle(0, 0, fc.width, fc.height), type);                
             }
         }
         private void button_fur_table_Click(object sender, EventArgs e)
         {
             Image img = Properties.Resources.icons8_Table_100px;
-            select_furniture(img);
+            select_furniture(img, "Table");
         }
 
         private void button_fur_toilet_Click(object sender, EventArgs e)
         {
             Image img = Properties.Resources.icons8_Toilet_Bowl_96px;
-            select_furniture(img);
+            select_furniture(img, "Toilet_Bowl");
         }
 
         private void button_fur_bureau_Click(object sender, EventArgs e)
         {
             Image img = Properties.Resources.icons8_Bureau_100px;
-            select_furniture(img);
+            select_furniture(img, "Bureau");
         }
 
         private void button_fur_washing_Click(object sender, EventArgs e)
         {
             Image img = Properties.Resources.icons8_Washing_Machine_100px_1;
-            select_furniture(img);
+            select_furniture(img, "Washing_Machine");
         }
 
         private void button_fur_lamp_Click(object sender, EventArgs e)
         {
             Image img = Properties.Resources.icons8_Lamp_100px;
-            select_furniture(img);
+            select_furniture(img, "Lamp");
         }
 
         private void button_fur_closet_Click(object sender, EventArgs e)
         {
             Image img = Properties.Resources.icons8_Closet_100px;
-            select_furniture(img);
+            select_furniture(img, "Closet");
         }
     }
 }

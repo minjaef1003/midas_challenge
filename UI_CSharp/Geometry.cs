@@ -132,7 +132,7 @@ namespace midas_challenge
         public Point startPoint;
         public List<Wall> walls;
         public List<Door> doors;
-        public List<Door> windows;
+        public List<Door> windows; 
         public string type = "Not_defined";
         public int id;
         public Room(){
