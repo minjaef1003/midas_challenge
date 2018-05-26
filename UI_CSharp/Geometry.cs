@@ -23,7 +23,8 @@ namespace midas_challenge
         {
 
         }
-        public Line(Point sp, Point ep) {
+        public Line(Point sp, Point ep)
+        {
             startPoint = sp;
             endPoint = ep;
         }
@@ -60,7 +61,7 @@ namespace midas_challenge
             double a = Math.Sqrt((dist * dist) / ((slope * slope) + 1));
             double b = a * slope;
             Point result_pt;
-            double direction = dist > 0 ? 1.0 : -1.0 ;
+            double direction = dist > 0 ? 1.0 : -1.0;
 
             a *= direction;
             b *= direction;
@@ -102,7 +103,7 @@ namespace midas_challenge
                         slope = -RoomMaker.MAX_SLOPE;
                 }
                 else
-                    slope = (double) (endPoint.Y - startPoint.Y) / (double)(endPoint.X - StartPoint.X);
+                    slope = (double)(endPoint.Y - startPoint.Y) / (double)(endPoint.X - StartPoint.X);
             }
             return slope;
         }
@@ -132,20 +133,22 @@ namespace midas_challenge
         public Point startPoint;
         public List<Wall> walls;
         public List<Door> doors;
-        public List<Door> windows; 
+        public List<Door> windows;
         public string type = "Not_defined";
         private int id;
 
         public int Id { get => id; set => id = value; }
 
-        public Room(){
+        public Room()
+        {
             walls = new List<Wall>();
             doors = new List<Door>();
             windows = new List<Door>();
             IsStart = false;
         }
 
-        public List<Point> getAllCoordinate() {
+        public List<Point> getAllCoordinate()
+        {
 
             List<Point> coords = new List<Point>();
             foreach (Wall wall in walls)
@@ -184,6 +187,132 @@ namespace midas_challenge
             else
                 walls[w - 1].EndPoint = new Point(x, y);
         }
+
+        public bool CheckInnerPoint(Point p)
+        {
+            int LCount = 0, UCount = 0, RCount = 0, DCount = 0;
+            // 직선과 동일범위인지 확인.
+            foreach (Wall wall in walls)
+            {
+                int minX, minY, maxX, maxY;
+                if (wall.StartPoint.X > wall.EndPoint.X)
+                {
+                    minX = wall.EndPoint.X;
+                    maxX = wall.StartPoint.X;
+                }
+                else
+                {
+                    minX = wall.StartPoint.X;
+                    maxX = wall.EndPoint.X;
+                }
+                if (wall.StartPoint.Y > wall.EndPoint.Y)
+                {
+                    minY = wall.EndPoint.Y;
+                    maxY = wall.StartPoint.Y;
+                }
+                else
+                {
+                    minY = wall.StartPoint.Y;
+                    maxY = wall.EndPoint.Y;
+                }
+
+                if (minX == maxX)
+                {
+                    if (minY < p.Y && p.Y < maxY)
+                    {
+                        if (minX < p.X)
+                            RCount++;
+                        else if (minX > p.X)
+                            LCount++;
+                        else
+                            return true;
+                    }
+                    else if (minY == p.Y || maxY == p.Y)
+                    {
+                        // 선위.
+                        return true;
+                    }
+                }
+                else if (minY == maxY)
+                {
+                    if (minX < p.X && p.X < maxX)
+                    {
+                        if (minY < p.Y)
+                            UCount++;
+                        else if (minY > p.Y)
+                            DCount++;
+                        else
+                            return true;
+                    }
+                    else if (minX == p.X || maxX == p.X)
+                    {
+                        // 선위.
+                        return true;
+                    }
+                }
+                else if (minX <= p.X && p.X <= maxX)
+                {
+                    int ccw = RoomMaker.CCW(wall, p);
+
+                    if (ccw == 1)
+                        DCount++;
+                    else if (ccw == -1)
+                        UCount++;
+                    else
+                        return true;
+
+                }
+                else if (minY <= p.Y && p.Y <= maxY)
+                {
+                    int ccw = RoomMaker.CCW(wall, p);
+
+                    if (wall.EndPoint.Y > wall.StartPoint.Y)
+                    {
+                        if (ccw == 1)
+                            RCount++;
+                        else if (ccw == -1)
+                            LCount++;
+                        else
+                            return true;
+
+                    }
+                    else
+                    {
+                        if (ccw == 1)
+                            LCount++;
+                        else if (ccw == -1)
+                            RCount++;
+                        else
+                            return true;
+                    }
+                }
+            }
+            //동일범위라면 x, y같은 선상에서 만나는지 카운트 
+            if (UCount * DCount * RCount * LCount == 0)
+                return false;
+            //하나라도 0이면 false;
+            else if ((UCount % 2) + (DCount % 2) + (RCount % 2) + (LCount % 2) == 4)
+            {
+                return true;
+            }
+            // 짝수면 노, 홀수면 ㅇㅇ, 상하좌우 다 홀수.
+            else
+            {
+                return false;
+            }
+        }
+        public void MoveRoom(Point start, Point end)
+        {
+            int dx = end.X - start.X;
+            int dy = end.Y - start.Y;
+
+            foreach (Wall wall in walls)
+            {
+                wall.StartPoint = new Point(wall.StartPoint.X + dx, wall.StartPoint.Y + dy);
+                wall.EndPoint = new Point(wall.EndPoint.X + dx, wall.EndPoint.Y + dy);
+
+            }
+        }
     }
 
     public struct Furniture
@@ -192,7 +321,7 @@ namespace midas_challenge
         public System.Windows.Forms.Label name;
         public Rectangle imgSize;
         public string type;
-        public Furniture(Image _img, string _name, Rectangle rect, string _type="None")
+        public Furniture(Image _img, string _name, Rectangle rect, string _type = "None")
         {
             img = _img;
             name = new System.Windows.Forms.Label();
@@ -215,35 +344,34 @@ namespace midas_challenge
 
         static public int room_id = 0;
 
-        static public int PushVertex(Point coord, bool snapmode = false)
+        static public int PushVertex(ref Point coord, bool snapmode = true)
         {
             if (curr_room.walls.Count > 2 && IsClosed(curr_room, coord))
             {
                 curr_room.makeClose();
-                if (!IsSimplePolygon(curr_room))
+                if (!IsSimplePolygon(curr_room) && Intersect(rooms, curr_room))
                 {
                     Debug.Print("This is Not Simple");
                     curr_room = new Room();
                     return -1;
                 }
+                // if (snapmode) SnapRectangleRoom(curr_room);
+                
                 rooms.Add(curr_room);
                 curr_room = new Room();
                 Form_Main.count = rooms.Count;
                 return 1;
             }
 
+            Debug.WriteLine(coord.ToString());
             if (snapmode)
             {
-                SnapRectangleRoom(curr_room);
-                DoSnap(ref coord);
+                Point new_coord = SnapCoord(coord);
+                curr_room.pushVertex(new_coord);
+                coord = new_coord;
             }
-            if (Intersect(rooms, curr_room))
-            {
-
-            }
-
-            curr_room.pushVertex(coord);
-
+            else
+                curr_room.pushVertex(coord);
 
             return 0;
         }
@@ -256,11 +384,6 @@ namespace midas_challenge
             curr_room.pushVertex(coords[3]);
             curr_room.makeClose();
             if (snapmode) SnapRectangleRoom(curr_room);
-
-
-            rooms.Add(curr_room);
-            curr_room = new Room();
-
             if (!Intersect(rooms, curr_room))
             {
                 rooms.Add(curr_room);
@@ -319,7 +442,7 @@ namespace midas_challenge
                 {
                     new_door.EndPoint = wall.EndPoint;
                 }
-                    
+
                 new_door.length = Computation.EuclideanDist(new_door.StartPoint, new_door.EndPoint); ;
             }
             if (IsDoor)
@@ -329,7 +452,7 @@ namespace midas_challenge
 
             return new_door;
         }
-        
+
         private static Tuple<int, int> FindWallfromDoorCenter(Point center, out double globalMinDist, out Point closest)
         {
             globalMinDist = 10000.0;
@@ -345,43 +468,80 @@ namespace midas_challenge
                     if (dist < globalMinDist)
                     {
                         closest = temp_closest;
-                        globalMin = new Tuple<int, int>(i,j);
+                        globalMin = new Tuple<int, int>(i, j);
                         globalMinDist = dist;
                     }
                 }
-                    
+
             }
 
             return globalMin;
         }
+
+        private static Point SnapCoord(Point point)
+        {
+            double mindist = 1000.0;
+            Point minPoint = new Point(0, 0);
+            for (int i = 0; i < rooms.Count; i++)
+            {
+                for (int j = 0; j < rooms[i].walls.Count; j++)
+                {
+                    Point rwl = rooms[i].walls[j].StartPoint;
+
+                    double dist = Computation.EuclideanDist(rwl, point);
+                    if (mindist > dist)
+                    {
+                        mindist = dist;
+                        minPoint = rwl;
+                    }
+
+                }
+            }
+            if (RoomMaker.SNAPPING_TRHES > mindist)
+                return minPoint;
+            return point;
+        }
         
         private static void SnapRectangleRoom(Room room)
         {
-            if (room.walls.Count != 4) return;
+            int n = room.walls.Count;
+            bool[] hasChanged = new bool[n];
+            Array.Clear(hasChanged, 0, hasChanged.Length);
 
-            if (rooms.Count == 0) return;
-            
-            for (int w = 0; w < 4; w += 1)
+            if (rooms.Count == 0 || n == 0) return;
+
+            double mindist = 0;
+            while (mindist < SNAPPING_TRHES)
             {
-                double mindist = 1000.0;
-                Point minPoint = new Point(0,0);
-                for (int i = 0; i < rooms.Count; i++)
+                mindist = 1000.0;
+                Point minPoint = new Point(0, 0);
+                int mw = -1;
+                for (int w = 0; w < n; w += 1)
                 {
-                    for (int j = 0; j < rooms[i].walls.Count; j++)
+                    if (hasChanged[w]) continue;
+                    for (int i = 0; i < rooms.Count; i++)
                     {
-                        Point rwl = rooms[i].walls[j].StartPoint;
-                        double dist = Computation.EuclideanDist(rwl, room.walls[w].StartPoint);
-                        if (mindist > dist)
+                        for (int j = 0; j < rooms[i].walls.Count; j++)
                         {
-                            mindist = dist;
-                            minPoint = rwl;
+                            Point rwl = rooms[i].walls[j].StartPoint;
+                            
+                            double dist = Computation.EuclideanDist(rwl, room.walls[w].StartPoint);
+                            if (mindist > dist)
+                            {
+                                mindist = dist;
+                                minPoint = rwl;
+                                mw = w;
+                            }
+
                         }
                     }
                 }
-                if (mindist < SNAPPING_TRHES)
+                if (mw != -1 && mindist < SNAPPING_TRHES)
                 {
-                    room.translateStartPoint(w, minPoint.X, minPoint.Y);
+                    room.translateStartPoint(mw, minPoint.X, minPoint.Y);
+                    hasChanged[mw] = true;
                 }
+                if (mindist > SNAPPING_TRHES) break;
             }
             return;
         }
@@ -399,7 +559,7 @@ namespace midas_challenge
             return true;
         }
 
-        private static int CCW(Line line, Point point)
+        public static int CCW(Line line, Point point)
         {
             int x1 = line.StartPoint.X, y1 = line.StartPoint.Y;
             int x2 = line.EndPoint.X, y2 = line.EndPoint.Y;
@@ -414,49 +574,50 @@ namespace midas_challenge
             else
                 return 0;
         }
-        
-
-        private static bool Intersect(List<Room> rooms, Room curr_room)
+        private static bool IntersectWall(List<Room> rooms, Room curr_room)
         {
-            //  public List<Wall> walls;
             foreach (Wall curWall in curr_room.walls)
             {
-                foreach (Room room in rooms) 
+                foreach (Room room in rooms)
                 {
                     foreach (Wall wall in room.walls)
                     {
-                        if(Computation.DoIntersect_easy(wall, curWall))
+                        if (Computation.DoIntersect_easy(wall, curWall))
                         {
                             return true;
                         }
                     }
                 }
             }
-
+            return false;
+        }
+        private static bool Intersect(List<Room> rooms, Room curr_room)
+        {
+            //  public List<Wall> walls;
+            if (IntersectWall(rooms, curr_room)) return true;
             int ccw, pre = -2;
-            foreach (Room room in rooms) 
+            foreach (Room room in rooms)
             {
                 int i;
                 pre = -2;
                 for (i = 0; i < curr_room.walls.Count(); i++)
                 {
                     ccw = CCW(curr_room.walls[i], room.walls[0].StartPoint);
-                    if(pre != -2)
+                    if (pre != -2)
                     {
-                        if(ccw != pre)
+                        if (ccw != pre)
                         {
                             break;
                         }
                     }
                     pre = ccw;
                 }
-                if(i == curr_room.walls.Count())
+                if (i == curr_room.walls.Count())
                 {
                     return true;
                 }
             }
-
-                return false;
+            return false;
         }
 
         static public int PushFurniture(Furniture ft)
@@ -514,7 +675,7 @@ namespace midas_challenge
                 new Line(new Point(maxx, maxy), new Point(maxx, miny)),
                 new Line(new Point(maxx, miny), new Point(minx, miny))
             };
-               
+
             foreach (Wall wall in room.walls)
             {
                 foreach (Line ft_line in ft_lines)
@@ -524,15 +685,42 @@ namespace midas_challenge
                         return true;
                     }
                 }
-                
+
             }
             return false;
         }
 
         public void WriteFile()
         {
-           // Form_Main.Write(rooms);
+            // Form_Main.Write(rooms);
         }
-    }
+        public static Room CheckInnerPoint(Point p)
+        {
+            Room closet = null;
+            double closetDis = double.MaxValue;
+           
+            foreach (Room room in rooms)
+            {
+                double distance = double.MaxValue, compare;
+                if (room.CheckInnerPoint(p))
+                {
+                    foreach(Wall wall in room.walls)
+                    {
+                        Point temp = new Point();
+                        compare = Computation.EuclideanDist(wall, p, out temp);
+                        if (compare < distance)
+                            distance = compare;
+                    }
+                    if(distance < closetDis)
+                    {
+                        closetDis = distance;
+                        closet = room;
+                    }
+                }
+            }
+            // 내부 클릭 안하면 null 반환
+            return closet;
+        }
 
+    }
 }

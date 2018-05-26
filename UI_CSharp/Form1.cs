@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
@@ -96,6 +97,8 @@ namespace midas_challenge
 
                     e.Graphics.DrawPolygon(pen, p);
                 }
+
+
             }
             for (int i = 0; i < RoomMaker.furnitures.Count; i++)
             {
@@ -181,12 +184,12 @@ namespace midas_challenge
                     sp = e.Location;
                     ep = e.Location;
                     isLine = true;
-                    RoomMaker.PushVertex(sp);
+                    RoomMaker.PushVertex(ref sp);
                 }
                 else
                 {
                     ep = e.Location;
-                    if (RoomMaker.PushVertex(ep) == 1)
+                    if(RoomMaker.PushVertex(ref ep) == 1)
                     {
                         isPolygon = false;
                         isLine = false;
@@ -233,6 +236,7 @@ namespace midas_challenge
                 list.Add(new Point(rect.X, rect.Y));
 
                 RoomMaker.PushRectangle(list);
+
                 isRect = false;
                 rect = new Rectangle(0, 0, 0, 0);
             }
