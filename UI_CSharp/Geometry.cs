@@ -24,15 +24,11 @@ namespace midas_challenge
 
     public struct Furniture
     {
-        public Coordinate upperLeft;
-        public Coordinate lowerRight;
         public Image img;
         public Label name;
         public Rectangle rectangle;
-        public Furniture(Coordinate ll, Coordinate ur, Image _img, Label _name, Rectangle rect)
+        public Furniture(Image _img, Label _name, Rectangle rect)
         {
-            upperLeft = ll;
-            lowerRight = ur;
             img = _img;
             name = _name;
             rectangle = rect;
@@ -47,13 +43,20 @@ namespace midas_challenge
 
         static public int PushVertex(Coordinate coord, bool snapmode = false)
         {
+            if (Intersect(rooms, curr_room))
+            {
+
+            }
+
             if (IsClosed(curr_room, coord))
             {
+                if (isSimple(curr_room))
 
                 return 1;
             }
 
             if (snapmode) DoSnap(ref coord);
+            
 
             return 0;
         }
