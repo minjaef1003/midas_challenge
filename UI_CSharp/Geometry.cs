@@ -12,7 +12,9 @@ namespace midas_challenge
     using Line = KeyValuePair<KeyValuePair<int, int>, KeyValuePair<int, int>>;
     public class Wall
     {
-        public Line line; // start and end
+        private Line line; // start and end
+
+        public Line Line { get => line; set => line = value; }
     }
 
     public struct Room
@@ -51,6 +53,9 @@ namespace midas_challenge
             if (IsClosed(curr_room, coord))
             {
                 if (isSimple(curr_room))
+                {
+
+                }
 
                 return 1;
             }
@@ -102,5 +107,21 @@ namespace midas_challenge
         {
            // Form_Main.Write(rooms);
         }
+    }
+
+    public class Computation
+    {
+        public static bool DoIntersect(Line line1, Line line2)
+        {
+            return CrossProduct(line1.InitialPoint, line1.TerminalPoint, line2.InitialPoint) !=
+                   CrossProduct(line1.InitialPoint, line1.TerminalPoint, line2.TerminalPoint) ||
+                   CrossProduct(line2.InitialPoint, line2.TerminalPoint, line1.InitialPoint) !=
+                   CrossProduct(line2.InitialPoint, line2.TerminalPoint, line1.TerminalPoint);
+        }
+        public static double CrossProduct(Point2D p1, Point2D p2, Point2D p3)
+        {
+            return (p2.X - p1.X) * (p3.Y - p1.Y) - (p3.X - p1.X) * (p2.Y - p1.Y);
+        }
+
     }
 }
