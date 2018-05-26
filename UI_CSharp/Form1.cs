@@ -503,6 +503,26 @@ namespace midas_challenge
             panel_canvas.BackgroundImageLayout = ImageLayout.Zoom;
         }
 
+        private void EditModeReSizeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (selected_room != null)
+            {
+                if (selected_room.walls.Count == 4)
+                {
+                    MessageBox.Show("사각형 방만 가능...");
+                    return;
+                }
+                RoomResize fc = new RoomResize();
+                if (fc.ShowDialog() == DialogResult.Cancel)
+                {
+                    width = fc.width;
+                    height = fc.height;
+                    selected_room.resize(width, height);
+                }
+                
+            }
+         }
+
         private void EditModeMovingRoomToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (selected_room != null)

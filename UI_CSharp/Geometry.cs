@@ -349,6 +349,24 @@ namespace midas_challenge
                 wall.EndPoint = new Point(wall.EndPoint.X + dx, wall.EndPoint.Y + dy);
             }
         }
+
+        public void resize(int width, int height)
+        {
+            Point cr = walls[0].StartPoint;
+            walls.Clear();
+            doors.Clear();
+            windows.Clear();
+
+            Point cr1 = new Point(cr.X + width, cr.Y);
+            Point cr2 = new Point(cr.X + width, cr.Y + height);
+            Point cr3 = new Point(cr.X, cr.Y + height);
+
+            this.pushVertex(cr);
+            this.pushVertex(cr1);
+            this.pushVertex(cr2);
+            this.pushVertex(cr3);
+            this.makeClose();
+        }
     }
 
     public struct Furniture
