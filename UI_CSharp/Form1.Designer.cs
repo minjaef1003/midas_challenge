@@ -412,7 +412,7 @@
             // 
             this.새문서ToolStripMenuItem.Name = "새문서ToolStripMenuItem";
             this.새문서ToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
-            this.새문서ToolStripMenuItem.Text = "ㅁㅁ";
+            this.새문서ToolStripMenuItem.Text = "새문서";
             this.새문서ToolStripMenuItem.Click += new System.EventHandler(this.button_new_document_Click);
             // 
             // 저장ToolStripMenuItem
