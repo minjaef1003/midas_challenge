@@ -85,8 +85,9 @@ namespace midas_challenge
                         RoomMaker.rooms[i].walls[j].EndPoint
                     };
                                       
-                    pointList[cnt++] = p[0];                    
-                    pointList[cnt++] = p[1];
+                    // pointList[cnt++] = p[0];                    
+                    // pointList[cnt++] = p[1];
+                    /*
                     if (cnt == RoomMaker.rooms[i].walls.Count )
                     {
                         HatchStyle h = (HatchStyle)3;
@@ -94,6 +95,7 @@ namespace midas_challenge
                         e.Graphics.FillPolygon(brush, pointList);
                         cnt = 0;
                     }
+                    */
                     
                     e.Graphics.DrawPolygon(pen, p);                  
                 }              
@@ -165,12 +167,12 @@ namespace midas_challenge
                     sp = e.Location;
                     ep = e.Location;
                     isLine = true;
-                    RoomMaker.PushVertex(sp);
+                    RoomMaker.PushVertex(ref sp);
                 }
                 else
                 {
                     ep = e.Location;
-                    if(RoomMaker.PushVertex(ep) == 1)
+                    if(RoomMaker.PushVertex(ref ep) == 1)
                     {
                         isPolygon = false;
                         isLine = false;
