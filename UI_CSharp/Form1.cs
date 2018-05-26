@@ -20,11 +20,13 @@ namespace midas_challenge
         //isCreateMenu : 1:room 2:furniture
         private int isCreateMenu = 0;
         private bool isRect = false, isPolygon = false,
-            isDraw = false, isLine = false, isFurn = false;
+            isDraw = false, isLine = false, isFurn = false,
+            isWindow = false, isDoor = false;
         private Point sp, ep, loc; // start point, end point;
         private Rectangle rect;
         private int selectFurn = 0;
         Furniture f;
+        Image imgDoor, imgWindow;
 
         public Form_Main()
         {
@@ -35,7 +37,10 @@ namespace midas_challenge
             rectList = new List<Rectangle>();
             RoomMaker.curr_room = new Room();
             RoomMaker.rooms = new List<Room>();
-            RoomMaker.furnitures = new List<Furniture>();            
+            RoomMaker.furnitures = new List<Furniture>();
+            imgDoor = Image.FromFile("res/icons8_Door_40px.png");
+            imgWindow = Image.FromFile("res/icons8_Open_Window_40px.png");
+
         }
         private void button_new_document_Click(object sender, EventArgs e)
         {
@@ -92,6 +97,14 @@ namespace midas_challenge
             {
                 e.Graphics.DrawImage(f.img, loc.X, loc.Y, width, height);
             }
+            if(isDoor)
+            {
+                e.Graphics.DrawImage(imgDoor, loc.X, loc.Y);
+            }
+            if(isWindow)
+            {
+                e.Graphics.DrawImage(imgWindow, loc.X, loc.Y);
+            }
         }
 
         private void panel_canvas_MouseDown(object sender, MouseEventArgs e)
@@ -101,6 +114,14 @@ namespace midas_challenge
                 f.imgSize.X = e.X; f.imgSize.Y = e.Y;
                 if(RoomMaker.PushFurniture(f) == 1)
                     selectFurn = 0;            
+            }
+            if(isDoor)
+            {
+
+            }
+            if(isWindow)
+            {
+
             }
                              
             if (isPolygon)
@@ -151,7 +172,8 @@ namespace midas_challenge
                 list.Add(new Point(rect.X + rect.Width, rect.Y + rect.Height));
                 list.Add(new Point(rect.X, rect.Y + rect.Height));
                 list.Add(new Point(rect.X, rect.Y));
-                
+
+                RoomMaker.PushRectangle(list);
             }            
             isDraw = false;
         }
@@ -207,6 +229,18 @@ namespace midas_challenge
         private void button_createroom_line_Click(object sender, EventArgs e)
         {
             isPolygon = true; isRect = false;
+        }
+
+        private void button_create_door_Click(object sender, EventArgs e)
+        {
+            if (isDoor) isDoor = false;
+            else isDoor = true;
+        }
+
+        private void button_create_window_Click(object sender, EventArgs e)
+        {
+            if (isWindow) isWindow = false;
+            else isWindow = true;
         }
 
         private void button_createroom_rect_Click(object sender, EventArgs e)

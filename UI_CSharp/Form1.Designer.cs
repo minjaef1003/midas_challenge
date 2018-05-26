@@ -58,6 +58,8 @@
             this.저장ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.불러오기ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timer_menu_slide = new System.Windows.Forms.Timer(this.components);
+            this.button_create_door = new System.Windows.Forms.Button();
+            this.button_create_window = new System.Windows.Forms.Button();
             this.panel_outline.SuspendLayout();
             this.panel_workspace.SuspendLayout();
             this.panel_furniture_menu.SuspendLayout();
@@ -259,6 +261,8 @@
             // 
             this.panel_menu.BackColor = System.Drawing.Color.White;
             this.panel_menu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel_menu.Controls.Add(this.button_create_window);
+            this.panel_menu.Controls.Add(this.button_create_door);
             this.panel_menu.Controls.Add(this.button_create_furniture);
             this.panel_menu.Controls.Add(this.button_create_room);
             this.panel_menu.Dock = System.Windows.Forms.DockStyle.Left;
@@ -386,6 +390,40 @@
             this.timer_menu_slide.Interval = 5;
             this.timer_menu_slide.Tick += new System.EventHandler(this.timer_menu_slide_Tick);
             // 
+            // button_create_door
+            // 
+            this.button_create_door.FlatAppearance.BorderSize = 0;
+            this.button_create_door.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_create_door.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_create_door.Image = ((System.Drawing.Image)(resources.GetObject("button_create_door.Image")));
+            this.button_create_door.Location = new System.Drawing.Point(1, 207);
+            this.button_create_door.Margin = new System.Windows.Forms.Padding(0);
+            this.button_create_door.Name = "button_create_door";
+            this.button_create_door.Size = new System.Drawing.Size(164, 101);
+            this.button_create_door.TabIndex = 0;
+            this.button_create_door.Text = "Create Door";
+            this.button_create_door.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.button_create_door.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.button_create_door.UseVisualStyleBackColor = true;
+            this.button_create_door.Click += new System.EventHandler(this.button_create_door_Click);
+            // 
+            // button_create_window
+            // 
+            this.button_create_window.FlatAppearance.BorderSize = 0;
+            this.button_create_window.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_create_window.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_create_window.Image = ((System.Drawing.Image)(resources.GetObject("button_create_window.Image")));
+            this.button_create_window.Location = new System.Drawing.Point(1, 308);
+            this.button_create_window.Margin = new System.Windows.Forms.Padding(0);
+            this.button_create_window.Name = "button_create_window";
+            this.button_create_window.Size = new System.Drawing.Size(164, 101);
+            this.button_create_window.TabIndex = 0;
+            this.button_create_window.Text = "Create Window";
+            this.button_create_window.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.button_create_window.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.button_create_window.UseVisualStyleBackColor = true;
+            this.button_create_window.Click += new System.EventHandler(this.button_create_window_Click);
+            // 
             // Form_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -446,6 +484,8 @@
         private System.Windows.Forms.Button button_fur_table;
         private System.Windows.Forms.Button button_fur_bureau;
         private System.Windows.Forms.Button button_fur_closet;
+        private System.Windows.Forms.Button button_create_window;
+        private System.Windows.Forms.Button button_create_door;
     }
 }
 
