@@ -12,7 +12,7 @@ namespace midas_challenge
 
     public class Wall
     {
-        private List<Coordinate> coords;
+        public List<Coordinate> coords;
     }
 
     public struct Room
@@ -24,30 +24,45 @@ namespace midas_challenge
 
     public class RoomManager
     {
-        private List<Room> rooms;
-
-        public void writeFile()
+        public static int pushVertex(Room room, ref Coordinate coord, bool snapmode)
         {
-            IOSystem.write(rooms);
+            if (isClose(room, coord))
+            {
+
+            }
+            return 0;
         }
+
+        public static bool isClose(Room room, Coordinate coord)
+        {
+            return false;
+        }
+
     }
 
     public class Furniture
     {
-        private Coordinate lowerLeft;
-        private Coordinate upperRight;
-        private Image img;
-        private Label name;
+        public Coordinate lowerLeft;
+        public Coordinate upperRight;
+        public Image img;
+        public Label name;
+        public Rectangle rectangle;
     }
 
     public class RoomMaker
     {
-        private RoomManager room_manager;
-        private Room curr_room;
-        public int pushVertex(Coordinate cd)
-        {
+        public RoomManager room_manager;
+        public Room curr_room;
+        public List<Room> rooms;
 
-            return 0;
+        public int pushVertex(Coordinate cd, bool snapmode = false)
+        {
+            return RoomManager.pushVertex(curr_room, ref cd, snapmode);
+        }
+
+        public void writeFile()
+        {
+            Form_Main.write(rooms);
         }
     }
 }
