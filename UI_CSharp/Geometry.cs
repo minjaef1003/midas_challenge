@@ -190,7 +190,7 @@ namespace midas_challenge
 
         public bool CheckInnerPoint(Point p)
         {
-            int LX = -650, RX = 650, UY= 650, DY =-650;
+            int LX = 0, RX = 1300, UY= 0, DY =1300;
             Line L = new Line(new Point(LX, p.Y), p);
             Line R = new Line(new Point(RX, p.Y), p);
             Line U = new Line(new Point(p.X, UY), p);
