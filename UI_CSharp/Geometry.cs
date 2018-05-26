@@ -116,14 +116,14 @@ namespace midas_challenge
     {
         public static bool DoIntersect(Line line1, Line line2)
         {
-            return CrossProduct(line1.InitialPoint, line1.TerminalPoint, line2.InitialPoint) !=
-                   CrossProduct(line1.InitialPoint, line1.TerminalPoint, line2.TerminalPoint) ||
-                   CrossProduct(line2.InitialPoint, line2.TerminalPoint, line1.InitialPoint) !=
-                   CrossProduct(line2.InitialPoint, line2.TerminalPoint, line1.TerminalPoint);
+            return CrossProduct(line1.Key, line1.Value, line2.Key) !=
+                   CrossProduct(line1.Key, line1.Value, line2.Value) ||
+                   CrossProduct(line2.Key, line2.Value, line1.Key) !=
+                   CrossProduct(line2.Key, line2.Value, line1.Value);
         }
-        public static double CrossProduct(Point2D p1, Point2D p2, Point2D p3)
+        public static double CrossProduct(Coordinate p1, Coordinate p2, Coordinate p3)
         {
-            return (p2.X - p1.X) * (p3.Y - p1.Y) - (p3.X - p1.X) * (p2.Y - p1.Y);
+            return (double)(p2.Key - p1.Key) * (double)(p3.Value - p1.Value) - (double)(p3.Key - p1.Key) * (double)(p2.Value - p1.Value);
         }
 
     }
