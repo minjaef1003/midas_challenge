@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Reflection.Emit;
@@ -91,13 +92,15 @@ namespace midas_challenge
         public Image img;
         public System.Windows.Forms.Label name;
         public Rectangle imgSize;
-        public Furniture(Image _img, string _name, Rectangle rect)
+        public string type;
+        public Furniture(Image _img, string _name, Rectangle rect, string _type="None")
         {
             img = _img;
             name = new System.Windows.Forms.Label();
             name.Text = _name;
             imgSize = new Rectangle();
             imgSize = rect;
+            type = _type;
         }
     }
 
@@ -111,57 +114,70 @@ namespace midas_challenge
 
         static public int PushVertex(Point coord, bool snapmode = false)
         {
-            
-            if (Intersect(rooms, curr_room))
-            {
-
-            }
-
             if (curr_room.walls.Count > 2 && IsClosed(curr_room, coord))
             {
-                if (isSimple(curr_room))
-                {
-
-                }
                 curr_room.makeClose();
+                if (!isSimplePolygon(curr_room))
+                {
+                    Debug.Print("This is Not Simple");
+                    return -1;
+                }
                 rooms.Add(curr_room);
                 curr_room = new Room();
                 return 1;
             }
 
             if (snapmode) DoSnap(ref coord);
+            if (Intersect(rooms, curr_room))
+            {
+
+            }
+
             curr_room.pushVertex(coord);
 
 
             return 0;
         }
 
-        private static bool isSimple(Room curr_room)
+        private static bool isSimplePolygon(Room curr_room)
         {
-            Console.Write("TODO");
+            for (int i = 0; i < curr_room.walls.Count - 1; i++)
+            {
+                for (int j = i; j < curr_room.walls.Count; j++)
+                {
+                    if (Computation.DoIntersect_easy(curr_room.walls[i], curr_room.walls[j]))
+                        return false;
+                }
+            }
             return true;
         }
 
         private static bool Intersect(List<Room> rooms, Room curr_room)
         {
-            Console.Write("TODO");
+            Debug.Print("Intersect TODO");
             return false;
         }
 
         static public int PushFurniture(Furniture ft)
         {
-            if (CheckOverlap(ft))
+            if (CheckOverlap(ft) || CheckOutside(ft))
             {
                 return 1;
             }
-            
+
             furnitures.Add(ft);
             return 0;
         }
 
+        private static bool CheckOutside(Furniture ft)
+        {
+            Debug.Print("CheckOutside TODO");
+            return false;
+        }
+
         private static void DoSnap(ref Point coord)
         {
-            Console.Write("TODO");
+            Debug.Print("DoSnap TODO");
             return;
         }
 
@@ -202,7 +218,7 @@ namespace midas_challenge
             {
                 foreach (Line ft_line in ft_lines)
                 {
-                    if (Computation.DoIntersect(wall, ft_line))
+                    if (Computation.DoIntersect_strict(wall, ft_line))
                     {
                         return true;
                     }
@@ -218,23 +234,4 @@ namespace midas_challenge
         }
     }
 
-    public class Computation
-    {
-        public static bool DoIntersect(Line line1, Line line2)
-        {
-            return CrossProduct(line1.StartPoint, line1.EndPoint, line2.StartPoint) !=
-                   CrossProduct(line1.StartPoint, line1.EndPoint, line2.EndPoint) ||
-                   CrossProduct(line2.StartPoint, line2.EndPoint, line1.StartPoint) !=
-                   CrossProduct(line2.StartPoint, line2.EndPoint, line1.EndPoint);
-        }
-        public static double CrossProduct(Point p1, Point p2, Point p3)
-        {
-            return (double)(p2.X - p1.X) * (double)(p3.Y - p1.Y) - (double)(p3.X - p1.X) * (double)(p2.Y - p1.Y);
-        }
-        public static double EuclideanDist(Point coord1, Point coord2)
-        {
-            return Math.Sqrt(Math.Pow((double)(coord1.X - coord2.X), 2.0) + Math.Pow((double)(coord2.Y - coord1.Y), 2.0));
-        }
-      
-    }
 }
