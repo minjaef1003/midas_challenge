@@ -9,19 +9,41 @@ using System.Windows.Forms;
 
 namespace midas_challenge
 {
-    using Coordinate = KeyValuePair<int, int>;
-    using Line = KeyValuePair<KeyValuePair<int, int>, KeyValuePair<int, int>>;
-    public class Wall
+    public class Line
     {
-        private Line line; // start and end
+        protected Point startPoint;
+        protected Point endPoint;
 
-        public Line Line { get => line; set => line = value; }
+        public Point StartPoint { get => startPoint; set => startPoint = value; }
+        public Point EndPoint { get => endPoint; set => endPoint = value; }
+
+        public Line()
+        {
+
+        }
+        public Line(Point sp, Point ep) {
+            startPoint = sp;
+            endPoint = ep;
+        }
+    }
+
+    public class Wall : Line
+    {
+        public Wall()
+        {
+
+        }
+        public Wall(Point sp, Point ep)
+        {
+            startPoint = sp;
+            endPoint = ep;
+        }
     }
 
     public class Room
     {
         public bool IsStart;
-        public Coordinate startPoint;
+        public Point startPoint;
         public List<Wall> walls;
         public List<Line> doors;
         public List<Line> windows;
@@ -32,17 +54,17 @@ namespace midas_challenge
             IsStart = false;
         }
 
-        public List<Coordinate> getAllCoordinate() {
+        public List<Point> getAllCoordinate() {
 
-            List<Coordinate> coords = new List<Coordinate>();
+            List<Point> coords = new List<Point>();
             foreach (Wall wall in walls)
             {
-                coords.Add(wall.Line.Key);
+                coords.Add(wall.StartPoint);
             }
             return coords;
         }
 
-        public void pushVertex(Coordinate coord)
+        public void pushVertex(Point coord)
         {
             if (!IsStart)
             {
@@ -51,8 +73,8 @@ namespace midas_challenge
             }
             else
             {
-                Wall wall = new Wall();
-                wall.Line = new Line(startPoint, coord);
+                Wall wall = new Wall(startPoint, coord);
+                startPoint = coord;
                 walls.Add(wall);
             }
         }
@@ -81,7 +103,7 @@ namespace midas_challenge
 
         public const double SNAPPING_TRHES = 1.0;
 
-        static public int PushVertex(Coordinate coord, bool snapmode = false)
+        static public int PushVertex(Point coord, bool snapmode = false)
         {
             
             if (Intersect(rooms, curr_room))
@@ -130,15 +152,15 @@ namespace midas_challenge
             return 0;
         }
 
-        private static void DoSnap(ref Coordinate coord)
+        private static void DoSnap(ref Point coord)
         {
             Console.Write("TODO");
             return;
         }
 
-        private static bool IsClosed(Room room, Coordinate coord)
+        private static bool IsClosed(Room room, Point coord)
         {
-            Coordinate firstCoord = room.walls[0].Line.Key;
+            Point firstCoord = room.walls[0].StartPoint;
             if (Computation.EuclideanDist(firstCoord, coord) < SNAPPING_TRHES)
             {
                 return true;
@@ -163,17 +185,17 @@ namespace midas_challenge
             int maxy = ft.imgSize.Y + ft.imgSize.Height;
             List<Line> ft_lines = new List<Line>
             {
-                new Line(new Coordinate(minx, miny), new Coordinate(minx, maxy)),
-                new Line(new Coordinate(minx, maxy), new Coordinate(maxx, maxy)),
-                new Line(new Coordinate(maxx, maxy), new Coordinate(maxx, miny)),
-                new Line(new Coordinate(maxx, miny), new Coordinate(minx, miny))
+                new Line(new Point(minx, miny), new Point(minx, maxy)),
+                new Line(new Point(minx, maxy), new Point(maxx, maxy)),
+                new Line(new Point(maxx, maxy), new Point(maxx, miny)),
+                new Line(new Point(maxx, miny), new Point(minx, miny))
             };
                
             foreach (Wall wall in room.walls)
             {
                 foreach (Line ft_line in ft_lines)
                 {
-                    if (Computation.DoIntersect(wall.Line, ft_line))
+                    if (Computation.DoIntersect(wall, ft_line))
                     {
                         return true;
                     }
@@ -193,19 +215,19 @@ namespace midas_challenge
     {
         public static bool DoIntersect(Line line1, Line line2)
         {
-            return CrossProduct(line1.Key, line1.Value, line2.Key) !=
-                   CrossProduct(line1.Key, line1.Value, line2.Value) ||
-                   CrossProduct(line2.Key, line2.Value, line1.Key) !=
-                   CrossProduct(line2.Key, line2.Value, line1.Value);
+            return CrossProduct(line1.StartPoint, line1.EndPoint, line2.StartPoint) !=
+                   CrossProduct(line1.StartPoint, line1.EndPoint, line2.EndPoint) ||
+                   CrossProduct(line2.StartPoint, line2.EndPoint, line1.StartPoint) !=
+                   CrossProduct(line2.StartPoint, line2.EndPoint, line1.EndPoint);
         }
-        public static double CrossProduct(Coordinate p1, Coordinate p2, Coordinate p3)
+        public static double CrossProduct(Point p1, Point p2, Point p3)
         {
-            return (double)(p2.Key - p1.Key) * (double)(p3.Value - p1.Value) - (double)(p3.Key - p1.Key) * (double)(p2.Value - p1.Value);
+            return (double)(p2.X - p1.X) * (double)(p3.Y - p1.Y) - (double)(p3.X - p1.X) * (double)(p2.Y - p1.Y);
         }
-        public static double EuclideanDist(KeyValuePair<int, int> coord1, KeyValuePair<int, int> coord2)
+        public static double EuclideanDist(Point coord1, Point coord2)
         {
-            return Math.Sqrt(Math.Pow((double)(coord1.Key - coord2.Key), 2.0) + Math.Pow((double)(coord2.Value - coord1.Value), 2.0));
+            return Math.Sqrt(Math.Pow((double)(coord1.X - coord2.X), 2.0) + Math.Pow((double)(coord2.Y - coord1.Y), 2.0));
         }
-
+      
     }
 }
