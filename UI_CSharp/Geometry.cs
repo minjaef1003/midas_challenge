@@ -325,7 +325,7 @@ namespace midas_challenge
             if (curr_room.walls.Count > 2 && IsClosed(curr_room, coord))
             {
                 curr_room.makeClose();
-                if (!IsSimplePolygon(curr_room) || Intersect(rooms, curr_room))
+                if (!IsSimplePolygon(curr_room) || IntersectWall(rooms, curr_room))
                 {
                     Debug.Print("This is Not Simple");
                     curr_room = new Room();
@@ -358,10 +358,12 @@ namespace midas_challenge
             curr_room.pushVertex(coords[3]);
             curr_room.makeClose();
             if (snapmode) SnapRectangleRoom(curr_room);
-            if (!Intersect(rooms, curr_room))
+            if (!IntersectWall(rooms, curr_room))
             {
                 rooms.Add(curr_room);
             }
+            else
+                Debug.Print("Intersect");
             curr_room = new Room();
             Form_Main.count = rooms.Count;
 
@@ -571,7 +573,7 @@ namespace midas_challenge
                 {
                     List<Room> rm1 = new List<Room> { rooms[i] };
                     Room rm2 = rooms[j];
-                    if (Intersect(rm1, rm2))
+                    if (IntersectWall(rm1, rm2))
                     {
                         return true;
                     }
