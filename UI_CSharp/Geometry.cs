@@ -134,7 +134,7 @@ namespace midas_challenge
         public List<Wall> walls;
         public List<Door> doors;
         public List<Door> windows;
-        public string type = "Not_defined";
+        public int type = 3;
         private int id;
 
         public int Id { get => id; set => id = value; }

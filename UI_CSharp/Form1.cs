@@ -29,7 +29,7 @@ namespace midas_challenge
         private Rectangle rect;
         private int selectFurn = 0;
         Furniture f;
-        Image imgDoor, imgWindow;                
+        Image imgDoor, imgWindow;
 
         // Edit mode
         Room selected_room = null;
@@ -56,34 +56,29 @@ namespace midas_challenge
         }
         private void button_new_document_Click(object sender, EventArgs e)
         {
-            if (panel_canvas == null)
-            {
-                panel_canvas = new DoubleBufferPannel();
-                panel_canvas.ResumeLayout(false);
-                panel_canvas.SuspendLayout();
-                panel_canvas.BorderStyle = BorderStyle.FixedSingle;
-                panel_canvas.Dock = DockStyle.Fill;
-                panel_canvas.Name = "panel_canvas";
-                panel_canvas.Size = new Size(876, 555);
-                panel_canvas.BackColor = Color.MistyRose;
-                panel_canvas.Paint += new PaintEventHandler(this.panel_canvas_Paint);
-                panel_canvas.MouseDown += new MouseEventHandler(this.panel_canvas_MouseDown);
-                panel_canvas.MouseMove += new MouseEventHandler(this.panel_canvas_MouseMove);
-                panel_canvas.MouseUp += new MouseEventHandler(this.panel_canvas_MouseUp);
-                panel_workspace.Controls.Add(panel_canvas);
-                panel_workspace.Refresh();
-            }
-            else
-            {
-                var result = MessageBox.Show("이미 생성된 문서가 존재합니다.", "문서 생성 실패", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+
+            panel_canvas = new DoubleBufferPannel();
+            panel_canvas.ResumeLayout(false);
+            panel_canvas.SuspendLayout();
+            panel_canvas.BorderStyle = BorderStyle.FixedSingle;
+            panel_canvas.Dock = DockStyle.Fill;
+            panel_canvas.Name = "panel_canvas";
+            panel_canvas.Size = new Size(876, 555);
+            panel_canvas.BackColor = Color.MistyRose;
+            panel_canvas.Paint += new PaintEventHandler(this.panel_canvas_Paint);
+            panel_canvas.MouseDown += new MouseEventHandler(this.panel_canvas_MouseDown);
+            panel_canvas.MouseMove += new MouseEventHandler(this.panel_canvas_MouseMove);
+            panel_canvas.MouseUp += new MouseEventHandler(this.panel_canvas_MouseUp);
+            panel_workspace.Controls.Add(panel_canvas);
+            panel_workspace.Refresh();
+
         }
         private void panel_canvas_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
 
             Pen pen = new Pen(Color.Black, 3);
-            
+
             for (int i = 0; i < Form_Main.count; i++)
             {
                 int size = RoomMaker.rooms[i].walls.Count;
@@ -92,13 +87,13 @@ namespace midas_challenge
                 for (int j = 0; j < RoomMaker.rooms[i].walls.Count; j++)
                 {
                     plist.Add(RoomMaker.rooms[i].walls[j].StartPoint);
-                    plist.Add(RoomMaker.rooms[i].walls[j].EndPoint);                                    
+                    plist.Add(RoomMaker.rooms[i].walls[j].EndPoint);
                 }
 
                 Point[] p = new Point[plist.Count];
-                for(int j=0; j<plist.Count; j++)                
+                for (int j = 0; j < plist.Count; j++)
                     p[j] = plist[j];
-                
+
                 HatchStyle h = (HatchStyle)3;
                 HatchBrush hatch = new HatchBrush(h, Color.Gold, Color.White);
                 e.Graphics.FillPolygon(hatch, p);
@@ -126,11 +121,11 @@ namespace midas_challenge
                     var doors = RoomMaker.rooms[i].doors;
                     pen1.Color = Color.Black;
                     e.Graphics.DrawLine(pen1, doors[j].StartPoint, doors[j].EndPoint);
-                    if(doors[j].StartPoint.X == doors[j].EndPoint.X)
+                    if (doors[j].StartPoint.X == doors[j].EndPoint.X)
                     {
-                        e.Graphics.DrawLine(new Pen(Color.Black, 3), doors[j].EndPoint.X,doors[j].EndPoint.Y, doors[j].EndPoint.X - 20, doors[j].EndPoint.Y + 40);
+                        e.Graphics.DrawLine(new Pen(Color.Black, 3), doors[j].EndPoint.X, doors[j].EndPoint.Y, doors[j].EndPoint.X - 20, doors[j].EndPoint.Y + 40);
                     }
-                    else if((doors[j].StartPoint.Y == doors[j].EndPoint.Y))
+                    else if ((doors[j].StartPoint.Y == doors[j].EndPoint.Y))
                     {
                         e.Graphics.DrawLine(new Pen(Color.Black, 3), doors[j].StartPoint.X, doors[j].StartPoint.Y, doors[j].StartPoint.X + 20, doors[j].StartPoint.Y + 40);
                     }
@@ -148,7 +143,7 @@ namespace midas_challenge
             }
             if (isRect || isMovingDraw)
             {
-                e.Graphics.DrawRectangle(pen, rect);                
+                e.Graphics.DrawRectangle(pen, rect);
             }
             else if (isPolygon && isLine)
             {
@@ -185,7 +180,7 @@ namespace midas_challenge
                     e.Graphics.DrawPolygon(pen1, p);
                 }
             }
-            
+
         }
 
         private void panel_canvas_MouseDown(object sender, MouseEventArgs e)
@@ -294,7 +289,7 @@ namespace midas_challenge
                 if (selected_room != null)
                 {
                     List<int> list = selected_room.getRectangle();
-                    rect = new Rectangle(e.X - (moveStartPoint.X-list[0]), e.Y - (moveStartPoint.Y - list[1]), list[2], list[3]);
+                    rect = new Rectangle(e.X - (moveStartPoint.X - list[0]), e.Y - (moveStartPoint.Y - list[1]), list[2], list[3]);
                 }
             }
             panel_canvas.Refresh();
@@ -410,28 +405,23 @@ namespace midas_challenge
         }
         private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (panel_canvas != null)
-            {
-               MessageBox.Show("이미 생선된 문서가 존재합니다.", "불러오기 실패", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else
-            {
-                string openFileName = "";
-                DialogResult result = openFileDialog1.ShowDialog();
-                if (result == DialogResult.OK)
-                {
-                    openFileName = openFileDialog1.FileName;
-                }
-                else if (result == DialogResult.Cancel) return;
 
-                button_new_document_Click(sender, e);
-
-                Tuple<List<Room>, List<Furniture>> readDate;
-                readDate = Read(openFileName);
-                RoomMaker.rooms = readDate.Item1;
-                RoomMaker.furnitures = readDate.Item2;
-                Form_Main.count = RoomMaker.rooms.Count;
+            string openFileName = "";
+            DialogResult result = openFileDialog1.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                openFileName = openFileDialog1.FileName;
             }
+            else if (result == DialogResult.Cancel) return;
+
+            button_new_document_Click(sender, e);
+
+            Tuple<List<Room>, List<Furniture>> readDate;
+            readDate = Read(openFileName);
+            RoomMaker.rooms = readDate.Item1;
+            RoomMaker.furnitures = readDate.Item2;
+            Form_Main.count = RoomMaker.rooms.Count;
+
         }
 
         private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -447,23 +437,24 @@ namespace midas_challenge
 
         private void button_save_image_Click(object sender, EventArgs e)
         {
-            if (panel_canvas == null)
+            if(RoomMaker.checkValid())
             {
-                button_new_document_Click(sender, e);
+                Bitmap bmp = new Bitmap(panel_canvas.Width, panel_canvas.Height);
+                panel_canvas.DrawToBitmap(bmp, new Rectangle(0, 0, panel_canvas.Width, panel_canvas.Height));
+                saveFileDialog1.Filter = "png files (*.png)|*.png|jpeg files (*.jpeg)|*.jpeg";
+                saveFileDialog1.FilterIndex = 2;
+                saveFileDialog1.RestoreDirectory = true;
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    int idx = saveFileDialog1.FilterIndex;
+                    if (idx == 1) bmp.Save(saveFileDialog1.FileName, ImageFormat.Png);
+                    else bmp.Save(saveFileDialog1.FileName, ImageFormat.Jpeg);
+                }
             }
-
-            Bitmap bmp = new Bitmap(panel_canvas.Width, panel_canvas.Height);
-            panel_canvas.DrawToBitmap(bmp, new Rectangle(0, 0, panel_canvas.Width, panel_canvas.Height));
-            saveFileDialog1.Filter = "png files (*.png)|*.png|jpeg files (*.jpeg)|*.jpeg";
-            saveFileDialog1.FilterIndex = 2;
-            saveFileDialog1.RestoreDirectory = true;
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            else
             {
-                int idx = saveFileDialog1.FilterIndex;
-                if (idx == 1) bmp.Save(saveFileDialog1.FileName, ImageFormat.Png);
-                else bmp.Save(saveFileDialog1.FileName, ImageFormat.Jpeg);
+                MessageBox.Show("닫힌 공간이 존재합니다.");
             }
-            button_new_document_Click(sender, e);
         }
 
         private void button_editmode_Click(object sender, EventArgs e)
@@ -483,7 +474,7 @@ namespace midas_challenge
                 label_status.Text = "Edit Mode";
                 isRect = false;
                 Cursor.Current = Cursors.Hand;
-                panel_createroom_menu.Width = 0;               
+                panel_createroom_menu.Width = 0;
             }
         }
 
@@ -574,7 +565,7 @@ namespace midas_challenge
 
         private void button_undo_Click(object sender, EventArgs e)
         {
-            if ( Form_Main.count > 0)
+            if (Form_Main.count > 0)
             {
                 Form_Main.count--;
                 panel_canvas.Refresh();
@@ -583,7 +574,7 @@ namespace midas_challenge
 
         private void button_redo_Click(object sender, EventArgs e)
         {
-            if ( Form_Main.count <  RoomMaker.rooms.Count )
+            if (Form_Main.count < RoomMaker.rooms.Count)
             {
                 Form_Main.count++;
                 panel_canvas.Refresh();
