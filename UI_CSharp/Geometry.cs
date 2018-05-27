@@ -269,6 +269,16 @@ namespace midas_challenge
                 wall.StartPoint = new Point(wall.StartPoint.X + dx, wall.StartPoint.Y + dy);
                 wall.EndPoint = new Point(wall.EndPoint.X + dx, wall.EndPoint.Y + dy);
             }
+            foreach (Door door in doors)
+            {
+                door.StartPoint = new Point(door.StartPoint.X + dx, door.StartPoint.Y + dy);
+                door.EndPoint = new Point(door.EndPoint.X + dx, door.EndPoint.Y + dy);
+            }
+            foreach (Door window in doors)
+            {
+                window.StartPoint = new Point(window.StartPoint.X + dx, window.StartPoint.Y + dy);
+                window.EndPoint = new Point(window.EndPoint.X + dx, window.EndPoint.Y + dy);
+            }
         }
 
         public void resize(int width, int height)
