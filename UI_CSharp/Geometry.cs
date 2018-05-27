@@ -130,6 +130,7 @@ namespace midas_challenge
     public class Room
     {
         public bool IsStart;
+        public int floorType = 3;
         public Point startPoint;
         public List<Wall> walls;
         public List<Door> doors;
@@ -190,108 +191,28 @@ namespace midas_challenge
 
         public bool CheckInnerPoint(Point p)
         {
-            int LCount = 0, UCount = 0, RCount = 0, DCount = 0;
-            // 직선과 동일범위인지 확인.
-            foreach (Wall wall in walls)
+            int LX = 0, RX = 1300, UY= 0, DY =1300;
+            Line L = new Line(new Point(LX, p.Y), p);
+            Line R = new Line(new Point(RX, p.Y), p);
+            Line U = new Line(new Point(p.X, UY), p);
+            Line D = new Line(new Point(p.X, DY), p);
+
+            int Rc = 0, Lc = 0, Uc = 0, Dc = 0;
+            foreach(Wall wall in walls)
             {
-                int minX, minY, maxX, maxY;
-                if (wall.StartPoint.X > wall.EndPoint.X)
-                {
-                    minX = wall.EndPoint.X;
-                    maxX = wall.StartPoint.X;
-                }
-                else
-                {
-                    minX = wall.StartPoint.X;
-                    maxX = wall.EndPoint.X;
-                }
-                if (wall.StartPoint.Y > wall.EndPoint.Y)
-                {
-                    minY = wall.EndPoint.Y;
-                    maxY = wall.StartPoint.Y;
-                }
-                else
-                {
-                    minY = wall.StartPoint.Y;
-                    maxY = wall.EndPoint.Y;
-                }
-
-                if (minX == maxX)
-                {
-                    if (minY < p.Y && p.Y < maxY)
-                    {
-                        if (minX < p.X)
-                            RCount++;
-                        else if (minX > p.X)
-                            LCount++;
-                        else
-                            return true;
-                    }
-                    else if (minY == p.Y || maxY == p.Y)
-                    {
-                        // 선위.
-                        return true;
-                    }
-                }
-                else if (minY == maxY)
-                {
-                    if (minX < p.X && p.X < maxX)
-                    {
-                        if (minY < p.Y)
-                            UCount++;
-                        else if (minY > p.Y)
-                            DCount++;
-                        else
-                            return true;
-                    }
-                    else if (minX == p.X || maxX == p.X)
-                    {
-                        // 선위.
-                        return true;
-                    }
-                }
-                else if (minX <= p.X && p.X <= maxX)
-                {
-                    int ccw = RoomMaker.CCW(wall, p);
-
-                    if (ccw == 1)
-                        DCount++;
-                    else if (ccw == -1)
-                        UCount++;
-                    else
-                        return true;
-
-                }
-                else if (minY <= p.Y && p.Y <= maxY)
-                {
-                    int ccw = RoomMaker.CCW(wall, p);
-
-                    if (wall.EndPoint.Y > wall.StartPoint.Y)
-                    {
-                        if (ccw == 1)
-                            RCount++;
-                        else if (ccw == -1)
-                            LCount++;
-                        else
-                            return true;
-
-                    }
-                    else
-                    {
-                        if (ccw == 1)
-                            LCount++;
-                        else if (ccw == -1)
-                            RCount++;
-                        else
-                            return true;
-                    }
-                }
+                if (Computation.DoIntersect_strict(L, wall))
+                    Lc++;
+                if (Computation.DoIntersect_strict(R, wall))
+                    Rc++;
+                if (Computation.DoIntersect_strict(U, wall))
+                    Uc++;
+                if (Computation.DoIntersect_strict(D, wall))
+                    Dc++;
             }
-            //동일범위라면 x, y같은 선상에서 만나는지 카운트 
-            if (UCount * DCount * RCount * LCount == 0)
+            if (Uc * Dc * Rc * Lc == 0)
                 return false;
             //하나라도 0이면 false;
-            else if ((UCount % 2) + (DCount % 2) + (RCount % 2) + (LCount % 2) == 4)
+            else if ((Uc % 2) + (Dc % 2) + (Rc % 2) + (Lc % 2) == 4)
             {
                 return true;
             }
@@ -348,6 +269,35 @@ namespace midas_challenge
                 wall.StartPoint = new Point(wall.StartPoint.X + dx, wall.StartPoint.Y + dy);
                 wall.EndPoint = new Point(wall.EndPoint.X + dx, wall.EndPoint.Y + dy);
             }
+            foreach (Door door in doors)
+            {
+                door.StartPoint = new Point(door.StartPoint.X + dx, door.StartPoint.Y + dy);
+                door.EndPoint = new Point(door.EndPoint.X + dx, door.EndPoint.Y + dy);
+            }
+            foreach (Door window in doors)
+            {
+                window.StartPoint = new Point(window.StartPoint.X + dx, window.StartPoint.Y + dy);
+                window.EndPoint = new Point(window.EndPoint.X + dx, window.EndPoint.Y + dy);
+            }
+        }
+
+        public void resize(int width, int height)
+        {
+            IsStart = false;
+            Point cr = walls[0].StartPoint;
+            walls.Clear();
+            doors.Clear();
+            windows.Clear();
+
+            Point cr1 = new Point(cr.X + width, cr.Y);
+            Point cr2 = new Point(cr.X + width, cr.Y + height);
+            Point cr3 = new Point(cr.X, cr.Y + height);
+
+            this.pushVertex(cr);
+            this.pushVertex(cr1);
+            this.pushVertex(cr2);
+            this.pushVertex(cr3);
+            this.makeClose();
         }
     }
 
@@ -385,7 +335,7 @@ namespace midas_challenge
             if (curr_room.walls.Count > 2 && IsClosed(curr_room, coord))
             {
                 curr_room.makeClose();
-                if (!IsSimplePolygon(curr_room) || Intersect(rooms, curr_room))
+                if (!IsSimplePolygon(curr_room) || IntersectWall(rooms, curr_room))
                 {
                     Debug.Print("This is Not Simple");
                     curr_room = new Room();
@@ -418,10 +368,12 @@ namespace midas_challenge
             curr_room.pushVertex(coords[3]);
             curr_room.makeClose();
             if (snapmode) SnapRectangleRoom(curr_room);
-            if (!Intersect(rooms, curr_room))
+            if (!IntersectWall(rooms, curr_room))
             {
                 rooms.Add(curr_room);
             }
+            else
+                Debug.Print("Intersect");
             curr_room = new Room();
             Form_Main.count = rooms.Count;
 
@@ -495,6 +447,7 @@ namespace midas_challenge
                 if (room.doors.Count <= 0)
                     return false;
             }
+            if (hasIntersect()) return false;
             return true;
         }
 
@@ -621,6 +574,24 @@ namespace midas_challenge
             else
                 return 0;
         }
+
+        public static bool hasIntersect()
+        {
+            for (int i = 0; i < rooms.Count -1; i++)
+            {
+                for (int j = i; j < rooms.Count; j++)
+                {
+                    List<Room> rm1 = new List<Room> { rooms[i] };
+                    Room rm2 = rooms[j];
+                    if (IntersectWall(rm1, rm2))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
         private static bool IntersectWall(List<Room> rooms, Room curr_room)
         {
             foreach (Wall curWall in curr_room.walls)
