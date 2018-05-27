@@ -130,6 +130,7 @@ namespace midas_challenge
     public class Room
     {
         public bool IsStart;
+        public int floorType = 3;
         public Point startPoint;
         public List<Wall> walls;
         public List<Door> doors;
